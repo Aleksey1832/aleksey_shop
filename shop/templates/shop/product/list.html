@@ -1,0 +1,12 @@
+{% extends "shop/base.html" %}
+
+{% block title%}
+    Каталог
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        {{ product.name }} - {{ product.price }}<br><br>
+    {% endfor %}
+
+{% endblock %}
