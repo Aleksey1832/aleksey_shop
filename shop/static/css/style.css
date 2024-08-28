@@ -1,6 +1,13 @@
 body
 {
-    background: darkkhaki;
+    background: #d9eecf;
     color: dodgerblue;
-    text-align: center;
+    text-align: left;
 }
+p.one {
+    border-style: solid;
+    border-color: red;
+    border-width: 3px;
+    text-align: center;
+    color: #1e42d2;
+  }
