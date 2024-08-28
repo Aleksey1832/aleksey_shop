@@ -4,6 +4,7 @@ body
     color: dodgerblue;
     text-align: left;
 }
+
 p.one {
     border-style: solid;
     border-color: red;
@@ -11,3 +12,10 @@ p.one {
     text-align: center;
     color: #1e42d2;
   }
+
+p.two {
+    text-align: center;
+    color: #043838;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 50px;
+}
