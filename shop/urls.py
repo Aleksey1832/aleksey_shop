@@ -11,7 +11,7 @@ urlpatterns = [
         name='product_list'
     ),
     path(
-        '<slug:slug>/',
+        '<slug:category_slug>/',
         views.product_list,
         name='product_list_by_category'
     ),

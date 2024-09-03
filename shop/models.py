@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):                         # категория
@@ -20,6 +21,12 @@ class Category(models.Model):                         # категория
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse(
+            'shop:product_list_by_category',
+            args=[self.slug]
+        )
 
 
 class ProductConstruction(models.Model):              # конструкция
@@ -132,7 +139,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')  # наименование
     product_code = models.IntegerField(default=0, verbose_name='Код товара')  # код товара
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name='Цена')  # цена
-    image = models.ImageField(upload_to='shop/templates/images', verbose_name='Фото')  # адреса картинок
+    image = models.ImageField(upload_to='shop/static/images', verbose_name='Фото')  # адреса картинок
     description = models.TextField(blank=True, verbose_name='Описание')  # описание
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создание товара')  # создание товара
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Изменение товара')  # изменение товара (описания или изменение цены)
@@ -183,3 +190,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse(
+            'shop:product_detail',
+            args=[self.id, self.slug]
+        )
