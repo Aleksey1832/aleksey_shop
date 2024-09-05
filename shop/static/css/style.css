@@ -2,20 +2,18 @@ body
 {
     background: #d9eecf;
     color: dodgerblue;
-    text-align: left;
+    text-align: center;
 }
-
-h1.one {
-    border-style: solid;
-    border-color: red;
-    border-width: 3px;
+.price
+{
+    background: #dae729;
+    border: 3px #00B344  ridge;
+    box-shadow: 3px 3px 5px #999;
+    width: 175px;
+    padding: 5px 10px 10px 17px;
+    margin: 2% -4% 5% 40%;
+    font-size: 40px;
+    color: #811c25;
     text-align: center;
-    color: #1e42d2;
-  }
-
-p.two {
-    text-align: center;
-    color: #043838;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 50px;
+    font-weight: bolder;
 }
