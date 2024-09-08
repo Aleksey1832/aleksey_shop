@@ -25,7 +25,7 @@
         {% for product in products %}
             <div class="item">
                 <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" style="width:100px;height:100px;border:2px solid red;">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" style="width:100px;height:100px;">
                 </a>
                 <a href="{{ product.get_absolute_url }}"><br>{{ product.name }}</a>
                 <br>

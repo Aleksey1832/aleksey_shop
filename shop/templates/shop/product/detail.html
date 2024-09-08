@@ -8,18 +8,36 @@
 {% block content %}
     <div class="product-detail">
 
-        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" style="width:300px;height:300px;">
-
-        <h2>
-            <a href="{{ product.category.get_absolute_url }}">
-                {{ product.category }}
+        <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
+        <p>Код товара: {{ product.product_code }}</p>
+        <div class="Category_product">Категория товаров: <a href="{{ product.category.get_absolute_url }}" target="_blank">
+            {{ product.category }}
             </a>
-        </h2>
-
-        <h1>{{ product.name }}</h1>
+        </div>
+        <h2>{{ product.name }}</h2>
 
         <p class="price">{{ product.price }} ₽</p>
-        {{ product.description|linebreaks }}
+
+
+        <div class="short_description">
+            <p id="head1_description">Описание товара:</p>
+            <div id="detail_description"> {{ product.description|linebreaks }}
+                </div>
+
+            <details>
+                <summary id="head2_description">Характеристики:</summary>
+                <div id="detail_description">
+                    <p></p>
+                    <p>{{ ProductConstruction|linebreaks }}</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+
+                </div>
+            </details>
+        </div>
 
 
 
