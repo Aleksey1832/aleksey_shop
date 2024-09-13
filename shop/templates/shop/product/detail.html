@@ -7,39 +7,75 @@
 
 {% block content %}
     <div class="product-detail">
-
-        <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
-        <p>Код товара: {{ product.product_code }}</p>
         <div class="Category_product">Категория товаров: <a href="{{ product.category.get_absolute_url }}" target="_blank">
             {{ product.category }}
             </a>
         </div>
-        <h2>{{ product.name }}</h2>
-
-        <p class="price">{{ product.price }} ₽</p>
-
-
-        <div class="short_description">
-            <p id="head1_description">Описание товара:</p>
-            <div id="detail_description"> {{ product.description|linebreaks }}
-                </div>
-
-            <details>
-                <summary id="head2_description">Характеристики:</summary>
-                <div id="detail_description">
-                    <p></p>
-                    <p>{{ ProductConstruction|linebreaks }}</p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-
-                </div>
-            </details>
+        <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
+        <div class="cod_product">
+            <p>Код товара: {{ product.product_code }}</p>
+            <p class="price">{{ product.price }} ₽</p>
         </div>
 
+    <div class="name"><h2>{{ product.name }}</h2></div>
 
 
     </div>
+
+    <div class="short_description">
+        <h1>Описание товара:</h1>
+        <div id="detail_description"> {{ product.description|linebreaks }}
+        </div>
+    </div>
+
+    <div>
+        <details>
+            <summary id="head2_description"><u>Характеристики:</u></summary>
+
+            <div id="characteristic">
+                <h2><b>Технические характеристики:</b></h2>
+                <table class="table">
+                    <tbody>
+                        <tr class="table-primary">
+                            <th><ul><li></li></ul></th>
+                            <td>Модификации огнетушителя</td>
+                            <td>{{ product }}</td>
+                        </tr>
+                        <tr class="table-light">
+                            <th><ul><li></li></ul></th>
+                            <td>Наличие товара</td>
+                            <td>{% if product.available %}Есть в наличии{% else %}Нет в наличии{% endif %}</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <th><ul><li></li></ul></th>
+                            <td>Тип товара</td>
+                            <td>{{ product.product_type }}</td>
+                        </tr>
+                        <tr class="table-success">
+                            <th><ul><li></li></ul></th>
+                            <td>Конструкция</td>
+                            <td>{{ product.construction }}</td>
+                        </tr>
+                        <tr class="table-danger">
+                            <th><ul><li></li></ul></th>
+                            <td>Класс пожара</td>
+                            <td>{{ product.fire_class }}</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <th><ul><li></li></ul></th>
+                            <td>Ранг модельного очага</td>
+                            <td>{{ product.rang_model_hearth }}</td>
+                        </tr>
+                        <tr class="table-info">
+                            <th><ul><li></li></ul></th>
+                            <td>Применение</td>
+                            <td>{{ product.usage }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </details>
+    </div>
+
 {% endblock %}
