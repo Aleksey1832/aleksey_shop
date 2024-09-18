@@ -1,5 +1,6 @@
 from django.conf import settings
 from shop.models import Product
+from decimal import *
 
 
 class Cart:
@@ -35,3 +36,18 @@ class Cart:
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
         self.save()
+
+    def __len__(self):
+        """
+        Считаем товарные позиции
+        """
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        sum_item = self.__len__()
+        total = 0
+        for item in self.cart.values():
+            total += Decimal(item['price']).quantize(Decimal('1.00')) * Decimal(sum_item).quantize(Decimal('1.00'))
+
+        return total
+

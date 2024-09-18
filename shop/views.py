@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from shop.models import (Product, Category, ProductConstruction,
                          ProductFireclass, ProductUsage,
                          ProductRangModelHearth, ProductType)
+from cart.forms import CartAddProductForm
 
 
 def product_list(request, category_slug=None):
@@ -35,6 +36,7 @@ def product_detail(request, id, slug):
     usage = ProductUsage.objects.all()
     rang_model_hearth = ProductRangModelHearth.objects.all()
     product_type = ProductType.objects.all()
+    cart_product_form = CartAddProductForm()
 
     return render(
         request,
@@ -46,10 +48,7 @@ def product_detail(request, id, slug):
             'fire_class': fire_class,
             'usage': usage,
             'rang_model_hearth': rang_model_hearth,
-            'product_type': product_type
+            'product_type': product_type,
+            'cart_product_form': cart_product_form
         }
     )
-
-
-def cart_page(request):
-    return render(request, "shop/product/cart.html")

@@ -20,8 +20,4 @@ urlpatterns = [
         views.product_detail,
         name='product_detail'
     ),
-    path('cart_page',
-        views.cart_page,
-        name='cart_page'
-    ),
 ]
