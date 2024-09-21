@@ -2,86 +2,107 @@
 {% load static %}
 
 {% block title %}
-    {{ product.name }}
+  {{ product.name }}
 {% endblock %}
 
 {% block content %}
-    <div class="product-detail">
 
-        <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
-        <div class="cod_product">
-            <div class="Category_product">Категория товаров: <a href="{{ product.category.get_absolute_url }}" target="_blank">
-            {{ product.category }}
-            </a>
-            </div>
-            <p>Код товара: {{ product.product_code }}</p>
-            <p class="price">{{ product.price }} ₽<br></p>
-            <form action="{% url "cart:cart_add" product.id %}" method="post">
-                {{ cart_product_form }}<br>
-                {% csrf_token %}
-                <input type="submit" value="Добавить в корзину" class="submit-button">
-            </form>
-        </div>
+  <div class="product-detail">
+    <!-- Картинка -->
+    <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
 
+    <!-- блок с права от картинки-->
+    <div class="product_price">
+      <div class="category_product">Категория товаров: <a href="{{ product.category.get_absolute_url }}" target="_blank">
+        <u>{{ product.category }}</u></a>
+      </div>
+      <div class="cod_product">Код товара:
+        {{ product.product_code }}
+
+        <!-- кнопка копировать код товара -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6ZM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1H2Z"/>
+        </svg>
+      </div>
+
+      <div class="price">{{ product.price }} ₽
+      </div><br><br>
+
+      <!-- блок выбора количества и добавление товара в корзину -->
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {{ cart_product_form }}<br>
+        {% csrf_token %}
+        <input class="submit-button" type="submit" value="Добавить в корзину">
+      </form>
+    </div>
+
+    <!-- надпись под картинкой -->
     <div class="name"><h2>{{ product.name }}</h2></div>
+  </div>
 
-
+  <!-- блок "Описание товара:" и текст описания -->
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" style="font-size: 25px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Описание товара:
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">{{ product.description|linebreaks }}</div>
+      </div>
     </div>
+  </div>
 
-    <div class="short_description">
-        <h1>Описание товара:</h1>
-        <div id="detail_description"> {{ product.description|linebreaks }}
-        </div>
-    </div>
+  <div> <!-- блок характеристики и таблица-->
+    <details>
+      <summary id="head2_description"><u>Характеристики:</u></summary> <!-- раскрывающая ссылка -->
 
-    <div>
-        <details>
-            <summary id="head2_description"><u>Характеристики:</u></summary>
+      <div id="characteristic">
+        <h2><b>Технические характеристики:</b></h2><br>
+        <table class="table">
+          <tbody>
 
-            <div id="characteristic">
-                <h2><b>Технические характеристики:</b></h2>
-                <table class="table">
-                    <tbody>
-                        <tr class="table-primary">
-                            <th><ul><li></li></ul></th>
-                            <td>Модификации огнетушителя</td>
-                            <td>{{ product }}</td>
-                        </tr>
-                        <tr class="table-light">
-                            <th><ul><li></li></ul></th>
-                            <td>Наличие товара</td>
-                            <td>{% if product.available %}Есть в наличии{% else %}Нет в наличии{% endif %}</td>
-                        </tr>
-                        <tr class="table-warning">
-                            <th><ul><li></li></ul></th>
-                            <td>Тип товара</td>
-                            <td>{{ product.product_type }}</td>
-                        </tr>
-                        <tr class="table-success">
-                            <th><ul><li></li></ul></th>
-                            <td>Конструкция</td>
-                            <td>{{ product.construction }}</td>
-                        </tr>
-                        <tr class="table-danger">
-                            <th><ul><li></li></ul></th>
-                            <td>Класс пожара</td>
-                            <td>{{ product.fire_class }}</td>
-                        </tr>
-                        <tr class="table-secondary">
-                            <th><ul><li></li></ul></th>
-                            <td>Ранг модельного очага</td>
-                            <td>{{ product.rang_model_hearth }}</td>
-                        </tr>
-                        <tr class="table-info">
-                            <th><ul><li></li></ul></th>
-                            <td>Применение</td>
-                            <td>{{ product.usage }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <tr class="table-primary">
+              <th><ul><li></li></ul></th>
+              <td>Модификация товара</td>
+              <td>{{ product }}</td>
+            </tr>
+            <tr class="table-light">
+              <th><ul><li></li></ul></th>
+              <td>Наличие товара</td>
+              <td>{% if product.available %}Есть в наличии{% else %}Нет в наличии{% endif %}</td>
+            </tr>
+            <tr class="table-warning">
+              <th><ul><li></li></ul></th>
+              <td>Тип товара</td>
+              <td>{{ product.product_type }}</td>
+            </tr>
+            <tr class="table-success">
+              <th><ul><li></li></ul></th>
+              <td>Конструкция</td>
+              <td>{{ product.construction }}</td>
+            </tr>
+            <tr class="table-danger">
+              <th><ul><li></li></ul></th>
+              <td>Класс пожара</td>
+              <td>{{ product.fire_class }}</td>
+            </tr>
+            <tr class="table-secondary">
+              <th><ul><li></li></ul></th>
+              <td>Ранг модельного очага</td>
+              <td>{{ product.rang_model_hearth }}</td>
+            </tr>
+            <tr class="table-info">
+              <th><ul><li></li></ul></th>
+              <td>Применение</td>
+              <td>{{ product.usage }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-            </div>
-        </details>
-    </div>
+      </div>
+    </details>
+  </div>
 
 {% endblock %}

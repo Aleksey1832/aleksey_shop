@@ -1,0 +1,94 @@
+.favicon /* для base */
+{
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+#detail_img /* для detail размер img */
+{
+    width: 300px;
+    height: 300px;
+    margin: 3em -1em 1em 3em;
+}
+
+.product_price /* для detail общие параметры для блока с права от img */
+{
+    float: right;
+    margin: 3em 30em 1em 1em;
+}
+
+.category_product /* для detail параметры "КАТЕГОРИЯ ТОВАРА" с права от img */
+{
+    padding-bottom: 10px;
+}
+
+.cod_product /* для detail параметры "КОД ТОВАРА" с права от img */
+{
+    padding-bottom: 25px;
+}
+
+.price /* для detail параметры "ЦЕНА" с права от img */
+{
+    box-shadow: 3px 3px 10px #999;
+    width: 175px;
+    font-size: 35px;
+    color: #275019;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.submit-button /* для detail кнопка "ПОКУПКА ТОВАРОВ" */
+{
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.name /* для detail "МАРКА ТОВАРА" под картинкой */
+{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+}
+
+.accordion /* для detail заголовок "Описание товара:" */
+{
+    margin-left: 5%;
+    width: 900px;
+}
+
+#head2_description /* для detail заголовок-ссылка "ХАРАКТЕРИСТИКИ" */
+{
+    margin: 5%;
+}
+
+#characteristic /* для detail шрифт и отступы внутри блока "ХАРАКТЕРИСТИКИ" */
+{
+    font-size: 15px;
+    margin: 5%;
+    width: 900px;
+}
+
+/* это блок для цветов ссылок */
+a:link /*  */
+{
+    text-decoration: none;
+    color: #2a78c7;
+}
+a:visited /*  */
+{
+    text-decoration: none;
+    color: #2a78c7;
+}
+a:hover /*  */
+{
+    text-decoration: underline;
+    color: #0048ff;
+}
+a:active /*  */
+{
+    text-decoration: underline;
+}

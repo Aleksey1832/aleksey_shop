@@ -1,0 +1,26 @@
+.body_list /* для list отступы страницы */
+{
+  margin-left: 5%;
+  width: 1280px;
+}
+
+.gallery /* для list вывод img и текста с низу */
+{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  transform: translateX(-1%);
+}
+
+.gallery img /* для list вывод img и текста с низу */
+{
+  width:120px;
+  height:120px;
+  margin: 10px;
+  border:1px #00B344  solid;
+}
+
+.item /* для list вывод текста с низу по картинками */
+{
+  text-align: center;
+}
