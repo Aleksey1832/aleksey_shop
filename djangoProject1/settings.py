@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',   # система управления каскадами стилей, картинками
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [

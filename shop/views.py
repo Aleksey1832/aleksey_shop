@@ -52,3 +52,19 @@ def product_detail(request, id, slug):
             'cart_product_form': cart_product_form
         }
     )
+
+
+def home(request):
+    return render(request, 'shop/product/home.html')
+
+
+def about(request):
+    return render(request, 'shop/product/about.html')
+
+
+def how_buy(request):
+    return render(request, 'shop/product/how_buy.html')
+
+
+def price_list(request):
+    return render(request, 'shop/product/price_list.html')
