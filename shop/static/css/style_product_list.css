@@ -14,13 +14,40 @@
 
 .gallery img /* для list вывод img и текста с низу */
 {
-  width:120px;
-  height:120px;
+  width: 120px;
+  height: 120px;
   margin: 10px;
-  border:1px #00B344  solid;
+  border: 1px #00B344 solid;
 }
 
 .item /* для list вывод текста с низу по картинками */
 {
   text-align: center;
+}
+
+.button /* для list кнопка "КУПИТЬ" */
+{
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 /* для list кнопка "КУПИТЬ" */
+{
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover /* для list кнопка "КУПИТЬ" */
+{
+  background-color: #4CAF50;
+  color: white;
 }
