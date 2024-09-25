@@ -6,20 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="body_list">
-    <div id="sidebar">
-      <ul>
-        <h3>Выбрать</h3>
-        <li {% if not category %}{% endif %}>
-          <a href="{% url "shop:product_list" %}">Все товары</a>
-        </li>
-        {% for c in categories %}
-          <li {% if category.slug == c.slug %}{% endif %}>
-            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+
 
     <div id="main" class="product-list">
       <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>

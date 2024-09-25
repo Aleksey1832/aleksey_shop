@@ -21,54 +21,37 @@ body
 </head>
 
 <body>
-
-  <div class="header">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid" style="background-color: #f0fff3;">
+  <header>
+    <div class="logo">
+      <a href="#">
         <img class="favicon" src="/static/images/favicon.png">
-        <a class="navbar-brand" href="home">Главная</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="how_buy">Как купить</a>
+      </a>
+    </div>
+    <div class="three">
+      <ul class="topmenu">
+        <li><a href="{% url 'shop:home' %}">Главная</a></li>
+        <li><a href="{% url 'shop:how_buy' %}">Как купить</a></li>
+        <li><a href="{% url 'shop:price_list' %}">Прайс-лист</a></li>
+        <li><a>Каталог</a>
+          <ul class="submenu">
+            <li {% if not category %}{% endif %}>
+              <a href="{% url "shop:product_list" %}">Все товары</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="price_list">Прайс-лист</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
-              <ul class="dropdown-menu">
-                <li {% if not category %}{% endif %}>
-                  <a href="{% url "shop:product_list" %}">Все товары</a>
-                </li>
-                {% for c in categories %}
-                  <li class="dropdown-item">{% if category.slug == c.slug %}{% endif %}
-                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                  </li>
-                {% endfor %}
-
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about">О нас</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cart/cart/detail.html">Корзина</a>
-            </li>
+            {% for c in categories %}
+              <li {% if category.slug == c.slug %}{% endif %}>
+              <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+            {% endfor %}
+            <li><a class="" href="#">Что-то еще здесь</a></li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-            <button class="btn btn-outline-success" type="submit">Поиск</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </div>
+        </li>
+        <li><a href="{% url 'shop:about' %}">О нас</a></li>
+      </ul>
+    </div>
+    <div class="cart_base">
+      <a href="{% url 'cart:cart_detail' %}">Корзина></a>
+    </div>
+  </header>
+
 
   <!-- Пока не знаю чо сюда засунуть -->
   <div id="content">
