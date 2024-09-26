@@ -1,7 +1,12 @@
-.body_list /* для list отступы страницы */
+.content /* для list отступы страницы */
 {
-  margin-left: 5%;
-  width: 1280px;
+  margin-left: 20px;
+}
+
+.product-list
+{
+  margin-top: 20px;
+  font-size: 10px;
 }
 
 .gallery /* для list вывод img и текста с низу */
@@ -22,32 +27,33 @@
 
 .item /* для list вывод текста с низу по картинками */
 {
+  color: #2e3034;
   text-align: center;
+  font-size: 18px;
 }
 
-.button /* для list кнопка "КУПИТЬ" */
+.pushable
 {
+  background: hsl(340deg 100% 32%);
+  border-radius: 12px;
   border: none;
-  color: white;
-  padding: 5px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
+  padding: 0;
   cursor: pointer;
+  outline-offset: 4px;
 }
 
-.button1 /* для list кнопка "КУПИТЬ" */
+.front
 {
-  background-color: white;
-  color: black;
-  border: 2px solid #4CAF50;
-}
-
-.button1:hover /* для list кнопка "КУПИТЬ" */
-{
-  background-color: #4CAF50;
+  display: block;
+  padding: 5px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: hsl(345deg 100% 47%);
   color: white;
+  transform: translateY(-6px);
+}
+
+.pushable:active .front
+{
+  transform: translateY(-2px);
 }

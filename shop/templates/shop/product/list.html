@@ -7,28 +7,32 @@
 
 {% block content %}
 
-
+  <div class="content">
     <div id="main" class="product-list">
       <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
     </div>
 
     <div class="gallery">
       {% for product in products %}
-          <div>
+        <div>
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}">
+          </a>
+          <div class="item">
+            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            <br>
             <a href="{{ product.get_absolute_url }}">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}">
-              </a>
-              <div class="item">
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                <br>
-                <a href="{{ product.get_absolute_url }}">
-                <button class="button button1">{{ product.price }} ₽</button>
-                </a>
-                <br>
-                <br>
-              </div>
+              {{ product.price }} ₽
+              <br>
+              <button class="pushable">
+                <span class="front">В корзину</span>
+              </button>
+            </a>
+            <br>
+            <br>
           </div>
-      {% endfor %}
+        </div>
+        {% endfor %}
     </div>
   </div>
 
