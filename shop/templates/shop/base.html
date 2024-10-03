@@ -47,7 +47,20 @@
     </nav>
   </header>
 
-
+  <!-- вывод информации из корзины -->
+  <div class="subheader">
+    <div class="cart_info">
+      {% with total_items=cart|length  %}
+        {% if total_items > 0 %}
+          <a href="{% url "cart:cart_detail" %}">
+            {{ total_items }} товара
+          </a>
+          {% else %}
+          Корзина пуста
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
 
   <div class="content">
     {% block content %}
@@ -55,22 +68,21 @@
     {% endblock %}
   </div>
 
-  <!-- пакет для JavaScript-->
+  <!-- пакет для JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <!-- Подвал -->
   <footer>
     <div>
-      <nav>
-        <ul>
-          <li><a href='#'>О нас</a></li>
-          <li><a href='#'>Контакты</a></li>
-          <li><a href='#'>Правила</a></li>
-        </ul>
-      </nav>
-      <p>Телефон: +7 (***) ***-**-**</p>
-      <p>Email: info@**********.ru</p>
-      <p style="text-align:center;">Это учебный проект. <br>2024г</p>
+      <ul class="about">
+        <li><a href="{% url 'shop:about' %}">О нас</a></li>
+        <li><a href="{% url 'shop:price_list' %}">Прайс-лист</a></li>
+        <li><a href="#">Правила</a></li>
+      </ul>
+
+      <p style="margin-left: 14px">Телефон: +7 (***) ***-**-**</p>
+      <p style="margin-left: 14px">Email: info@**********.ru</p>
+      <p style="text-align:center;">© Это учебный проект. <br>2024г</p>
     </div>
   </footer>
 </body>

@@ -4,7 +4,8 @@
 {% block title %} Корзина
 {% endblock %}
 {% block content %}
-    <h1>В вашей корзине...</h1>
+  <div class="content">
+    <h1 class="head">В вашей корзине...</h1>
     <table class="cart">
         <thead>
         <tr>
@@ -25,6 +26,7 @@
                             <img class="detail_img" src="{% if product.image %}{{ product.image.url }} {% else %}{% static "images/no_image.png" %} {% endif %}">
                         </a>
                     </td>
+
                     <td>{{ product.name }}</td>
                     <td>
                         <form action="{% url "cart:cart_add" product.id %}" method="post">
@@ -40,19 +42,27 @@
                             {% csrf_token %}
                         </form>
                     </td>
-                    <td class="num">₽{{ item.price }}</td>
-                    <td class="num">₽{{ item.total_price }}</td>
+                    <td class="num">{{ item.price }} ₽</td>
+                    <td class="num">{{ item.total_price }} ₽</td>
                 </tr>
             {% endwith %}
         {% endfor %}
+        <HR>
         <tr class="total">
-            <td>Total</td>
-            <td colspan="4"></td>
-            <td class="num">₽{{ cart.get_total_price }}</td>
+          <td>Количество ваших покупок:</td>
+          <td colspan="1"></td>
+          <td class="num">{{ total_items }} шт</td>
+
+          <td>Сумма ваших покупок:</td>
+          <td colspan="1"></td>
+          <td class="num">{{ cart.get_total_price }} ₽</td>
+
         </tr>
         </tbody>
     </table>
+              <HR>
     <p class="text-right">
         <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a>
     </p>
+  </div>
 {% endblock %}

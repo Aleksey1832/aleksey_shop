@@ -14,22 +14,16 @@
 
     <div class="gallery">
       {% for product in products %}
-        <div>
-          <a href="{{ product.get_absolute_url }}">
+        <div style="border: 1px #00B344 solid; margin:10px 10px;">
+          <a href="{{ product.image.url }}">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}">
           </a>
           <div class="item">
-            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-            <br>
-            <a href="{{ product.get_absolute_url }}">
-              {{ product.price }} ₽
-              <br>
-              <button class="pushable">
-                <span class="front">В корзину</span>
-              </button>
-            </a>
-            <br>
-            <br>
+            <p href="">{{ product.name }}</p>
+            <p>{{ product.price }} ₽</p>
+            <a href="{{ product.get_absolute_url }}"><button class="pushable">
+              <span class="front">Посмотреть</span>
+            </button></a>
           </div>
         </div>
         {% endfor %}

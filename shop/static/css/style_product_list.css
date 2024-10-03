@@ -1,12 +1,14 @@
 .content /* для list отступы страницы */
 {
   margin-left: 20px;
+  color: #003559;
 }
 
-.product-list
+.product-list /* для list "КАТЕГОРИЯ ТОВАРОВ" */
 {
   margin-top: 20px;
   font-size: 10px;
+  font-family: 'Calibri', serif;
 }
 
 .gallery /* для list вывод img и текста с низу */
@@ -21,8 +23,7 @@
 {
   width: 120px;
   height: 120px;
-  margin: 10px;
-  border: 1px #00B344 solid;
+  margin: 20px;
 }
 
 .item /* для list вывод текста с низу по картинками */
@@ -30,6 +31,7 @@
   color: #2e3034;
   text-align: center;
   font-size: 18px;
+  font-weight: 700;
 }
 
 .pushable
@@ -40,6 +42,7 @@
   padding: 0;
   cursor: pointer;
   outline-offset: 4px;
+  margin-bottom: 20px;
 }
 
 .front

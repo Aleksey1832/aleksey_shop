@@ -7,13 +7,14 @@
 {
     width: 300px;
     height: 300px;
-    margin: 3em -1em 1em 3em;
+    margin: 3em -1em 1em 1em;
 }
 
 .product_price /* для detail общие параметры для блока с права от img */
 {
     float: right;
-    margin: 3em 30em 1em 1em;
+    left: 10px;
+    margin: 55px 35em 1em 5px;
 }
 
 .category_product /* для detail параметры "КАТЕГОРИЯ ТОВАРА" с права от img */
@@ -49,26 +50,26 @@
 {
     margin-top: 10px;
     margin-bottom: 30px;
-    margin-left: 43px;
+    margin-left: 14px;
     font-size: 20px;
 }
 
 .accordion /* для detail заголовок "Описание товара:" */
 {
-    margin-left: 5%;
+    margin-left: 35px;
     width: 900px;
 }
 
 #head2_description /* для detail заголовок-ссылка "ХАРАКТЕРИСТИКИ" */
 {
-    margin: 5%;
+    margin: 40px 1px 50px 55px;
 }
 
 #characteristic /* для detail шрифт и отступы внутри блока "ХАРАКТЕРИСТИКИ" */
 {
     font-size: 15px;
     margin: 5%;
-    width: 900px;
+    width: 878px;
 }
 
 /* это блок для цветов ссылок */

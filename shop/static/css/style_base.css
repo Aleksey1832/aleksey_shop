@@ -1,13 +1,14 @@
 .favicon /* для base */
 {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 * { box-sizing: border-box; }
 
-body{
+header{
   background: radial-gradient(#BFD6E2 1px, rgba(255,255,255,0) 2px);
   background-size: 10px 10px;
   margin: 0;
@@ -44,7 +45,7 @@ nav a {
 .down:after {
   content: "\f107";
   margin-left: 8px;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman', serif;;
 }
 .top_menu li a:hover { color: #E6855F; }
 .submenu {
@@ -80,16 +81,21 @@ nav a {
   text-decoration: none;
 }
 
-footer
+footer /* подвал общий*/
 {
-  position: fixed;
   right: 0;
   bottom: 0;
-  text-align: center;
   width: 100%;
   font-size: 19px;
   font-weight: bold;
   color: #1e1e23;
-  margin-top: 40px;
+  margin-top: 20px;
   background-color: #e9fdea;
+  font-family: "Times New Roman", serif;
+}
+
+.about /* подвал для ссылок*/
+{
+  text-align: left;
+  margin-left: 1px;
 }
