@@ -14,7 +14,7 @@
 
     <div class="gallery">
       {% for product in products %}
-        <div style="border: 1px #00B344 solid; margin:10px 10px;">
+        <div class="border">
           <a href="{{ product.image.url }}">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}">
           </a>
