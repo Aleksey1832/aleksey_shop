@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru-RU">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,25 +42,26 @@
           <li><a href="{% url 'shop:about' %}">О нас</a></li>
 
           <li><a class="cart_base" href="{% url 'cart:cart_detail' %}">Корзина</a></li>
+
+            <!-- вывод информации из корзины -->
+            <li><div class="cart_info">
+              {% with total_items=cart|length  %}
+                {% if total_items > 0 %}
+
+                    {{ total_items }}
+
+                  {% else %}
+                  Корзина пуста
+                {% endif %}
+              {% endwith %}
+            </div>
+          </li>
+
         </ul>
+
       </div>
     </nav>
   </header>
-
-  <!-- вывод информации из корзины -->
-  <div class="subheader">
-    <div class="cart_info">
-      {% with total_items=cart|length  %}
-        {% if total_items > 0 %}
-          <a href="{% url "cart:cart_detail" %}">
-            {{ total_items }} товара
-          </a>
-          {% else %}
-          Корзина пуста
-        {% endif %}
-      {% endwith %}
-    </div>
-  </div>
 
   <div class="content">
     {% block content %}

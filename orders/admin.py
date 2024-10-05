@@ -5,7 +5,7 @@ from orders.models import OrderItem, Order
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
-    readonly_fields = ('product', 'order', 'price', 'quantity', 'discount')
+    readonly_fields = ['product']
 
 
 @admin.register(Order)
@@ -18,13 +18,13 @@ class OrderAdmin(admin.ModelAdmin):
         'gender',
         'date_birth',
         'email',
-        'phone_number',
+        # 'phone_number',
         'city',
         'street',
         'house_number',
         'litter_number',
-        'apartments_number',
-        'floor',
+        # 'apartments_number',
+        # 'floor',
         'postal_code'
     ]
 

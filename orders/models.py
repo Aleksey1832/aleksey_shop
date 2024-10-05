@@ -10,13 +10,13 @@ class Order(models.Model):
     gender = models.CharField(max_length=7, verbose_name='Пол')
     date_birth = models.DateField(verbose_name='Дата рождения')
     email = models.EmailField(verbose_name='Email')
-    phone_number = PhoneNumberField(unique=True, null=False, blank=False, verbose_name='Номер телефона')
+    # phone_number = PhoneNumberField(unique=True, null=False, blank=False, verbose_name='Номер телефона')
     city = models.CharField(max_length=30, verbose_name='Город')
     street = models.CharField(max_length=40, verbose_name='Улица/Проспект')
     house_number = models.IntegerField(verbose_name='Номер дома')
     litter_number = models.CharField(max_length=10, verbose_name='Корпус/Литера')
-    apartments_number = models.CharField(max_length=5, verbose_name='Номер квартиры/Офис')
-    floor = models.CharField(max_length=2, verbose_name='Этаж')
+    # apartments_number = models.CharField(max_length=5, verbose_name='Квартира/Офис')
+    # floor = models.CharField(max_length=2, verbose_name='Этаж')
     postal_code = models.CharField(max_length=6, verbose_name='Почтовый индекс')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,10 +25,10 @@ class Order(models.Model):
     def __str__(self):
         return f'Order №: {self.id}'
 
-    # class Meta:
-    #     ordering = ['orders']
-    #     verbose_name = 'Заказ'
-    #     verbose_name_plural = 'Заказы'
+    class Meta:
+
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
 
 class OrderItem(models.Model):

@@ -1,17 +1,27 @@
 .head
 {
-    margin-top: 15px;
-    margin-bottom: 25px;
+    margin: 15px 0 25px 14px;
+}
+
+.content_cart
+{
+    margin: 14px;
+    font-size: 17px;
+    color: #000;
+    border:2px solid #d5cdcd;
+    padding: 20px 20px 20px 20px;
+    width: 900px;
 }
 
 .cart
 {
-    margin-right: 50px;
+
+
 }
 
 .detail_img /* для detail размер img */
 {
     width: 70px;
     height: 70px;
-    margin: 20px 0 14px 0;
+    margin: 20px 0 10px 5px;
 }

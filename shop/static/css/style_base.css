@@ -81,6 +81,17 @@ nav a {
   text-decoration: none;
 }
 
+.cart_info
+{
+  font-size: 20px;
+  color: #fcf7f7;
+  text-decoration: none;
+  display: block;
+  padding: 1px 15px;
+  border-radius: 12px;
+  background: hsl(345deg 100% 47%);
+}
+
 footer /* подвал общий*/
 {
   right: 0;

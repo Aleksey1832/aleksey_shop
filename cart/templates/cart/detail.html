@@ -4,8 +4,10 @@
 {% block title %} Корзина
 {% endblock %}
 {% block content %}
-  <div class="content">
-    <h1 class="head">В вашей корзине...</h1>
+
+  <h1 class="head">В вашей корзине...</h1>
+  <div class="content_cart">
+
     <table class="cart">
         <thead>
         <tr>
@@ -47,7 +49,6 @@
                 </tr>
             {% endwith %}
         {% endfor %}
-        <HR>
         <tr class="total">
           <td>Количество ваших покупок:</td>
           <td colspan="1"></td>
@@ -60,9 +61,11 @@
         </tr>
         </tbody>
     </table>
-              <HR>
+    <br>
     <p class="text-right">
         <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a>
+        <a href="{% url "orders:order_create" %}" class="button light">Оформить заказ</a>
     </p>
+    <br>
   </div>
 {% endblock %}
