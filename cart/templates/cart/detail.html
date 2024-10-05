@@ -50,11 +50,11 @@
             {% endwith %}
         {% endfor %}
         <tr class="total">
-          <td>Количество ваших покупок:</td>
+          <td>В вашей корзине:</td>
           <td colspan="1"></td>
-          <td class="num">{{ total_items }} шт</td>
+          <td class="num">{{ total_items }} {{ ending_word }}</td>
 
-          <td>Сумма ваших покупок:</td>
+          <td>На сумму:</td>
           <td colspan="1"></td>
           <td class="num">{{ cart.get_total_price }} ₽</td>
 

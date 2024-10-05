@@ -45,15 +45,12 @@
 
             <!-- вывод информации из корзины -->
             <li><div class="cart_info">
-              {% with total_items=cart|length  %}
-                {% if total_items > 0 %}
+              {% if total_items > 0 %}
+                {{ total_items }} {{ ending_word }}
+              {% else %}
+                Корзина пуста
+              {% endif %}
 
-                    {{ total_items }}
-
-                  {% else %}
-                  Корзина пуста
-                {% endif %}
-              {% endwith %}
             </div>
           </li>
 
