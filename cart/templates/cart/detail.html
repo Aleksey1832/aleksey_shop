@@ -54,7 +54,7 @@
       </table>
     </div>
 
-
+    <!-- блок "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" -->
     <div class="payment">
       <div class="text-right">
         <form action="{% url "orders:order_create" %}" method="post">
@@ -81,6 +81,7 @@
     </div>
   </div>
 
+  <!-- блок "ПРОДОЛЖИТЬ ПОКУПКИ" -->
   <br>
   <div class="text-light">
     <form action="{% url "shop:product_list" %}" method="post">
@@ -88,7 +89,5 @@
       {% csrf_token %}
     </form>
   </div>
-
-
 
 {% endblock %}

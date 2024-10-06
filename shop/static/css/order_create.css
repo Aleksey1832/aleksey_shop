@@ -1,0 +1,19 @@
+.registering{
+  margin-left: 20em;
+  margin-top: 20px;
+}
+
+.www{
+  text-align: center;
+}
+
+.order_form{
+  text-align: right;
+  margin-top: 35px;
+  margin-left: 10em;
+  border:2px solid rgba(187, 225, 211, 0.5);
+  padding: 10px 50px 0 5px;
+  width: 500px;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.7);
+}

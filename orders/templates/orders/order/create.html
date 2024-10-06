@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html lang="ru-RU">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-<form method="post" class="order_form">
-  {{ form.as_p }}
-  <p><input type="submit" value="Заказать"></p>
-  {% csrf_token %}
-</form>
-</body>
-</html>
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Регистрация заказа
+{% endblock %}
+
+{% block content %}
+
+  <div class="registering">
+    <h2>Регистрация</h2>
+  </div>
+
+  <div class="www">
+    <form method="post" class="order_form">
+      {{ form.as_p }}
+      <p><input type="submit" value="Заказать"></p>
+      {% csrf_token %}
+    </form>
+  </div>
+
+
+{% endblock %}
