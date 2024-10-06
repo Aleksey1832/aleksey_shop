@@ -3,25 +3,85 @@
     margin: 15px 0 25px 14px;
 }
 
+.cart_container{
+    display: flex;
+}
 .content_cart
 {
-    margin: 14px;
-    font-size: 17px;
-    color: #000;
-    border:2px solid #d5cdcd;
-    padding: 20px 20px 20px 20px;
-    width: 900px;
+    border:2px solid rgba(206, 245, 230, 0.5);
+    padding: 10px 0 0 0;
+    width: 750px;
+    border-radius: 25px;
+    background: #ffffff;
+}
+
+.text-right{
+    text-align: center;
+}
+
+/* меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
+.register{
+    border:2px solid rgb(34, 201, 72);
+    font-size: 15px;
+    color: #fcf7f7;
+    text-decoration: none;
+    padding: 3px 15px;
+    border-radius: 15px;
+    background: hsl(134, 71%, 46%);
 }
 
 .cart
 {
-
-
+    color: #000;
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+    margin: 0;
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .detail_img /* для detail размер img */
 {
     width: 70px;
     height: 70px;
-    margin: 20px 0 10px 5px;
+    margin: 0 0 15px 0;
+}
+
+.update
+{
+    border:2px solid rgb(240, 0, 60);
+    font-size: 15px;
+    color: #fcf7f7;
+    text-decoration: none;
+    padding: 1px 12px;
+    border-radius: 15px;
+    background: hsl(345deg 100% 47%);
+}
+
+.payment{
+    margin-left: 20px;
+    border:2px solid rgba(206, 245, 230, 0.5);
+    padding: 10px 5px 0 5px;
+    width: 300px;
+    border-radius: 25px;
+    background: #ffffff;
+}
+
+.total{
+    font-size: 15px;
+    font-weight: 600;
+    background-image: radial-gradient(circle, #553c9a, #ee4b2b);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.shopping{
+    border:2px solid rgb(34, 201, 72);
+    font-size: 20px;
+    color: #fcf7f7;
+    text-decoration: none;
+    padding: 3px 15px;
+    border-radius: 15px;
+    background: hsl(134, 71%, 46%);
 }

@@ -4,11 +4,50 @@
   color: #003559;
 }
 
-.product-list /* для list "КАТЕГОРИЯ ТОВАРОВ" */
-{
-  margin-top: 20px;
-  font-size: 10px;
-  font-family: 'Calibri', serif;
+/*.product-list !* для list "КАТЕГОРИЯ ТОВАРОВ" *!*/
+/*{*/
+/*  margin-top: 20px;*/
+/*  font-size: 10px;*/
+/*  font-family: 'Calibri', serif;*/
+/*}*/
+
+/* заголовок для list "КАТЕГОРИЯ ТОВАРОВ" */
+.four {
+  background-color: rgb(244, 247, 238, 0.8);
+  padding: 50px 40px;
+  text-align: left;
+}
+.four h1 {
+  font-family: 'Merriweather', serif;
+  position: relative;
+  color: #C44737;
+  font-size: 50px;
+  font-weight: normal;
+  padding: 8px 20px 7px 20px;
+  border-top: 4px solid;
+  border-left: 4px solid;
+  display: inline-block;
+  margin: 0;
+  line-height: 1;
+}
+.four h1:before {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: -28px;
+  left: -28px;
+  border: 4px solid #C44737;
+  box-sizing: border-box;
+}
+@media (max-width: 450px) {
+  .four h1 {font-size: 36px;}
+  .four h1:before {
+    width: 20px;
+    height: 20px;
+    top: -20px;
+    left: -20px;
+  }
 }
 
 .gallery /* для list вывод img и текста с низу */
@@ -30,7 +69,8 @@
 {
   border: 1px #00B344 solid;
   margin:10px 10px;
-  background: #e9f8ee;
+  border-radius: 25px;
+  background-color: rgba(183, 232, 215, 0.4);
 }
 
 .item /* для list вывод текста с низу по картинками */

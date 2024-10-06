@@ -6,66 +6,89 @@
 {% block content %}
 
   <h1 class="head">В вашей корзине...</h1>
-  <div class="content_cart">
+  <div class="cart_container">
+    <div class="content_cart">
 
-    <table class="cart">
+      <table class="cart">
         <thead>
-        <tr>
-            <th>Изображение</th>
-            <th>Продукт</th>
-            <th>Количество</th>
-            <th>Убрать</th>
-            <th>Цена за штуку</th>
-            <th>Стоимость</th>
-        </tr>
+          <tr>
+            <th style="width: 120px">Изображение</th>
+            <th style="width: 130px">Продукт</th>
+            <th style="width: 150px">Количество</th>
+            <th style="width: 130px">Убрать</th>
+            <th style="width: 130px">Цена за штуку</th>
+            <th style="width: 130px">Стоимость</th>
+          </tr>
         </thead>
-        <tbody>
-        {% for item in cart %}
+          <tbody>
+          {% for item in cart %}
             {% with product=item.product %}
-                <tr>
-                    <td>
-                        <a href="{{ product.get_absolute_url }}">
-                            <img class="detail_img" src="{% if product.image %}{{ product.image.url }} {% else %}{% static "images/no_image.png" %} {% endif %}">
-                        </a>
-                    </td>
+              <tr>
+                <td><hr>
+                  <a href="{{ product.get_absolute_url }}">
+                    <img class="detail_img" src="{% if product.image %}{{ product.image.url }} {% else %}{% static "images/no_image.png" %} {% endif %}">
+                  </a>
+                </td>
 
-                    <td>{{ product.name }}</td>
-                    <td>
-                        <form action="{% url "cart:cart_add" product.id %}" method="post">
-                            {{ item.update_quantity_form.quantity }}
-                            {{ item.update_quantity_form.override }}
-                            <input type="submit" value="Обновить">
-                            {% csrf_token %}
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                            <input type="submit" value="Удалить">
-                            {% csrf_token %}
-                        </form>
-                    </td>
-                    <td class="num">{{ item.price }} ₽</td>
-                    <td class="num">{{ item.total_price }} ₽</td>
-                </tr>
+                <td>{{ product.name }}</td>
+                <td>
+                  <form action="{% url "cart:cart_add" product.id %}" method="post">
+                    {{ item.update_quantity_form.quantity }}
+                    {{ item.update_quantity_form.override }}
+                    <input class="update" type="submit" value="Обновить"><hr>
+                    {% csrf_token %}
+                  </form>
+                </td>
+                <td>
+                  <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                    <input class="update" type="submit" value="Удалить">
+                    {% csrf_token %}
+                  </form>
+                </td>
+                <td class="num">{{ item.price }} ₽</td>
+                <td class="num">{{ item.total_price }} ₽<hr></td>
+              </tr>
             {% endwith %}
-        {% endfor %}
-        <tr class="total">
-          <td>В вашей корзине:</td>
-          <td colspan="1"></td>
-          <td class="num">{{ total_items }} {{ ending_word }}</td>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
 
-          <td>На сумму:</td>
-          <td colspan="1"></td>
-          <td class="num">{{ cart.get_total_price }} ₽</td>
 
-        </tr>
-        </tbody>
-    </table>
-    <br>
-    <p class="text-right">
-        <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a>
-        <a href="{% url "orders:order_create" %}" class="button light">Оформить заказ</a>
-    </p>
-    <br>
+    <div class="payment">
+      <div class="text-right">
+        <form action="{% url "orders:order_create" %}" method="post">
+          <input class="register" type="submit" value="Перейти к оформлению">
+          {% csrf_token %}
+         </form>
+      </div>
+
+      <p style="font-size: 13px">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
+      <hr>
+      <div class="total">
+        <p class="num"><b>В вашей корзине:</b>&emsp;&emsp;&emsp;
+        {{ total_items }} {{ ending_word }}<br><br>
+        На сумму:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+        {{ cart.get_total_price }} ₽<br><br>
+        Скидка:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+        0 %<br><br>
+        </p>
+      </div>
+      <hr>
+      <div>
+        <h3>Итого:&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;{{ cart.get_total_price }} ₽</h3>
+      </div>
+    </div>
   </div>
+
+  <br>
+  <div class="text-light">
+    <form action="{% url "shop:product_list" %}" method="post">
+      <input class="shopping" type="submit" value="Продолжить покупки">
+      {% csrf_token %}
+    </form>
+  </div>
+
+
+
 {% endblock %}

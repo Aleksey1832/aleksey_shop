@@ -7,14 +7,15 @@
 {
     width: 300px;
     height: 300px;
-    margin: 3em -1em 1em 1em;
+    margin: 3em 50px 1em 1em;
+    float: left;
 }
 
 .product_price /* для detail общие параметры для блока с права от img */
 {
-    float: right;
-    left: 10px;
-    margin: 55px 35em 1em 5px;
+    padding: 53px 0 20px 450px;
+    font-size: 17px;
+    font-weight: bolder;
 }
 
 .category_product /* для detail параметры "КАТЕГОРИЯ ТОВАРА" с права от img */
@@ -30,8 +31,9 @@
 .price /* для detail параметры "ЦЕНА" с права от img */
 {
     box-shadow: 3px 3px 10px #999;
+    background-color: #fafaf9;
     width: 175px;
-    font-size: 35px;
+    font-size: 30px;
     color: #275019;
     text-align: center;
     font-weight: bolder;
@@ -48,10 +50,12 @@
 
 .name /* для detail "МАРКА ТОВАРА" под картинкой */
 {
-    margin-top: 10px;
-    margin-bottom: 30px;
-    margin-left: 14px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    margin-left: 35px;
     font-size: 20px;
+    text-align: left;
+    font-weight: bold;
 }
 
 .accordion /* для detail заголовок "Описание товара:" */
