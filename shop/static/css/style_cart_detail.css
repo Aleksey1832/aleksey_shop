@@ -1,13 +1,11 @@
-.head
-{
+.head {
     margin: 15px 0 25px 14px;
 }
 
-.cart_container{
+.cart_container {
     display: flex;
 }
-.content_cart
-{
+.content_cart {
     border:2px solid rgba(206, 245, 230, 0.5);
     padding: 10px 0 0 0;
     width: 750px;
@@ -15,23 +13,25 @@
     background: #ffffff;
 }
 
-.text-right{
+.text-right {
     text-align: center;
 }
 
 /* меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
-.register{
+.register {
     border:2px solid rgb(34, 201, 72);
-    font-size: 15px;
+    font-size: 16px;
     color: #fcf7f7;
     text-decoration: none;
     padding: 3px 15px;
     border-radius: 15px;
     background: hsl(134, 71%, 46%);
 }
+.register:hover, .register:focus {
+  background: #2cd754; /* Эффект при наведении — дополнительное оформление */
+}
 
-.cart
-{
+.cart {
     color: #000;
     font-family: 'Exo 2', sans-serif;
     text-align: center;
@@ -47,6 +47,7 @@
     margin: 0 0 15px 0;
 }
 
+/* кнопки "ОБНОВИТЬ" и "УДАЛИТЬ" */
 .update
 {
     border:2px solid rgb(240, 0, 60);
@@ -57,17 +58,22 @@
     border-radius: 15px;
     background: hsl(345deg 100% 47%);
 }
+.update:hover, .update:focus {
+  background: #f63b3b; /* Эффект при наведении — дополнительное оформление */
+}
 
-.payment{
+/* рамка для блока оформления */
+.payment {
     margin-left: 20px;
     border:2px solid rgba(206, 245, 230, 0.5);
     padding: 10px 5px 0 5px;
     width: 300px;
+    height: 400px;
     border-radius: 25px;
     background: #ffffff;
 }
 
-.total{
+.total {
     font-size: 15px;
     font-weight: 600;
     background-image: radial-gradient(circle, #553c9a, #ee4b2b);
@@ -75,8 +81,8 @@
     background-clip: text;
     -webkit-background-clip: text;
 }
-
-.shopping{
+/* кнопка "ПРОДОЛЖИТЬ ПОКУПКИ" */
+.shopping {
     border:2px solid rgb(34, 201, 72);
     font-size: 20px;
     color: #fcf7f7;
@@ -84,4 +90,7 @@
     padding: 3px 15px;
     border-radius: 15px;
     background: hsl(134, 71%, 46%);
+}
+.shopping:hover, .shopping:focus {
+  background: #2ede57; /* Эффект при наведении — дополнительное оформление */
 }

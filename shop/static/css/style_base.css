@@ -6,6 +6,21 @@
   margin-left: 10px;
 }
 
+.cart_info
+{
+  font-size: 15px;
+  color: #fcf7f7;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1px 11px;
+  border-radius: 10px;
+  background: hsl(345deg 100% 47%);
+}
+
+.cart_info:hover, .cart_info:focus {
+  background: #a10e35; /* Эффект при наведении — дополнительное оформление */
+}
+
 * { box-sizing: border-box; }
 
 body{
@@ -79,17 +94,6 @@ nav a {
   font-size: 20px;
   color: #000;
   text-decoration: none;
-}
-
-.cart_info
-{
-  font-size: 15px;
-  color: #fcf7f7;
-  text-decoration: none;
-  display: block;
-  padding: 1px 11px;
-  border-radius: 10px;
-  background: hsl(345deg 100% 47%);
 }
 
 footer /* подвал общий*/

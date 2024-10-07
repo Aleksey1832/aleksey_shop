@@ -11,13 +11,13 @@ class OrderCreateForm(forms.ModelForm):
             'last_name',
             'gender',
             'date_birth',
-            # 'phone_number',
+            'phone_number',
             'email',
             'city',
             'street',
             'house_number',
             'litter_number',
-            # 'apartments_number',
-            # 'floor',
+            'apartments_number',
+            'floor',
             'postal_code'
         ]

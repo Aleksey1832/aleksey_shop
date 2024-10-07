@@ -41,7 +41,7 @@
                 </td>
                 <td>
                   <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                    <input class="update" type="submit" value="Удалить">
+                    <button class="update" type="submit">Удалить</button>
                     {% csrf_token %}
                   </form>
                 </td>
@@ -58,10 +58,10 @@
     <div class="payment">
       <div class="text-right">
         <form action="{% url "orders:order_create" %}" method="post">
-          <input class="register" type="submit" value="Перейти к оформлению">
+          <button class="register" type="submit">Перейти к оформлению</button>
           {% csrf_token %}
          </form>
-      </div>
+      </div><br>
 
       <p style="font-size: 13px">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
       <hr>
@@ -76,7 +76,7 @@
       </div>
       <hr>
       <div>
-        <h3>Итого:&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;{{ cart.get_total_price }} ₽</h3>
+        <h3>Итого:&emsp;&emsp;&emsp;&nbsp;&nbsp;{{ cart.get_total_price }} ₽</h3>
       </div>
     </div>
   </div>
@@ -84,8 +84,8 @@
   <!-- блок "ПРОДОЛЖИТЬ ПОКУПКИ" -->
   <br>
   <div class="text-light">
-    <form action="{% url "shop:product_list" %}" method="post">
-      <input class="shopping" type="submit" value="Продолжить покупки">
+    <form action="{% url "shop:product_list" %}" method="get">
+      <button class="shopping" type="submit">Продолжить покупки</button>
       {% csrf_token %}
     </form>
   </div>

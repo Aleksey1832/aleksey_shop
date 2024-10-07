@@ -18,13 +18,13 @@ class OrderAdmin(admin.ModelAdmin):
         'gender',
         'date_birth',
         'email',
-        # 'phone_number',
+        'phone_number',
         'city',
         'street',
         'house_number',
         'litter_number',
-        # 'apartments_number',
-        # 'floor',
+        'apartments_number',
+        'floor',
         'postal_code'
     ]
 

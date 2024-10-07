@@ -45,12 +45,18 @@
           <li><a class="cart_base" href="{% url 'cart:cart_detail' %}">Корзина</a></li>
 
             <!-- вывод информации из корзины -->
-            <li><div class="cart_info">
-              {% if total_items > 0 %}
-                {{ total_items }} {{ ending_word }}
-              {% else %}
-                Корзина пуста
-              {% endif %}
+            <li>
+              <div>
+                {% with total_item=cart|length %}
+                  {% if total_item > 0 %}
+                    <a  class="cart_info" href="{% url "cart:cart_detail" %}">
+                      <b>{{ total_item }}</b>
+                    </a>
+{#                    {{ total_items }} {{ ending_word }}#}
+                  {% else %}
+                    Корзина пуста
+                  {% endif %}
+                {% endwith %}
 
             </div>
           </li>
