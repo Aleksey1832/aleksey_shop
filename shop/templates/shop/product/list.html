@@ -15,15 +15,26 @@
     <div class="gallery">
       {% for product in products %}
         <div class="border">
-          <a href="{{ product.image.url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}">
+
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
           </a>
+
           <div class="item">
-            <p href="">{{ product.name }}</p>
+            <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
+              <p>{{ product.name }}</p>
+            </a>
             <p>{{ product.price }} ₽</p>
-            <a href="{{ product.get_absolute_url }}"><button class="pushable">
-              <span class="front">Посмотреть</span>
-            </button></a>
+
+            <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
+              {{ cart_product_form }}
+              <button class="pushable" type="submit">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front"> В корзину </span>
+              </button>
+              {% csrf_token %}
+            </form>
           </div>
         </div>
         {% endfor %}

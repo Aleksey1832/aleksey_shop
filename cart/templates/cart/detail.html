@@ -61,30 +61,39 @@
           <button class="register" type="submit">Перейти к оформлению</button>
           {% csrf_token %}
          </form>
-      </div><br>
+      </div>
 
       <p style="font-size: 13px">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
       <hr>
       <div class="total">
-        <p class="num"><b>В вашей корзине:</b>&emsp;&emsp;&emsp;
-        {{ total_items }} {{ ending_word }}<br><br>
-        На сумму:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
-        {{ cart.get_total_price }} ₽<br><br>
-        Скидка:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
-        0 %<br><br>
-        </p>
+        <table class="display">
+          <tr>
+            <th><b>В вашей корзине:</b></th>
+            <th><b>{{ total_items }} {{ ending_word }}</b></th>
+          </tr>
+          <tr>
+            <td>На сумму:</td>
+            <td>{{ cart.get_total_price }} ₽</td>
+          </tr>
+          <tr>
+            <td>Скидка:</td>
+            <td>0 %</td>
+          </tr>
+        </table>
       </div>
       <hr>
       <div>
-        <h3>Итого:&emsp;&emsp;&emsp;&nbsp;&nbsp;{{ cart.get_total_price }} ₽</h3>
+        <h3>Итого:&emsp;&emsp;&emsp;{{ cart.get_total_price }} ₽</h3>
       </div>
+
     </div>
+
   </div>
 
   <!-- блок "ПРОДОЛЖИТЬ ПОКУПКИ" -->
   <br>
   <div class="text-light">
-    <form action="{% url "shop:product_list" %}" method="get">
+    <form action="{% url 'shop:product_list' %}" method="get">
       <button class="shopping" type="submit">Продолжить покупки</button>
       {% csrf_token %}
     </form>

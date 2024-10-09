@@ -1,13 +1,13 @@
-.favicon /* для base */
-{
+/* для base */
+.favicon {
   width: 60px;
   height: 60px;
   margin-right: 10px;
   margin-left: 10px;
 }
 
-.cart_info
-{
+/* вывод количества справа от "КОРЗИНА" */
+.cart_info {
   font-size: 15px;
   color: #fcf7f7;
   text-decoration: none;
@@ -15,15 +15,12 @@
   padding: 1px 11px;
   border-radius: 10px;
   background: hsl(345deg 100% 47%);
-}
-
-.cart_info:hover, .cart_info:focus {
-  background: #a10e35; /* Эффект при наведении — дополнительное оформление */
+  font-weight: bold;    /* жирный текст */
 }
 
 * { box-sizing: border-box; }
 
-body{
+body {
   background: radial-gradient(#BFD6E2 1px, rgba(255,255,255,0) 2px);
   background-size: 10px 10px;
   margin: 0;
@@ -89,15 +86,14 @@ nav a {
   font-family: 'Kurale', serif;
 }
 
-.cart_base
-{
+.cart_base {
   font-size: 20px;
   color: #000;
   text-decoration: none;
 }
 
-footer /* подвал общий*/
-{
+/* подвал общий*/
+footer {
   right: 0;
   bottom: 0;
   width: 100%;
@@ -109,8 +105,8 @@ footer /* подвал общий*/
   font-family: "Times New Roman", serif;
 }
 
-.about /* подвал для ссылок*/
-{
+/* подвал для ссылок*/
+.about {
   text-align: left;
   margin-left: 1px;
 }

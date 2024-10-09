@@ -17,20 +17,6 @@
     text-align: center;
 }
 
-/* меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
-.register {
-    border:2px solid rgb(34, 201, 72);
-    font-size: 16px;
-    color: #fcf7f7;
-    text-decoration: none;
-    padding: 3px 15px;
-    border-radius: 15px;
-    background: hsl(134, 71%, 46%);
-}
-.register:hover, .register:focus {
-  background: #2cd754; /* Эффект при наведении — дополнительное оформление */
-}
-
 .cart {
     color: #000;
     font-family: 'Exo 2', sans-serif;
@@ -62,17 +48,17 @@
   background: #f63b3b; /* Эффект при наведении — дополнительное оформление */
 }
 
-/* рамка для блока оформления */
+/* рамка для блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .payment {
     margin-left: 20px;
     border:2px solid rgba(206, 245, 230, 0.5);
-    padding: 10px 5px 0 5px;
+    padding: 15px 10px 0 10px;
     width: 300px;
-    height: 400px;
+    height: 385px;
     border-radius: 25px;
     background: #ffffff;
 }
-
+/* текст внутри блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .total {
     font-size: 15px;
     font-weight: 600;
@@ -80,7 +66,31 @@
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
+    border:1px solid #ccc;
+
 }
+
+.display{
+    height: 130px;
+    width: 100%;
+    margin: 10px 10px 15px 10px;
+}
+
+/* кнопка меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
+.register {
+    border:2px solid rgb(34, 201, 72);
+    font-size: 16px;
+    color: #fcf7f7;
+    text-decoration: none;
+    padding: 3px 15px;
+    border-radius: 15px;
+    background: hsl(134, 71%, 46%);
+    margin-bottom: 15px;
+}
+.register:hover, .register:focus {
+  background: #2cd754; /* Эффект при наведении — дополнительное оформление */
+}
+
 /* кнопка "ПРОДОЛЖИТЬ ПОКУПКИ" */
 .shopping {
     border:2px solid rgb(34, 201, 72);
