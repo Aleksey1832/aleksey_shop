@@ -22,12 +22,12 @@
 
           <div class="item">
             <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
-              <p>{{ product.name }}</p>
+              <p>{{ product.product_type }}<br>{{ product.name }}</p>
             </a>
             <p>{{ product.price }} ₽</p>
 
             <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
-              {{ cart_product_form }}
+              <p>{{ cart_product_form }}</p>
               <button class="pushable" type="submit">
                 <span class="shadow"></span>
                 <span class="edge"></span>

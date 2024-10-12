@@ -1,8 +1,8 @@
 {% extends "shop/base.html" %}
 {% load static %}
 
-{% block title %} Корзина
-{% endblock %}
+{% block title %}Корзина{% endblock %}
+
 {% block content %}
 
   <h1 class="head">В вашей корзине...</h1>
@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th style="width: 120px">Изображение</th>
-            <th style="width: 130px">Продукт</th>
+            <th style="width: 130px">Название</th>
             <th style="width: 150px">Количество</th>
             <th style="width: 130px">Убрать</th>
             <th style="width: 130px">Цена за штуку</th>
@@ -30,7 +30,7 @@
                   </a>
                 </td>
 
-                <td>{{ product.name }}</td>
+                <td>{{ product.name }} Код:{{ product.product_code }}</td>
                 <td>
                   <form action="{% url "cart:cart_add" product.id %}" method="post">
                     {{ item.update_quantity_form.quantity }}
@@ -41,7 +41,7 @@
                 </td>
                 <td>
                   <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                    <button class="update" type="submit">Удалить</button>
+                    <input class="update" type="submit" value="Удалить">
                     {% csrf_token %}
                   </form>
                 </td>

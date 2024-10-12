@@ -12,13 +12,15 @@ def product_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
+    cart_product_form = CartAddProductForm()
     return render(
         request,
         'shop/product/list.html',
         {
             'category': category,
             'categories': categories,
-            'products': products
+            'products': products,
+            'cart_product_form': cart_product_form
         }
     )
 
@@ -40,7 +42,7 @@ def product_detail(request, id, slug):
 
     return render(
         request,
-        "shop/product/detail.html",
+        'shop/product/detail.html',
         {
             'product': product,
             'categories': categories,
@@ -66,5 +68,15 @@ def how_buy(request):
     return render(request, 'shop/product/how_buy.html')
 
 
-def price_list(request):
-    return render(request, 'shop/product/price_list.html')
+def price_list(request, category_slug=None):
+    category = None
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(category=category)
+    return render(
+        request,
+        'shop/product/price_list.html',
+        {'category': category, 'categories': categories, 'products': products,}
+    )

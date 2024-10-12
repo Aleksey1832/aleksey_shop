@@ -56,6 +56,7 @@
   flex-wrap: wrap;
   width: 100vw;
   transform: translateX(-1%);
+  text-align: center;
 }
 
 /* для list вывод img и текста с низу */
@@ -69,7 +70,7 @@
   border: 1px #00B344 solid;
   margin:10px 10px;
   border-radius: 25px;
-  background-color: rgba(183, 232, 215, 0.4);
+  background-color: rgba(183, 232, 215, 0.3);
 }
 
 /* для list вывод текста с низу по картинками */
@@ -78,8 +79,7 @@
 .item a:active,
 .item a:hover {
   color: #2e3034;
-  text-align: center;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   text-decoration: none;
 }

@@ -2,8 +2,8 @@
 .favicon {
   width: 60px;
   height: 60px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 /* вывод количества справа от "КОРЗИНА" */
@@ -57,7 +57,7 @@ nav a {
 .down:after {
   content: "\f107";
   margin-left: 8px;
-  font-family: 'Times New Roman', serif;;
+  font-family: 'Times New Roman', serif;
 }
 .top_menu li a:hover { color: #E6855F; }
 .submenu {
@@ -70,7 +70,7 @@ nav a {
   z-index: 5;
   width: 260px;
   transform: perspective(600px) rotateX(-90deg);
-  transform-origin: 0% 0%;
+  transform-origin: 0 0;
   transition: .6s ease-in-out;
 }
 .top_menu > li:hover .submenu{
@@ -110,3 +110,5 @@ footer {
   text-align: left;
   margin-left: 1px;
 }
+
+/* возврат в начало страницы */

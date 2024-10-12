@@ -34,18 +34,42 @@
 }
 
 /* кнопки "ОБНОВИТЬ" и "УДАЛИТЬ" */
-.update
-{
-    border:2px solid rgb(240, 0, 60);
-    font-size: 15px;
-    color: #fcf7f7;
-    text-decoration: none;
-    padding: 1px 12px;
-    border-radius: 15px;
-    background: hsl(345deg 100% 47%);
+/*.update*/
+/*{*/
+/*    border:2px solid rgb(240, 0, 60);*/
+/*    font-size: 15px;*/
+/*    color: #fcf7f7;*/
+/*    text-decoration: none;*/
+/*    padding: 1px 12px;*/
+/*    border-radius: 15px;*/
+/*    background: hsl(345deg 100% 47%);*/
+/*}*/
+/*.update:hover, .update:focus {*/
+/*  background: #f63b3b; !* Эффект при наведении — дополнительное оформление *!*/
+/*}*/
+
+.update {
+  position: relative;
+  display: inline-block;
+  width: 7em;
+  height: 2.5em;
+  line-height: 2.5em;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px #777;
+  color: #fff;
+  outline: none;
+  border: 2px solid #F64C2B;
+  border-radius: 5px;
+  box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;
+  background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
 }
-.update:hover, .update:focus {
-  background: #f63b3b; /* Эффект при наведении — дополнительное оформление */
+
+.update:active {
+  top: .1em;
+  left: .1em;
+  box-shadow: 0 0 0 60px rgba(0,0,0,.05) inset;
 }
 
 /* рамка для блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
@@ -67,7 +91,6 @@
     background-clip: text;
     -webkit-background-clip: text;
     border:1px solid #ccc;
-
 }
 
 .display{
