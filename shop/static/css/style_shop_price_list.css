@@ -80,22 +80,17 @@
 	appearance: none;
 	touch-action: manipulation;
 	vertical-align: center;
-	transition: box-shadow 0.2s;
+	transition: box-shadow 0.5s;
 }
 .button_pay:focus-visible {
 	border: 1px solid #4c51f9;
 	outline: none;
 }
 .button_pay:hover {
-	transition: all 0.2s;
+	transition: all 0.3s;
 	box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
 }
 .button_pay:active {
 	background-color: #808080;
 }
-.button_pay:disabled {
-	background-color: #eee;
-	border-color: #eee;
-	color: #444;
-	cursor: not-allowed;
-}
+

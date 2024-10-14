@@ -56,3 +56,7 @@ class Cart:
 
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def get_discount(self):
+        discount = 2
+        return self.get_total_price() * (100 - discount) / 100
