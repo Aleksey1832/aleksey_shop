@@ -8,10 +8,31 @@
 {% block content %}
 
   <div class="content">
+
+    <!-- Заголовок ВСЕ ТОВАРЫ -->
     <div id="main" class="four">
       <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
     </div>
 
+
+{#    <form method="GET">#}
+{#      {{ form_sort.as_p }}#}
+{#      <button type="submit">Сортировать</button>#}
+{#      {% csrf_token %}#}
+{#    </form>#}
+    <h1>Товары</h1>
+    <a href="{% url "shop:product_list"  %}">Сортировать по имени</a>
+    <a href="{{ product.get_absolute_url }}">Сортировать по цене</a>
+    <a href="{{ product.get_absolute_url }}">Сортировать по дате (новые сначала)</a>
+
+    <ul>
+      {% for product in products %}
+        <li>{{ product.name }} - {{ product.price }}</li>
+      {% endfor %}
+    </ul>
+
+
+    <!-- Карточки товаров -->
     <div class="gallery">
       {% for product in products %}
         <div class="border">
