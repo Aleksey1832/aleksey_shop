@@ -1,5 +1,5 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 from shop.models import Product
 
 
@@ -10,7 +10,7 @@ class Order(models.Model):
     gender = models.CharField(max_length=7, verbose_name='Пол')
     date_birth = models.DateField(verbose_name='Дата рождения')
     email = models.EmailField(verbose_name='Email')
-    phone_number = PhoneNumberField(unique=True, null=False, blank=False, verbose_name='Номер телефона')
+    phone_number = models.CharField(max_length=30, verbose_name='Номер телефона')
     city = models.CharField(max_length=30, verbose_name='Город')
     street = models.CharField(max_length=40, verbose_name='Улица/Проспект')
     house_number = models.IntegerField(verbose_name='Номер дома')
