@@ -5,7 +5,7 @@
 
 {% block content %}
 
-  <div class="product-detail">
+  <div id="top" class="product-detail">
     <div>
       <!-- Картинка -->
       <a href="{{ product.image.url }}">
@@ -105,6 +105,7 @@
 
       </div>
     </details>
+    <a class="return_back" href="#top">Вернуться в начало</a>
   </div>
 
 {% endblock %}

@@ -34,12 +34,10 @@ class ProductConstruction(models.Model):              # конструкция
         max_length=100,
         unique=True,
         null=True
-        # verbose_name='Конструкции товара'
     )
     slug = models.SlugField(
         max_length=100,
         unique=True
-        # verbose_name='URL-конструкции товара'
     )
 
     class Meta:

@@ -1,9 +1,6 @@
 from django.contrib import admin
-
 from shop.models import Category, ProductConstruction, ProductFireclass, ProductUsage
 from shop.models import ProductRangModelHearth, ProductType, Product
-# Register your models here.
-
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

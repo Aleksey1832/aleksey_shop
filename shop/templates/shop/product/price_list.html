@@ -5,7 +5,7 @@
 
 {% block content %}
 
-  <h1 class="head_price">Прайс-лист на противопожарное оборудование</h1>
+  <h1 id="top" class="head_price">Прайс-лист на противопожарное оборудование</h1>
 
   <div class="">
     <table class="price_list_style">
@@ -47,7 +47,7 @@
     <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
     {% endfor %}
   </div>
-
+  <a class="return_back" href="#top">Вернуться в начало</a>
 
 
 {% endblock %}
