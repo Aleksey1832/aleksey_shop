@@ -9,8 +9,8 @@ from shop.forms import ShopFormSorted
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
-    # products = sort_method(request)
+    # products = Product.objects.filter(available=True)
+    products = sort_method(request)
     print(sort_method(request))
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -91,10 +91,10 @@ def sort_method(request):
     if sort_form.is_valid():
         needed_sort = sort_form.cleaned_data.get("sort_form")
         if needed_sort == "ДТ":
-            products = products.order_by("created_at")  # или updated_at
+            products = products.order_by("name")  # или updated_at
         elif needed_sort == "ДЕД":
             products = products.order_by("price")
         elif needed_sort == "ДОД":
             products = products.order_by("-price")
 
-    return {'products': products}
+    return products
