@@ -16,21 +16,11 @@
 
 
 
-{#    <h1>Товары</h1>#}
-{#    <a href="{{ form_sort.as_p }}">Сортировать по имени</a>#}
-{#    <a href="{{ product.get_absolute_url }}">Сортировать по цене</a>#}
-{#    <a href="{{ product.get_absolute_url }}">Сортировать по дате (новые сначала)</a>#}
-
-    <div>
-        <a href="{{ product.get_absolute_url }}?sort=price">Сортировать по цене (возрастанию)</a>
-        <a href="{{ product.get_absolute_url }}?sort=-price">Сортировать по цене (убыванию)</a>
-    </div>
-
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }}</li>
-        {% endfor %}
-    </ul>
+    <form action="{% url 'shop:product_list' %}" method="post" class="sort-form">
+      {{ sort_form }}
+      <p><input type="submit" name="sort" value="Сортировать"></p>
+      {% csrf_token %}
+    </form>
 
 
     <!-- Карточки товаров -->

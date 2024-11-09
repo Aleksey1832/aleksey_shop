@@ -10,10 +10,8 @@ def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
-    #
-    sort_by = request.GET.get('sort', 'name')
-    products_sort = Product.objects.all().order_by(sort_by)
-    #
+    # products = sort_method(request)
+    print(sort_method(request))
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -25,9 +23,6 @@ def product_list(request, category_slug=None):
             'category': category,
             'categories': categories,
             'products': products,
-            #
-            # 'products_sort': products_sort,
-            #
             'cart_product_form': cart_product_form
         }
     )
@@ -91,30 +86,15 @@ def price_list(request, category_slug=None):
 
 
 def sort_method(request):
-    sort_by = request.GET.get('sort', 'price')  # Параметр 'sort' из URL
-    if sort_by:
-        products = Product.objects.all().order_by('-price')  # Сортировка по убыванию
-    else:
-        products = Product.objects.all().order_by('price')  # Сортировка по возрастанию
+    sort_form = ShopFormSorted(request.POST)
+    products = Product.objects.filter(available=True)
+    if sort_form.is_valid():
+        needed_sort = sort_form.cleaned_data.get("sort_form")
+        if needed_sort == "ДТ":
+            products = products.order_by("created_at")  # или updated_at
+        elif needed_sort == "ДЕД":
+            products = products.order_by("price")
+        elif needed_sort == "ДОД":
+            products = products.order_by("-price")
 
-    return render(request, 'shop/product/list.html', {'products': products})
-
-
-
-    # form_sorted = ShopFormSorted(request.POST)
-    # products = Product.objects.filter(available=True)
-    # # form_sort_list = ShopFormSorted(request.GET or None)
-    # # choices=[('ПУ', 'По умолчанию'), ('ДТ', 'По дате'), ('ДЕД', 'От дешевых к дорогим'), ('ДОД', 'От дорогих к дешевым')])
-    #
-    # if form_sorted.is_valid():
-    #     sort_by = form_sorted.cleaned_data.get('form_sorted')
-    #     if sort_by == "ДТ":
-    #         products = products.order_by("created")
-    #     elif sort_by == "ДЕД":
-    #         products = products.order_by("price")
-    #     elif sort_by == "ДОД":
-    #         products = products.order_by("-price")
-    #
-    # return render(request,
-    #               'shop/product/list.html',
-    #               {'products': products, 'form_sorted': form_sorted})
+    return {'products': products}
