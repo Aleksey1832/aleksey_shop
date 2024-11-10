@@ -14,14 +14,17 @@
       <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
     </div>
 
-
-
-    <form action="{% url 'shop:product_list' %}" method="post" class="sort-form">
-      {{ sort_form }}
-      <p><input type="submit" name="sort" value="Сортировать"></p>
+    <!-- Сортировка товаров -->
+    <form method="POST" id="sortForm">
       {% csrf_token %}
+      {{ sort_form.as_p }}
     </form>
 
+{#    <script>#}
+{#      document.getElementById('id_form_sorted').addEventListener('change', function() {#}
+{#          document.getElementById('sortForm').submit();#}
+{#      });#}
+{#    </script>#}
 
     <!-- Карточки товаров -->
     <div class="gallery">
