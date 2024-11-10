@@ -16,6 +16,7 @@
   background-color: rgb(244, 247, 238, 0.8);
   padding: 50px 40px;
   text-align: left;
+  height: 150px;
 }
 .four h1 {
   font-family: 'Merriweather', serif;
@@ -50,6 +51,18 @@
   }
 }
 
+/* стили для выпадающего меню сортировки */
+.sort_form{
+  margin-top: 25px;
+  font-family: 'Exo 2', sans-serif;
+  width: 195px;
+  height: 25px;
+  border: 1px solid #999999;
+  font-size: 16px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
 /* для list вывод img и текста с низу */
 .gallery {
   display: flex;
@@ -66,6 +79,10 @@
   margin: 20px;
 }
 
+.gallery img:hover {
+  border: 1px #888787 solid;
+}
+
 .border {
   border: 1px #00B344 solid;
   margin:10px 10px;
@@ -76,12 +93,15 @@
 /* для list вывод текста с низу по картинками */
 .item,
 .item a,
-.item a:active,
-.item a:hover {
-  color: #2e3034;
+.item a:active {
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
+  color: #003559;
+}
+.item a:hover {
+  color: #0946e3;
+
 }
 
 /* для кнопки "В КОРЗИНУ" */

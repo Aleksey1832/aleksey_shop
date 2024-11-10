@@ -95,13 +95,18 @@ nav a {
 
 /* подвал общий*/
 footer {
-  right: 0;
-  bottom: 0;
+  position: page; /* Подвал как приклеенный */
+  bottom: 0; /* Фиксация снизу */
+  left: 0; /* К началу слева */
+  right: 0; /* Без отступов справа */
+  height: 300px; /* Задаем высоту */
+  /*right: 0;*/
+  /*bottom: 0;*/
   width: 100%;
   font-size: 19px;
   font-weight: bold;
   color: #1e1e23;
-  margin-top: 100px;
+  margin-top: 200px;
   background-color: rgb(244, 247, 238, 0.8);
   font-family: "Times New Roman", serif;
 }

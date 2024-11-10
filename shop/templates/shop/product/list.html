@@ -15,7 +15,7 @@
     </div>
 
     <!-- Сортировка товаров -->
-    <form method="POST" id="sortForm">
+    <form method="POST" id="sortForm" class="sort_form">
       {% csrf_token %}
       {{ sort_form.as_p }}
     </form>
@@ -32,7 +32,9 @@
         <div class="border">
 
           <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
+            <img
+              src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}"
+              alt="{{ product.name }}" title="Посмотреть подробности">
           </a>
 
           <div class="item">
@@ -52,9 +54,9 @@
             </form>
           </div>
         </div>
-        {% endfor %}
+      {% endfor %}
     </div>
-  <a class="return_back" href="#top">Вернуться в начало</a>
+    <a class="return_back" href="#top">Вернуться в начало</a>
   </div>
 
 {% endblock %}
