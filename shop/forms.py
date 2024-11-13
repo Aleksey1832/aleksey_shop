@@ -9,13 +9,20 @@ SORT_CHOICES = [
 ]
 
 
+# class ShopFormSorted(forms.Form):
+#     form_sorted = forms.TypedChoiceField(
+#         label='',
+#         choices=SORT_CHOICES,
+#         coerce=str
+#     )
+
+
 class ShopFormSorted(forms.Form):
-    form_sorted = forms.TypedChoiceField(
-        label='',
+    form_sorted = forms.ChoiceField(
         choices=SORT_CHOICES,
-        coerce=str
-    )
-    override = forms.BooleanField(
-        required=False,
-        widget=forms.HiddenInput
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'autofocus': 'autofocus'
+        }),
+        label=''
     )
