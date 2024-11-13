@@ -26,7 +26,7 @@
               <tr>
                 <td><hr>
                   <a href="{{ product.get_absolute_url }}">
-                    <img class="detail_img" src="{% if product.image %}{{ product.image.url }} {% else %}{% static "images/no_image.png" %} {% endif %}">
+                    <img class="detail_img" alt="Упс!" src="{% if product.image %}{{ product.image.url }} {% else %}{% static "images/no_image.png" %} {% endif %}">
                   </a>
                 </td>
 
@@ -73,17 +73,17 @@
           </tr>
           <tr>
             <td>На сумму:</td>
-            <td>{{ cart.get_total_price }} ₽</td>
+            <td>{{ total_price }} ₽</td>
           </tr>
           <tr>
             <td>Скидка:</td>
-            <td>2 %</td>
+            <td>{{ discount }} %</td>
           </tr>
         </table>
       </div>
       <hr>
       <div>
-        <h4>Итого:&emsp;&emsp;&emsp;{{ cart.get_discount }} ₽</h4>
+        <h4>Итого:&emsp;&emsp;&emsp;{{ discounted_price }} ₽</h4>
       </div>
 
     </div>

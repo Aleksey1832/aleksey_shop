@@ -52,14 +52,19 @@ class Cart:
         """
         Считаем товарные позиции
         """
+        print(sum(item['quantity'] for item in self.cart.values()))
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
         """
-        Считаем общую сумму товаров
+        Считаем общую сумму товаров, выводим скидку и общую сумму товаров с учетом скидки
         """
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
-
-    def get_discount(self):
+        # return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
         discount = 2
-        return self.get_total_price() * (100 - discount) / 100
+        total_price = sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        discounted_price = total_price * (100 - discount) / 100
+        return {
+            'total_price': total_price,
+            'discounted_price': discounted_price,
+            'discount': discount
+        }

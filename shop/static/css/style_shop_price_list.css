@@ -37,6 +37,7 @@
 .price_list_style thead tr th:last-child {
   border-radius: 0 20px 0 0;
 }
+
 .price_list_style tbody td {
   text-align: left;
   border: none;
@@ -45,21 +46,26 @@
   vertical-align: center;
 
 }
+
 .price_list_style tbody tr:nth-child(even) {
   background: rgba(218, 218, 216, 0.8);
 }
-.price_list_style tbody tr:last-child td{
+
+.price_list_style tbody tr:last-child td {
   border-bottom: 1px solid #ddd;
 }
+
 .price_list_style tbody tr:last-child td:first-child {
   border-radius: 0 0 0 20px;
 }
+
 .price_list_style tbody tr:last-child td:last-child {
   border-radius: 0 0 20px 0;
 }
 
 /* стили для кнопки в таблице */
 .button_pay {
+  transition: transform 0.5s ease;
   vertical-align: center;
   display: inline-block;
   box-sizing: border-box;
@@ -75,13 +81,18 @@
   text-decoration: none;
   color: #444;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+  box-shadow: 0 6px 6px rgb(65 132 144 / 10%), 0 3px 3px rgb(0 0 0 / 8%);
   cursor: pointer;
   user-select: none;
   appearance: none;
   touch-action: manipulation;
-  transition: box-shadow 0.5s;
+  /*transition: box-shadow 0.5s;*/
 }
+
+.button_pay:hover {
+  transform: scale(1.25);
+}
+
 .button_pay:focus-visible {
   border: 1px solid #4c51f9;
   outline: none;

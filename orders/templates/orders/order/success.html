@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="ru-RU">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "shop/base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title %} Подтверждение оплаты {% endblock %}
+
+{% block content %}
+
+
+<div>
+  <p> Ваш заказ: № {{ order.id }} </p>
+  <p> Вы хотите оплатить: {{ total_items }} {{ ending_word }} </p>
+  <p> На общую сумму: {{ total_price }} ₽ </p>
+
+  <form action="{% url 'orders:payment' %}" method="get" target="_blank">
+    <input class="bottom_log" type="submit" value="Оплатить">
+  </form>
+</div>
+
+
+{% endblock %}

@@ -9,7 +9,7 @@
     <div>
       <!-- Картинка -->
       <a href="{{ product.image.url }}">
-        <img id="detail_img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
+        <img class="product_image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="{{ product.name }}">
       </a>
 
       <!-- блок с права от картинки-->

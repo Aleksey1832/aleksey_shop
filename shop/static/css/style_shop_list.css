@@ -53,14 +53,14 @@
 
 /* стили для выпадающего меню сортировки */
 .sort_form{
-  margin-top: 25px;
+  margin: 25px 0 25px 0;
   font-family: 'Exo 2', sans-serif;
   width: 195px;
   height: 25px;
-  border: 1px solid #999999;
+  /*border: 1px solid #999999;*/
   font-size: 16px;
   background-color: #f3f3f3;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
 }
 
 /* для list вывод img и текста с низу */
@@ -72,7 +72,7 @@
   text-align: center;
 }
 
-/* для list вывод img и текста с низу */
+/* для list вывод img */
 .gallery img {
   width: 120px;
   height: 120px;
@@ -101,7 +101,6 @@
 }
 .item a:hover {
   color: #0946e3;
-
 }
 
 /* для кнопки "В КОРЗИНУ" */

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
+from accounts.forms import CustomAuthenticationForm
 
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -14,7 +14,7 @@ def login_view(request):
                 login(request, user)
                 return redirect('shop:home')
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
 
 

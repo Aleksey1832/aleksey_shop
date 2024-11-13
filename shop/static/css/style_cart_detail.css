@@ -26,11 +26,16 @@
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-.detail_img /* для detail размер img */
-{
+/* для detail размер img */
+.detail_img {
+    transition: transform 0.5s ease;
     width: 70px;
     height: 70px;
     margin: 0 0 15px 0;
+}
+
+.detail_img:hover {
+  transform: scale(1.35);
 }
 
 /* кнопки "ОБНОВИТЬ" и "УДАЛИТЬ" */

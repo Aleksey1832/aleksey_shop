@@ -32,6 +32,7 @@ def cart_detail(request):
     cart = Cart(request)
     total_items = len(cart)
     ending_word = ending_word_items(len(cart))
+    total_price_info = cart.get_total_price()
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
             initial={'quantity': item['quantity'],
@@ -40,7 +41,14 @@ def cart_detail(request):
     return render(
         request,
         'cart/detail.html',
-        {'cart': cart, 'total_items': total_items, 'ending_word': ending_word}
+        {
+            'cart': cart,
+            'total_items': total_items,
+            'ending_word': ending_word,
+            'total_price': total_price_info['total_price'],
+            'discounted_price': total_price_info['discounted_price'],
+            'discount': total_price_info['discount']
+        }
     )
 
 

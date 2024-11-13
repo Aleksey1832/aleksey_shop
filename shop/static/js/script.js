@@ -17,6 +17,3 @@ $(document).on('click', '.read-more-link', function () {
 $(document).on('click', '.read-less-link', function () {
     $(this).parent().hide().next().show();
 });
-
-// возврат в начало страницы
-
