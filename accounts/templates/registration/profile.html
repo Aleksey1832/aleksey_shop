@@ -1,0 +1,53 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %} Личный кабинет {% endblock %}
+
+{% block content %}
+
+  <div class="">
+    <h2>Мой личный кабинет</h2>
+    <hr>
+    <table>
+      <tr>
+        <th>Имя пользователя</th>
+        <td>{{ user.username  }}</td>
+      </tr>
+      <tr>
+        <th>Телефон</th>
+        <td>{{ user.profile.tel }}</td>
+      </tr>
+      <tr>
+        <th>Дата рождения</th>
+        <td>{{ user.profile.birth_date }}</td>
+      </tr>
+      <tr>
+        <th>Страна</th>
+        <td>{{ user.profile.country }}</td>
+      </tr>
+      <tr>
+        <th>Город</th>
+        <td>{{ user.profile.city }}</td>
+      </tr>
+      <tr>
+        <th>Улица</th>
+        <td>{{ user.profile.street }}</td>
+      </tr>
+      <tr>
+        <th>Дом/кор., кв./офис</th>
+        <td>{{ user.profile.address }}</td>
+      </tr>
+      <tr>
+        <th>Почтовый код</th>
+        <td>{{ user.profile.postal_code }}</td>
+      </tr>
+      <tr>
+        <th>Пол</th>
+        <td>{{ user.profile.gender }}</td>
+      </tr>
+    </table>
+
+  </div>
+
+
+{% endblock %}

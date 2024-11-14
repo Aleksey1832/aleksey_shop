@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from accounts.forms import CustomAuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -21,3 +22,8 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('shop:about')  # accounts:login_view
+
+
+@login_required
+def profile_view(request):
+    return render(request, 'registration/profile.html')
