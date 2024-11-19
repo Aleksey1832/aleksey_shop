@@ -1,6 +1,14 @@
 from django.db import models
 # from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
 from shop.models import Product
+
+
+ORDER_STATUS_CHOICES = (
+    ('active', 'Активный'),  # Заказ создан
+    ('completed', 'Выполненный'),  # Заказ успешно завершен
+    ('canceled', 'Отмененный')  # Заказ отменен пользователем
+)
 
 
 class Order(models.Model):
@@ -21,14 +29,20 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    status = models.CharField(max_length=20,
+                              choices=ORDER_STATUS_CHOICES,
+                              default='active',
+                              verbose_name='Статус заказа')
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'Order №: {self.id}'
 
-    class Meta:
-
-        verbose_name = 'Заказ'
-        verbose_name_plural = 'Заказы'
+    def get_total_cost(self):
+        return sum(item.total_price() for item in self.orderitem_set.all())
 
 
 class OrderItem(models.Model):
@@ -39,3 +53,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.id}'
+
+    def total_price(self):
+        return self.price * self.quantity

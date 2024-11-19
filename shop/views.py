@@ -13,7 +13,6 @@ def product_list(request, category_slug=None):
     sort_form = ShopFormSorted(request.POST or None)
     if sort_form.is_valid():
         products = sort_method(request)
-    # print(sort_method(request))
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)

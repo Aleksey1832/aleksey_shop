@@ -47,7 +47,42 @@
       </tr>
     </table>
 
-  </div>
 
+  <a href="{% url 'accounts:logout_view' %}">Выход</a>
+  <hr>
+    <h3>Активные заказы</h3>
+      {% for order in active_orders %}
+      <ul>
+        <li>
+          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+            <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
+        </li>
+      </ul>
+        {% empty %}
+          <p> У вас пока нет заказов </p>
+      {% endfor %}
+  <hr>
+    <h3>Завершенные заказы</h3>
+      {% for order in completed_orders %}
+      <ul>
+        <li>
+          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+        </li>
+      </ul>
+        {% empty %}
+          <p> Ни один заказ пока не выполнен </p>
+      {% endfor %}
+  <hr>
+    <h3>Отмененные заказы</h3>
+      {% for order in canceled_orders %}
+      <ul>
+        <li>
+          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+        </li>
+      </ul>
+        {% empty %}
+          <p> У вас пока нет отмененных заказов </p>
+      {% endfor %}
+  </div>
 
 {% endblock %}

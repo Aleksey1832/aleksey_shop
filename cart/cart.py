@@ -52,7 +52,6 @@ class Cart:
         """
         Считаем товарные позиции
         """
-        print(sum(item['quantity'] for item in self.cart.values()))
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):

@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cart.cart import Cart
 from orders.forms import OrderCreateForm
-from orders.models import OrderItem
+from orders.models import OrderItem, Order
 from cart.views import ending_word_items
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def order_create(request):
     cart = Cart(request)
     total_orders = cart.get_total_price()
@@ -13,7 +15,9 @@ def order_create(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
@@ -43,3 +47,17 @@ def order_create(request):
 
 def payment(request):
     return render(request, 'orders/order/payment.html')
+
+
+@login_required
+def cancel_order(request, order_id):
+    order = Order.objects.get(id=order_id)
+    if request.method == 'POST':
+        order.status = 'canceled'
+        order.save()
+        return redirect('account:profile_view')
+    return render(
+        request,
+        'orders/order/cancel_confirm.html',
+        {'order': order}
+    )
