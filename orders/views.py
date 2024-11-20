@@ -55,7 +55,7 @@ def cancel_order(request, order_id):
     if request.method == 'POST':
         order.status = 'canceled'
         order.save()
-        return redirect('account:profile_view')
+        return redirect('accounts:profile_view')
     return render(
         request,
         'orders/order/cancel_confirm.html',
