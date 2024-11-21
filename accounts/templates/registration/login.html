@@ -5,6 +5,11 @@
 
 {% block content %}
 
+  <div>
+
+    <h4>Для зарегистрированных пользователей | <a href="{% url 'accounts:register_view' %}">Вход</a></h4>
+  </div>
+
   <div class="log">
     <h2 class="head_log">Авторизация</h2>
     <form method="post">
