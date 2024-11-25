@@ -1,118 +1,132 @@
 /* для base */
 .favicon {
-  width: 60px;
-  height: 60px;
-  margin-right: 5px;
-  margin-left: 5px;
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 /* вывод количества справа от "КОРЗИНА" */
 .cart_info {
-  font-size: 15px;
-  color: #fcf7f7;
-  text-decoration: none;
-  display: inline-block;
-  padding: 1px 11px;
-  border-radius: 10px;
-  background: hsl(345deg 100% 47%);
-  font-weight: bold;    /* жирный текст */
+    font-size: 15px;
+    color: #fcf7f7;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 11px;
+    border-radius: 10px;
+    background: hsl(345deg 100% 47%);
+    font-weight: bold; /* жирный текст */
 }
 
 /* панель навигации */
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
-  background: radial-gradient(#BFD6E2 1px, rgba(255,255,255,0) 2px);
-  background-size: 10px 10px;
-  margin: 0;
+    background: radial-gradient(#BFD6E2 1px, rgba(255, 255, 255, 0) 2px);
+    background-size: 10px 10px;
+    margin: 0;
 }
 
 nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 nav a {
-  display: block;
-  text-decoration: none;
-  outline: none;
-  transition: .4s ease-in-out;
+    display: block;
+    text-decoration: none;
+    outline: none;
+    transition: .4s ease-in-out;
 }
+
 .top_menu {
-  backface-visibility: hidden;
-  background: rgba(255,255,255,.8);
+    backface-visibility: hidden;
+    background: rgba(255, 255, 255, .8);
 }
+
 .top_menu > li {
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
 }
+
 .top_menu > li > a {
-  font-family: 'Exo 2', sans-serif;
-  height: 70px;
-  line-height: 70px;
-  padding: 0 30px;
-  font-weight: bold;
-  color: #003559;
-  text-transform: uppercase;
+    font-family: 'Exo 2', sans-serif;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 25px;
+    font-weight: bold;
+    color: #003559;
+    text-transform: uppercase;
 }
+
 .down:after {
-  content: "\f107";
-  margin-left: 8px;
-  font-family: 'Times New Roman', serif;
+    content: "\f107";
+    margin-left: 8px;
+    font-family: 'Times New Roman', serif;
 }
-.top_menu li a:hover { color: #E6855F; }
+
+.top_menu li a:hover {
+    color: #E6855F;
+}
+
 .submenu {
-  background: white;
-  border: 2px solid #003559;
-  position: absolute;
-  left: 0;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 5;
-  width: 260px;
-  transform: perspective(600px) rotateX(-90deg);
-  transform-origin: 0 0;
-  transition: .6s ease-in-out;
+    background: white;
+    border: 2px solid #003559;
+    position: absolute;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 5;
+    width: 260px;
+    transform: perspective(600px) rotateX(-90deg);
+    transform-origin: 0 0;
+    transition: .6s ease-in-out;
 }
-.top_menu > li:hover .submenu{
-  visibility: visible;
-  opacity: 1;
-  transform: perspective(600px) rotateX(0deg);
+
+.top_menu > li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: perspective(600px) rotateX(0deg);
 }
+
 .submenu li a {
-  color: #7f7f7f;
-  font-size: 13px;
-  line-height: 36px;
-  padding: 0 25px;
-  font-family: 'Kurale', serif;
+    color: #7f7f7f;
+    font-size: 13px;
+    line-height: 36px;
+    padding: 0 25px;
+    font-family: 'Kurale', serif;
 }
 
 .cart_base {
-  font-size: 20px;
-  color: #000;
-  text-decoration: none;
+    font-size: 20px;
+    color: #000;
+    text-decoration: none;
 }
 
 /* подвал общий*/
 footer {
-  position: page; /* Подвал как приклеенный */
-  bottom: 0; /* Фиксация снизу */
-  left: 0; /* К началу слева */
-  right: 0; /* Без отступов справа */
-  height: 300px; /* Задаем высоту */
-  /*right: 0;*/
-  /*bottom: 0;*/
-  width: 100%;
-  font-size: 19px;
-  font-weight: bold;
-  color: #1e1e23;
-  margin-top: 200px;
-  background-color: rgb(244, 247, 238, 0.8);
-  font-family: "Times New Roman", serif;
+    position: page; /* Подвал как приклеенный */
+    bottom: 0; /* Фиксация снизу */
+    left: 0; /* К началу слева */
+    right: 0; /* Без отступов справа */
+    height: 300px; /* Задаем высоту */
+    /*right: 0;*/
+    /*bottom: 0;*/
+    width: 100%;
+    font-size: 19px;
+    font-weight: bold;
+    color: #1e1e23;
+    margin-top: 200px;
+    /*background-color: rgb(244, 247, 238, 0.2);*/
+    background-color: rgb(244, 244, 244, 0.5);
+    font-family: "Times New Roman", serif;
 }
 
 /* подвал для ссылок*/
 .about {
-  text-align: left;
-  margin-left: 1px;
+    text-align: left;
+    margin-left: 1px;
 }

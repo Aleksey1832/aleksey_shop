@@ -1,82 +1,154 @@
-/* стили для страницы create - регистрация */
-.registering{
-  margin-left: 20em;
-  margin-top: 20px;
-}
-
-.www{
-  text-align: center;
-}
-
-.order_form{
-  text-align: right;
-  margin-top: 35px;
-  margin-left: 15em;
-  border:2px solid rgba(187, 225, 211, 0.5);
-  padding: 10px 50px 0 5px;
-  width: 500px;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
 /* стили для border страницы login */
 .log {
-  color: rgb(252, 252, 247);
-  /*text-align: left;*/
-  font-family: 'Exo 2', sans-serif;
-  background-color: rgba(52, 68, 75, 0.6);
-  border:3px solid rgba(81, 137, 157, 0.8); /* F4F7EECC */
-  /*border-radius: 8px;*/
-  padding: 20px 20px 20px 20px;
-  margin: 150px auto;
-  margin-bottom: 200px;
-  width: 400px;
-  /*vertical-align: middle;*/
+    color: rgb(252, 252, 247);
+    /*text-align: left;*/
+    font-family: 'Exo 2', sans-serif;
+    background-color: rgba(52, 68, 75, 0.5);
+    border: 3px solid rgba(81, 137, 157, 0.8); /* F4F7EECC */
+    /*border-radius: 8px;*/
+    padding: 20px 20px 10px 20px;
+    margin: 150px auto;
+    margin-bottom: 200px;
+    width: 400px;
+    /*vertical-align: middle;*/
 }
 
 /* для окон */
-.form-control{
-  margin: 5px 0 25px 0;
+.form-control {
+    margin: 5px 0 25px 0;
+}
+
+/* стили для "Создать аккаунт" страницы login */
+.head_log1 > a {
+    font-size: 15px;
+    margin: 0 0 0 220px;
+    color: #02568a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700
+}
+
+.head_log1 > a:hover {
+    color: #0c28de;
 }
 
 /* стили для "Авторизация" страницы login */
-.head_log{
-  text-align: center;
-  margin: 10px 0 15px 0;
+.head_log2 {
+    text-align: center;
+    margin: 7px 0 10px 0;
 }
 
 /* стили для bottom страницы login */
 .bottom_log {
-  display: block;
-  /*height: 100vh;*/
-  margin: 10px auto 15px auto;
-  /*display: inline-block;*/
-  box-sizing: border-box;
-  padding: 0 20px;
-  /*margin: 0 15px 15px 0;*/
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  height: 32px;
-  line-height: 32px;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  color: #fff;
-  background-color: hsl(345deg 100% 47%);
-  box-shadow: 0 4px #800523;
-  cursor: pointer;
-  user-select: none;
-  appearance: none;
-  touch-action: manipulation;
-  vertical-align: top;
+    display: block;
+    /*height: 100vh;*/
+    margin: 35px auto 20px auto;
+    /*display: inline-block;*/
+    box-sizing: border-box;
+    padding: 0 20px;
+    /*margin: 0 15px 15px 0;*/
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background-color: hsl(345deg 100% 47%);
+    box-shadow: 0 4px #800523;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    vertical-align: top;
 }
+
 .bottom_log:hover {
-  background-color: rgb(245, 50, 50);
+    background-color: rgb(245, 50, 50);
 }
+
 .bottom_log:active {
-  background-color: #800523 !important;
+    background-color: #800523 !important;
 }
+
 .bottom_log:focus-visible {
-  box-shadow: 0 0 0 3px #f35757;
+    box-shadow: 0 0 0 3px #f35757;
+}
+
+/* формы регистраций для registration.html, change_password.html, edit_profile.html */
+.registration_body {
+    font-family: Arial, sans-serif;
+    /*background-color: rgb(244, 244, 244, 0.5);*/
+}
+
+.registration_container{
+    padding: 10px 20px 10px 20px;
+    margin: 20px auto;
+    width: 600px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+}
+
+.registration_head {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registration_form__input {
+    width: 100%;
+    padding: 5px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.registration_bottom {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+.registration_bottom:hover {
+  background-color: #45a049;
+}
+
+/* Вывод предварительно заказа для страницы success.html */
+.preliminarily{
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+    margin: 110px auto;
+    width: 400px;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+
+.info_order{
+    float: right;
+    font-size: 12px;
+    text-align: center;
+    /*position: absolute;*/
+    /*top: 70px;*/
+    right: 100px;
+    margin: -20px 120px 0 0;
+    padding: 10px 20px 10px 20px;
+    /*margin: 0 100px 0 -10px;*/
+    width: 200px;
+    max-width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
 }

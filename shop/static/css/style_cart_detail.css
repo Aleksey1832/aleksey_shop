@@ -5,8 +5,9 @@
 .cart_container {
     display: flex;
 }
+
 .content_cart {
-    border:2px solid rgba(206, 245, 230, 0.5);
+    border: 2px solid rgba(206, 245, 230, 0.5);
     padding: 10px 0 0 0;
     width: 750px;
     border-radius: 25px;
@@ -35,7 +36,7 @@
 }
 
 .detail_img:hover {
-  transform: scale(1.35);
+    transform: scale(1.35);
 }
 
 /* кнопки "ОБНОВИТЬ" и "УДАЛИТЬ" */
@@ -54,39 +55,40 @@
 /*}*/
 
 .update {
-  position: relative;
-  display: inline-block;
-  width: 7em;
-  height: 2.5em;
-  line-height: 2.5em;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: 0 -1px 1px #777;
-  color: #fff;
-  outline: none;
-  border: 2px solid #F64C2B;
-  border-radius: 5px;
-  box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;
-  background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
+    position: relative;
+    display: inline-block;
+    width: 7em;
+    height: 2.5em;
+    line-height: 2.5em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #777;
+    color: #fff;
+    outline: none;
+    border: 2px solid #F64C2B;
+    border-radius: 5px;
+    box-shadow: 0 0 0 60px rgba(0, 0, 0, 0) inset, .1em .1em .2em #800;
+    background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
 }
 
 .update:active {
-  top: .1em;
-  left: .1em;
-  box-shadow: 0 0 0 60px rgba(0,0,0,.05) inset;
+    top: .1em;
+    left: .1em;
+    box-shadow: 0 0 0 60px rgba(0, 0, 0, .05) inset;
 }
 
 /* рамка для блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .payment {
     margin-left: 20px;
-    border:2px solid rgba(206, 245, 230, 0.5);
+    border: 2px solid rgba(206, 245, 230, 0.5);
     padding: 15px 10px 0 10px;
     width: 300px;
     height: 385px;
     border-radius: 25px;
     background: #ffffff;
 }
+
 /* текст внутри блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .total {
     font-size: 15px;
@@ -95,10 +97,10 @@
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
-.display{
+.display {
     height: 130px;
     width: 100%;
     margin: 10px 10px 15px 10px;
@@ -106,7 +108,7 @@
 
 /* кнопка меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
 .register {
-    border:2px solid rgb(34, 201, 72);
+    border: 2px solid rgb(34, 201, 72);
     font-size: 16px;
     color: #fcf7f7;
     text-decoration: none;
@@ -115,13 +117,14 @@
     background: hsl(134, 71%, 46%);
     margin-bottom: 15px;
 }
+
 .register:hover, .register:focus {
-  background: #2cd754; /* Эффект при наведении — дополнительное оформление */
+    background: #2cd754; /* Эффект при наведении — дополнительное оформление */
 }
 
 /* кнопка "ПРОДОЛЖИТЬ ПОКУПКИ" */
 .shopping {
-    border:2px solid rgb(34, 201, 72);
+    border: 2px solid rgb(34, 201, 72);
     font-size: 20px;
     color: #fcf7f7;
     text-decoration: none;
@@ -129,6 +132,7 @@
     border-radius: 15px;
     background: hsl(134, 71%, 46%);
 }
+
 .shopping:hover, .shopping:focus {
-  background: #2ede57; /* Эффект при наведении — дополнительное оформление */
+    background: #2ede57; /* Эффект при наведении — дополнительное оформление */
 }

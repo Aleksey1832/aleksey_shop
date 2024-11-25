@@ -5,18 +5,25 @@
 
 {% block content %}
 
-  <div class="registering">
-    <h2 class="registering_head">Форма заказа</h2>
-    <h6>Для оформления Вашего заказа заполните, <br>пожалуйста эту форму</h6>
-  </div>
+   <div class="info_order">
+    <h3>Доставка товара</h3>
+    <hr>
+    <p> Ваш заказ: № {{ order.id }} </p>
+    <p> В вашей корзине: {{ total_items }} {{ ending_word }} </p>
+    <p> На общую сумму: {{ total_price }} ₽ </p>
+   </div>
 
-  <div class="www">
-    <form method="post" class="order_form">
-      {{ form.as_p }}
-      <p><input type="submit" value="Заказать"></p>
-      {% csrf_token %}
-    </form>
-  </div>
 
+  <div class="registration_body">
+    <div class="registration_container">
+      <h1 class="registration_head" >Форма заказа</h1>
+      <h6>Пожалуйста, заполните эту форму, чтобы оформить покупку.</h6>
+      <form method="post" class="registration_form__input">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input class="registration_bottom" type="submit" value="Заказать">
+      </form>
+    </div>
+  </div>
 
 {% endblock %}

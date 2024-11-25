@@ -21,37 +21,62 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-                               max_length=30,
-                               min_length=3,
-                               required=True,
-                               label='Логин')
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-                                 max_length=30,
-                                 required=True,
-                                 label='Имя')
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-                                max_length=150,
-                                required=True,
-                                label='Фамилия')
-    email = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-                            max_length=254,
-                            required=True,
-                            label='Email')
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'autofocus': 'autofocus'}),
-                                label='Пароль')
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'autofocus': 'autofocus'}),
-                                label='Подтверждение пароля')
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control',
+        'placeholder': 'Придумайте логин'
+    }),
+        max_length=30,
+        min_length=3,
+        required=True,
+        label='Логин'
+    )
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        max_length=30,
+        required=True,
+        label='Имя'
+    )
+    last_name = forms.CharField(widget=forms.TextInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        max_length=150,
+        required=True,
+        label='Фамилия'
+    )
+    email = forms.CharField(widget=forms.TextInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        max_length=254,
+        required=True,
+        label='Email'
+    )
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        label='Пароль'
+    )
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        label='Подтверждение пароля'
+    )
 
-    birth_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'autofocus': 'autofocus'}),
-                                 required=True,
-                                 label='Дата рождения')
-    gender = forms.CharField(max_length=7, required=False, label='Пол')
-    tel = forms.CharField(max_length=11, required=False, label='Телефон')
-    postal_code = forms.CharField(max_length=5, required=False, label='Почтовый индекс')
-    city = forms.CharField(max_length=50, required=False, label='Город')
-    street = forms.CharField(max_length=50, required=False, label='Улица')
-    address = forms.CharField(max_length=100, required=False, label='Дом/корпус, кв. или офис')
+    # birth_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'autofocus': 'autofocus'}),
+    #                              required=True,
+    #                              label='Дата рождения')
+    # gender = forms.CharField(max_length=7, required=True, label='Пол')
+    # tel = forms.CharField(max_length=11, required=True, label='Телефон')
+    # postal_code = forms.CharField(max_length=5, required=True, label='Почтовый индекс')
+    # city = forms.CharField(max_length=50, required=True, label='Город')
+    # street = forms.CharField(max_length=50, required=True, label='Улица')
+    # address = forms.CharField(max_length=100, required=True, label='Дом/корпус, кв. или офис')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -98,14 +123,28 @@ class ProfileEditForm(forms.ModelForm):
             'Дом/корпус, кв. или офис'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].widget.attrs.update({'class': 'form-control', 'autofocus': 'autofocus'})
+
 
 class CustomPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'autofocus': 'autofocus'}),
-                                   label='Старый пароль'
-                                   )
-    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'autofocus': 'autofocus'}),
-                                    label='Новый пароль'
-                                    )
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'autofocus': 'autofocus'}),
-                                    label='Новый пароль (подтверждение)'
-                                    )
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        label='Старый пароль'
+    )
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        label='Новый пароль'
+    )
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autofocus': 'autofocus',
+        'class': 'form-control'
+    }),
+        label='Новый пароль (подтверждение)'
+    )

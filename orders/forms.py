@@ -21,3 +21,8 @@ class OrderCreateForm(forms.ModelForm):
             'floor',
             'postal_code'
         ]
+
+    def __init__(self, *args, **kwargs):
+        super(OrderCreateForm, self).__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].widget.attrs.update({'class': 'form-control', 'autofocus': 'autofocus'})
