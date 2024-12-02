@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 
 class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     country = models.CharField(max_length=50, blank=True, verbose_name='Страна')
     region = models.CharField(max_length=100, blank=True, verbose_name='Регион')
     city = models.CharField(max_length=100, blank=True, verbose_name='Город/населенный пункт')

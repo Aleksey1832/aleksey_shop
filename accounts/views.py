@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from accounts.forms import (CustomAuthenticationForm,
                             CustomUserCreationForm,
@@ -7,6 +7,7 @@ from accounts.forms import (CustomAuthenticationForm,
                             AddressForm)
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
+from accounts.models import Address
 
 
 def login_view(request):
@@ -90,3 +91,13 @@ def add_address(request):
     else:
         form = AddressForm()
     return render(request, 'addresses/add_address.html', {'form': form})
+
+
+@login_required
+def delete_address(request, address_id):
+    address = get_object_or_404(Address, id=address_id)
+    if address.user != request.user:
+        return redirect('accounts:login_view')
+    if request.method == 'POST':
+        address.delete()
+        return redirect('accounts:profile_view')
