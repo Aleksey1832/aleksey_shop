@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from accounts.forms import CustomAuthenticationForm, CustomUserCreationForm, CustomPasswordChangeForm, ProfileEditForm
+from accounts.forms import (CustomAuthenticationForm,
+                            CustomUserCreationForm,
+                            CustomPasswordChangeForm,
+                            ProfileEditForm,
+                            AddressForm)
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
 
@@ -72,3 +76,17 @@ def change_password_view(request):
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'registration/change_password.html', {"form": form})
+
+
+@login_required
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            return redirect('accounts:profile_view')
+    else:
+        form = AddressForm()
+    return render(request, 'addresses/add_address.html', {'form': form})

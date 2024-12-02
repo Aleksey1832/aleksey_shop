@@ -39,15 +39,11 @@ def order_create(request):
 
     else:
         user = request.user
-        profile = user.profile
         initial = {
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
-            'phone': user.profile.tel,
-            'address': user.profile.address,
-            'city': user.profile.city,
-            'postal_code': user.profile.postal_code
+            'phone': user.profile.tel
         }
         form = OrderCreateForm(initial=initial)
     return render(
