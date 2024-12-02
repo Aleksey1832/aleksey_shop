@@ -28,7 +28,7 @@
     <nav>
       <div class="three">
         <ul class="top_menu">
-          <li><a href="{% url 'shop:home' %}"><img class="favicon" src="/static/images/favicon.png"></a></li>
+          <li><a href="{% url 'shop:home' %}"><img class="favicon" alt="Упс!" src="/static/images/favicon.png"></a></li>
           <li><a href="{% url 'shop:home' %}">Главная</a></li>
           <li><a href="{% url 'shop:how_buy' %}">Как купить</a></li>
           <li><a href="{% url 'shop:price_list' %}">Прайс-лист</a></li>
@@ -48,15 +48,6 @@
 
           <li><a class="cart_base" href="{% url 'cart:cart_detail' %}">Корзина</a></li>
 
-          <!-- Профиль -->
-          <li>
-            <div class="">
-              {% if user.is_authenticated %}
-                <a href="{% url 'accounts:profile_view' %}">Профиль | {{ user.username }}</a>
-              {% endif %}
-            </div>
-          </li>
-
             <!-- вывод информации из корзины -->
           <li>
             <div class="cart_info">
@@ -67,6 +58,15 @@
                   Корзина пуста
                 {% endif %}
               {% endwith %}
+            </div>
+          </li>
+
+          <!-- Профиль -->
+          <li>
+            <div>
+              {% if user.is_authenticated %}
+                <a class="profile_link" href="{% url 'accounts:profile_view' %}">Профиль | {{ user.username }}</a>
+              {% endif %}
             </div>
           </li>
         </ul>

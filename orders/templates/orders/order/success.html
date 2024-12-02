@@ -7,8 +7,8 @@
 
 
 <div class="preliminarily">
-  <p> Заказ: № {{ order.id }} </p>
-  <p> {{ total_items }} {{ ending_word }} </p>
+  <p> Заказ: № {{ order.id }} оформлен!</p>
+  <p> В корзине: {{ total_items }} {{ ending_word }} </p>
   <p> Общая сумма: {{ total_price }} ₽ </p>
 
   <form action="{% url 'orders:payment' %}" method="get" target="_blank">

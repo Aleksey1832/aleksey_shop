@@ -106,6 +106,13 @@ nav a {
     text-decoration: none;
 }
 
+/* стиль для ссылки на личный кабинет "profile_link" */
+.profile_link{
+    font-size: 15px;
+    color: #011a2a;
+    padding-left: 20px;
+}
+
 /* подвал общий*/
 footer {
     position: page; /* Подвал как приклеенный */

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
-from accounts.models import Profile
+from accounts.models import Profile, Address
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -23,8 +23,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'autofocus': 'autofocus',
-        'class': 'form-control',
-        'placeholder': 'Придумайте логин'
+        'class': 'form-control'
     }),
         max_length=30,
         min_length=3,
@@ -68,9 +67,9 @@ class CustomUserCreationForm(UserCreationForm):
         label='Подтверждение пароля'
     )
 
-    # birth_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'autofocus': 'autofocus'}),
-    #                              required=True,
-    #                              label='Дата рождения')
+    birth_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'autofocus': 'autofocus'}),
+                                 required=True,
+                                 label='Дата рождения')
     # gender = forms.CharField(max_length=7, required=True, label='Пол')
     # tel = forms.CharField(max_length=11, required=True, label='Телефон')
     # postal_code = forms.CharField(max_length=5, required=True, label='Почтовый индекс')
@@ -85,42 +84,30 @@ class CustomUserCreationForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
-            profile = Profile.objects.create(user=user)
+            profile = Profile.objects.get(user=user)
             profile.birth_date = self.cleaned_data['birth_date']
-            profile.gender = self.cleaned_data['gender']
-            profile.tel = self.cleaned_data['tel']
-            profile.postal_code = self.cleaned_data['postal_code']
-            profile.city = self.cleaned_data['city']
-            profile.street = self.cleaned_data['street']
-            profile.address = self.cleaned_data['address']
+            # profile.tel = self.cleaned_data['tel']
             profile.save()
         return user
 
 
 class ProfileEditForm(forms.ModelForm):
+    gender = forms.ChoiceField(choices=[
+        ('Женский', 'Женский'),
+        ('Мужской', 'Мужской'),
+    ], widget=forms.Select(attrs={'class': 'form-control'}), label='Выбрать пол')
+
     class Meta:
         model = Profile
         fields = [
-            # 'first_name',
-            # 'last_name',
-            # 'birth_date',
             'gender',
             'tel',
-            'postal_code',
-            'city',
-            'street',
-            'address'
+            'birth_date'
         ]
         labels = [
-            # 'Имя',
-            # 'Фамилия',
-            # 'Дата рождения',
             'Пол',
             'Телефон',
-            'Почтовый индекс',
-            'Город',
-            'Улица',
-            'Дом/корпус, кв. или офис'
+            'Дата рождения'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -148,3 +135,18 @@ class CustomPasswordChangeForm(PasswordChangeForm):
     }),
         label='Новый пароль (подтверждение)'
     )
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = [
+            'country',
+            'region',
+            'city',
+            'street',
+            'house_number',
+            'litter_number',
+            'apartments_number',
+            'postal_code'
+        ]

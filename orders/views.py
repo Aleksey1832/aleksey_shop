@@ -25,23 +25,41 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity'],
                 )
-                cart.clear()
-                return render(
-                    request,
-                    'orders/order/success.html',
-                    {
-                        'order': order,
-                        'total_items': total_items,
-                        'total_price': total_orders['total_price'],
-                        'ending_word': ending_word
-                    }
-                )
+            cart.clear()
+            return render(
+                request,
+                'orders/order/success.html',
+                {
+                    'order': order,
+                    'total_items': total_items,
+                    'total_price': total_orders['total_price'],
+                    'ending_word': ending_word
+                }
+            )
 
-    form = OrderCreateForm()
+    else:
+        user = request.user
+        profile = user.profile
+        initial = {
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'phone': user.profile.tel,
+            'address': user.profile.address,
+            'city': user.profile.city,
+            'postal_code': user.profile.postal_code
+        }
+        form = OrderCreateForm(initial=initial)
     return render(
         request,
         'orders/order/create.html',
-        {'cart': cart, 'form': form}
+        {
+            'cart': cart,
+            'form': form,
+            'total_items': total_items,
+            'total_price': total_orders['total_price'],
+            'ending_word': ending_word
+        }
     )
 
 

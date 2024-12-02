@@ -58,7 +58,7 @@ def register_view(request):
             return redirect('accounts:login_view')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'registration/registration.html', {"form": form})
+    return render(request, 'registration/registration.html', {'form': form})
 
 
 @login_required
