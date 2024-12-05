@@ -9,13 +9,15 @@ class Address(models.Model):
     country = models.CharField(max_length=50, blank=True, verbose_name='Страна')
     region = models.CharField(max_length=100, blank=True, verbose_name='Регион')
     city = models.CharField(max_length=100, blank=True, verbose_name='Город/населенный пункт')
-    street = models.CharField(max_length=100, blank=True, verbose_name='Улица')
+    street = models.CharField(max_length=100, blank=True, verbose_name='Улица/Проспект')
     house_number = models.CharField(max_length=100, blank=True, verbose_name='Номер дома')
     litter_number = models.CharField(max_length=100, verbose_name='Корпус/литера/строение')
     apartments_number = models.CharField(max_length=100, verbose_name='Квартира/помещение')
     floor = models.CharField(max_length=100, verbose_name='Этаж')
-    elevator = models.CharField(max_length=100, verbose_name='Наличие лифта')
-    intercom = models.CharField(max_length=100, verbose_name='Наличие домофона')
+    # elevator = models.CharField(max_length=100, verbose_name='Наличие лифта')
+    elevator = models.BooleanField(null=True, blank=True, default=False, verbose_name='Наличие лифта')
+    # intercom = models.CharField(max_length=100, verbose_name='Наличие домофона')
+    intercom = models.BooleanField(null=True, blank=True, default=False, verbose_name='Наличие домофона')
     postal_code = models.CharField(max_length=12, blank=True, verbose_name='Почтовый код')
 
     def __str__(self):
@@ -27,21 +29,20 @@ class Address(models.Model):
             f' {self.house_number},'
             f' {self.litter_number},'
             f' {self.apartments_number},'
+            f' {self.floor},'
+            # f' {self.elevator},'
+            f' {'Да' if self.elevator else 'Нет'},'
+            # f' {self.intercom},'
+            f' {'Да' if self.intercom else 'Нет'},'
             f' {self.postal_code}'
         )
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    tel = models.CharField(max_length=11, blank=True, verbose_name='Телефон')
+    phone_number = models.CharField(max_length=11, blank=True, verbose_name='Телефон')
     birth_date = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
-    # country = models.CharField(max_length=50, blank=True, verbose_name='Страна')
-    # city = models.CharField(max_length=50, blank=True, verbose_name='Город')
-    # street = models.CharField(max_length=50, blank=True, verbose_name='Улица')
-    # address = models.CharField(max_length=100, blank=True, verbose_name='Дом/кор., кв./офис')
-    # postal_code = models.CharField(max_length=10, blank=True, verbose_name='Почтовый код')
     gender = models.CharField(max_length=50, blank=True, verbose_name='Пол')
-    # address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.username}'

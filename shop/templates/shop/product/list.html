@@ -2,61 +2,62 @@
 {% load static %}
 
 {% block title %}
-  {% if category %}{{ category.name }}{% else %}Все товары{% endif %}
+    {% if category %}{{ category.name }}{% else %}Все товары{% endif %}
 {% endblock %}
 
 {% block content %}
 
-  <div id="top" class="content">
+    <div id="top" class="content">
 
-    <!-- Заголовок ВСЕ ТОВАРЫ -->
-    <div id="main" class="four">
-      <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
-    </div>
-
-    <!-- Сортировка товаров -->
-    <form method="POST" id="sortForm" class="sort_form">
-      {% csrf_token %}
-      {{ sort_form.as_p }}
-    </form>
-
-{#    <script>#}
-{#      document.getElementById('id_form_sorted').addEventListener('change', function() {#}
-{#          document.getElementById('sortForm').submit();#}
-{#      });#}
-{#    </script>#}
-
-    <!-- Карточки товаров -->
-    <div class="gallery">
-      {% for product in products %}
-        <div class="border">
-
-          <a href="{{ product.get_absolute_url }}">
-            <img
-              src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}"
-              alt="{{ product.name }}" title="Посмотреть подробности">
-          </a>
-
-          <div class="item">
-            <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
-              <p>{{ product.product_type }}<br>{{ product.name }}</p>
-            </a>
-            <p>{{ product.price }} ₽</p>
-
-            <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
-              <p>{{ cart_product_form }}</p>
-              <button class="pushable" type="submit">
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front"> В корзину </span>
-              </button>
-              {% csrf_token %}
-            </form>
-          </div>
+        <!-- Заголовок ВСЕ ТОВАРЫ -->
+        <div id="main" class="four">
+            <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
         </div>
-      {% endfor %}
+
+        <!-- Сортировка товаров -->
+        <form method="POST" id="sortForm" class="sort_form">
+            {% csrf_token %}
+            {{ sort_form.as_p }}
+        </form>
+
+        {#    <script>#}
+        {#      document.getElementById('id_form_sorted').addEventListener('change', function() {#}
+        {#          document.getElementById('sortForm').submit();#}
+        {#      });#}
+        {#    </script>#}
+
+        <!-- Карточки товаров -->
+        <div class="gallery">
+            {% for product in products %}
+                <div class="border">
+
+                    <a href="{{ product.get_absolute_url }}">
+                        <img
+                            src="
+                                {% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}"
+                            alt="{{ product.name }}" title="Посмотреть подробности">
+                    </a>
+
+                    <div class="item">
+                        <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
+                            <p>{{ product.product_type }}<br>{{ product.name }}</p>
+                        </a>
+                        <p>{{ product.price }} ₽</p>
+
+                        <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
+                            <p>{{ cart_product_form }}</p>
+                            <button class="pushable" type="submit">
+                                <span class="shadow"></span>
+                                <span class="edge"></span>
+                                <span class="front"> В корзину </span>
+                            </button>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="return_back" href="#top">Вернуться в начало</a>
     </div>
-    <a class="return_back" href="#top">Вернуться в начало</a>
-  </div>
 
 {% endblock %}

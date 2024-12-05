@@ -5,25 +5,37 @@
 
 {% block content %}
 
-   <div class="info_order">
-    <h3>Доставка товара</h3>
-    <hr class="hr-shelf">
-    <h6 style="text-decoration: underline;"> Оформление заказа</h6>
-    <p> В вашей корзине: {{ total_items }} {{ ending_word }} </p>
-    <p> На общую сумму: {{ total_price }} ₽ </p>
-    <hr class="hr-shelf">
-   </div>
-
-  <div class="registration_body">
-    <div class="registration_container">
-      <h1 class="registration_head" >Форма заказа</h1>
-      <h6>Пожалуйста, заполните эту форму, чтобы оформить покупку.</h6>
-      <form method="post" class="registration_form__input">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input class="registration_bottom" type="submit" value="Заказать">
-      </form>
+    <div class="info_order">
+        <h3>Доставка товара</h3>
+        <hr class="hr-shelf">
+        <h6 style="text-decoration: underline;"> Оформление заказа</h6>
+        <p> В вашей корзине: {{ total_items }} {{ ending_word }} </p>
+        <p> На общую сумму: {{ total_price }} ₽ </p>
+        <hr class="hr-shelf">
     </div>
-  </div>
+
+    <div class="registration_body">
+        <div class="registration_container">
+            <h1 class="registration_head">Форма заказа</h1>
+            <h6>Пожалуйста, заполните эту форму, чтобы оформить покупку.</h6>
+            <form method="post" class="registration_form__input">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input class="registration_bottom" type="submit" value="Заказать">
+
+            </form>
+        </div>
+    </div>
+
+
+    {#<script>  id="orderForm"#}
+    {#  document.getElementById('orderForm').addEventListener('submit', function(event) {#}
+    {#      event.preventDefault(); // Отменяем стандартное поведение отправки формы#}
+    {#      // Здесь можно добавить любую логику для обработки данных формы, если это необходимо#}
+    {##}
+    {#      // Перенаправляем пользователя в каталог#}
+    {#      window.location.href = ''; // Замените '/catalog/' на актуальный путь к вашему каталогу#}
+    {#  });#}
+    {#</script>#}
 
 {% endblock %}

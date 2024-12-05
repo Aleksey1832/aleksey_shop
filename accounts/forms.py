@@ -46,7 +46,7 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         label='Фамилия'
     )
-    email = forms.CharField(widget=forms.TextInput(attrs={
+    email = forms.EmailField(widget=forms.TextInput(attrs={
         'autofocus': 'autofocus',
         'class': 'form-control'
     }),
@@ -77,7 +77,7 @@ class CustomUserCreationForm(UserCreationForm):
     # street = forms.CharField(max_length=50, required=True, label='Улица')
     # address = forms.CharField(max_length=100, required=True, label='Дом/корпус, кв. или офис')
 
-    def save(self, commit=True):
+    def save(self, commit=True):  # эти поля создаются при первичной регистрации на сайте
         user = super().save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -86,13 +86,14 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
             profile = Profile.objects.get(user=user)
             profile.birth_date = self.cleaned_data['birth_date']
-            # profile.tel = self.cleaned_data['tel']
+            profile.email = self.cleaned_data['email']
             profile.save()
         return user
 
 
 class ProfileEditForm(forms.ModelForm):
     gender = forms.ChoiceField(choices=[
+        ('', 'Выберите пол'),
         ('Женский', 'Женский'),
         ('Мужской', 'Мужской'),
     ], widget=forms.Select(attrs={'class': 'form-control'}), label='Выбрать пол')
@@ -101,13 +102,30 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = [
             'gender',
-            'tel',
-            'birth_date'
+            'phone_number',
+
+            # 'birth_date'
+            # 'country',
+            # 'region',
+            # 'city',
+            # 'street',
+            # 'house_number',
+            # 'litter_number',
+            # 'apartments_number',
+            # 'postal_code'
         ]
         labels = [
             'Пол',
             'Телефон',
-            'Дата рождения'
+            # 'Дата рождения'
+            # 'Страна',
+            # 'Регион',
+            # 'Город',
+            # 'Улица',
+            # 'Номер дома',
+            # 'Корпус/литера/строение',
+            # 'Квартира/помещение',
+            # 'Почтовый код'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -148,5 +166,13 @@ class AddressForm(forms.ModelForm):
             'house_number',
             'litter_number',
             'apartments_number',
+            'floor',
+            'elevator',
+            'intercom',
             'postal_code'
         ]
+
+    def __init__(self, *args, **kwargs):
+        super(AddressForm, self).__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].widget.attrs.update({'class': 'form-control', 'autofocus': 'autofocus'})

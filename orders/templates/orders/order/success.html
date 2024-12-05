@@ -6,15 +6,15 @@
 {% block content %}
 
 
-<div class="preliminarily">
-  <p> Заказ: № {{ order.id }} оформлен!</p>
-  <p> В корзине: {{ total_items }} {{ ending_word }} </p>
-  <p> Общая сумма: {{ total_price }} ₽ </p>
+    <div class="preliminarily">
+        <p> Заказ: № {{ order.id }} оформлен!</p>
+        <p> В корзине: {{ total_items }} {{ ending_word }} </p>
+        <p> Общая сумма: {{ total_price }} ₽ </p>
 
-  <form action="{% url 'orders:payment' %}" method="get" target="_blank">
-    <input class="bottom_log" type="submit" value="Оплатить">
-  </form>
-</div>
+        <form action="{% url 'orders:payment' %}" method="get" target="_blank">
+            <input class="bottom_log" type="submit" value="Перейти к оплате">
+        </form>
+    </div>
 
 
 {% endblock %}

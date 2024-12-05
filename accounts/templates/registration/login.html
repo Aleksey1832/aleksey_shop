@@ -5,18 +5,18 @@
 
 {% block content %}
 
-  <div class="log">
-    <h2 class="head_log2">Вход в аккаунт</h2>
-    <form method="post">
-      {% csrf_token %}
-        {{ form.as_div }}
-        <input class="bottom_log" type="submit" value="Login">
-    </form>
-    <div class="head_log1">
-      <a href="{% url 'accounts:register_view' %}">Создать аккаунт</a>
-    </div>
+    <div class="log">
+        <h2 class="head_log2">Вход в аккаунт</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <input class="bottom_log" type="submit" value="Login">
+        </form>
+        <div class="head_log1">
+            <a href="{% url 'accounts:register_view' %}">Создать аккаунт</a>
+        </div>
 
-  </div>
+    </div>
 
 
 {% endblock %}

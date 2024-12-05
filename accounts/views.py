@@ -19,7 +19,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('shop:product_list')
+                return redirect('accounts:profile_view')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -35,9 +35,12 @@ def profile_view(request):
     active_orders = Order.objects.filter(user=request.user, status='active').order_by('-created_at')
     canceled_orders = Order.objects.filter(user=request.user, status='canceled').order_by('-created_at')
     completed_orders = Order.objects.filter(user=request.user, status='completed').order_by('-created_at')
+    addresses = Address.objects.filter(user=request.user)
+
     context = {'active_orders': active_orders,
                'canceled_orders': canceled_orders,
-               'completed_orders': completed_orders}
+               'completed_orders': completed_orders,
+               'addresses': addresses}
 
     return render(request, 'registration/profile.html', context)
 
@@ -76,7 +79,7 @@ def change_password_view(request):
             return redirect('accounts:profile_view')
     else:
         form = CustomPasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {"form": form})
+    return render(request, 'registration/change_password.html', {'form': form})
 
 
 @login_required
@@ -101,3 +104,4 @@ def delete_address(request, address_id):
     if request.method == 'POST':
         address.delete()
         return redirect('accounts:profile_view')
+    return render(request, 'addresses/address_confirm_delete.html', {'address': address})

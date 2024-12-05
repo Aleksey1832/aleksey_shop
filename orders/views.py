@@ -43,7 +43,7 @@ def order_create(request):
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
-            'phone': user.profile.tel
+            'phone_number': user.profile.phone_number
         }
         form = OrderCreateForm(initial=initial)
     return render(

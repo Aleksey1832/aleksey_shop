@@ -5,49 +5,47 @@
 
 {% block content %}
 
-  <h1 id="top" class="head_price">Прайс-лист на противопожарное оборудование</h1>
+    <h1 id="top" class="head_price">Прайс-лист на противопожарное оборудование</h1>
 
-  <div class="">
-    <table class="price_list_style">
-      <thead>
-        <tr>
-          <th>Название</th>
-          <th>Код товара</th>
-          <th>Цена</th>
-          <th style="text-align: center">Купить</th>
-        </tr>
-      </thead>
+    <div class="">
+        <table class="price_list_style">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Код товара</th>
+                <th>Цена</th>
+                <th style="text-align: center">Купить</th>
+            </tr>
+            </thead>
 
-      <tbody>
-        {% for product in products %}
-          <tr>
-            <td>{{ product.product_type }} {{ product.name }}</td>
-            <td>{{ product.product_code }}</td>
-            <td>{{ product.price }} ₽</td>
-            <td>
-              <form style="text-align: center" action="{{ product.get_absolute_url }}" method="post" >
-                <input class="button_pay" type="submit" title="Посмотреть подробности" value="Оформить">
-                {% csrf_token %}
-              </form>
-            </td>
-          </tr>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product_type }} {{ product.name }}</td>
+                    <td>{{ product.product_code }}</td>
+                    <td>{{ product.price }} ₽</td>
+                    <td>
+                        <form style="text-align: center" action="{{ product.get_absolute_url }}" method="post">
+                            <input class="button_pay" type="submit" title="Посмотреть подробности" value="Оформить">
+                            {% csrf_token %}
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+    <div>
+        {% for c in categories %}
+            <li {% if category.slug == c.slug %}{% endif %}>
+                <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
         {% endfor %}
-
-
-      </tbody>
-    </table>
-
-
-
-
-  </div>
-  <div>
-    {% for c in categories %}
-    <li {% if category.slug == c.slug %}{% endif %}>
-    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
-    {% endfor %}
-  </div>
-  <a class="return_back" href="#top">Вернуться в начало</a>
+    </div>
+    <a class="return_back" href="#top">Вернуться в начало</a>
 
 
 {% endblock %}

@@ -7,141 +7,127 @@
 
 
 
-  <div class="profile_container">
-    <h2>Личный кабинет</h2>
-    <hr>
+    <div class="profile_container">
+        <h2>Личный кабинет</h2>
+        <hr>
 
-    <div class="wrapper">
-      <div class="tabs">
-              <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
-                <label for="tab-1" class="tab-label">Личные данные</label>
-                <input type="radio" name="css-tabs" id="tab-2" checked class="tab-switch">
-                <label for="tab-2" class="tab-label">Активные заказы</label>
-
-
+        <div class="wrapper">
+            <div class="tabs">
+                <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                    <label for="tab-1" class="tab-label">Личные данные</label>
+                    <input type="radio" name="css-tabs" id="tab-2" checked class="tab-switch">
+                    <label for="tab-2" class="tab-label">Активные заказы</label>
 
 
-
-{#                  <div class="container_table">#}
+                    {#                  <div class="container_table">#}
                     <table class="container_table">
-                      <tr>
-                        <th>Имя пользователя</th>
-                        <td>{{ user.username  }}</td>
-                      </tr>
-                      <tr>
-                        <th>Имя</th>
-                        <td>{{ user.first_name }}</td>
-                      </tr>
-                      <tr>
-                        <th>Фамилия</th>
-                        <td>{{ user.last_name }}</td>
-                      </tr>
-                      <tr>
-                        <th>Пол</th>
-                        <td>{{ user.profile.gender }}</td>
-                      </tr>
-                      <tr>
-                        <th>Телефон</th>
-                        <td>{{ user.profile.tel }}</td>
-                      </tr>
-                      <tr>
-                        <th>Дата рождения</th>
-                        <td>{{ user.profile.birth_date }}</td>
-                      </tr>
-                      <tr>
-                        <th>Страна</th>
-                        <td>{{ user.profile.country }}</td>
-                      </tr>
-                      <tr>
-                        <th>Город</th>
-                        <td>{{ user.profile.city }}</td>
-                      </tr>
-                      <tr>
-                        <th>Улица</th>
-                        <td>{{ user.profile.street }}</td>
-                      </tr>
-                      <tr>
-                        <th>Дом/кор., кв./офис</th>
-                        <td>{{ user.profile.address }}</td>
-                      </tr>
-                      <tr>
-                        <th>Почтовый код</th>
-                        <td>{{ user.profile.postal_code }}</td>
-                      </tr>
+                        <tr>
+                            <th>Имя пользователя:</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Имя и фамилия:</th>
+                            <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail:</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Пол:</th>
+                            <td>{{ user.profile.gender }}</td>
+                        </tr>
+                        <tr>
+                            <th>Телефон:</th>
+                            <td>{{ user.profile.phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Дата рождения</th>
+                            <td>{{ user.profile.birth_date }}</td>
+                        </tr>
                     </table>
 
 
+                    {#              <div class="tab">#}
+                    {#                    <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">#}
+                    {#                    <label for="tab-2" class="tab-label">Активные заказы</label>#}
 
-
-
-
-
-
-
-              <div class="tab">
-                    <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
-                    <label for="tab-2" class="tab-label">Активные заказы</label>
-
-                  <div class="container_table">
-                    {% for order in active_orders %}
-                    <ul>
-                      <li>
-                        Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
-                          <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
-                      </li>
-                    </ul>
-                      {% empty %}
-                        <p> У вас пока нет заказов </p>
-                    {% endfor %}
-                  </div>
-              </div>
+                    <div class="container_table">
+                        {% for order in active_orders %}
+                            <ul>
+                                <li>
+                                    Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на
+                                    сумму {{ order.get_total_cost }}
+                                    <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
+                                </li>
+                            </ul>
+                        {% empty %}
+                            <p> У вас пока нет заказов </p>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
 
 
+        </div>
 
-      </div>
     </div>
-  </div>
 
 
     <h3>Активные заказы</h3>
-      {% for order in active_orders %}
-      <ul>
-        <li>
-          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
-            <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
-        </li>
-      </ul>
-        {% empty %}
-          <p> У вас пока нет заказов </p>
-      {% endfor %}
-  <hr>
+    {% for order in active_orders %}
+        <ul>
+            <li>
+                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+                <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
+            </li>
+        </ul>
+    {% empty %}
+        <p> У вас пока нет заказов </p>
+    {% endfor %}
+    <hr>
     <h3>Завершенные заказы</h3>
-      {% for order in completed_orders %}
-      <ul>
-        <li>
-          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
-        </li>
-      </ul>
-        {% empty %}
-          <p> Ни один заказ пока не выполнен </p>
-      {% endfor %}
-  <hr>
+    {% for order in completed_orders %}
+        <ul>
+            <li>
+                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+            </li>
+        </ul>
+    {% empty %}
+        <p> Ни один заказ пока не выполнен </p>
+    {% endfor %}
+    <hr>
     <h3>Отмененные заказы</h3>
-      {% for order in canceled_orders %}
-      <ul>
-        <li>
-          Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
-        </li>
-      </ul>
-        {% empty %}
-          <p> У вас пока нет отмененных заказов </p>
-      {% endfor %}
+    {% for order in canceled_orders %}
+        <ul>
+            <li>
+                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+            </li>
+        </ul>
+    {% empty %}
+        <p> У вас пока нет отмененных заказов </p>
+    {% endfor %}
 
-      <div>
-        <a href="{% url 'accounts:edit_profile' %}">Редактировать профиль |</a>
-        <a href="{% url 'accounts:change_password_view' %}">Смена пароля |</a>
+    <div>
+        <p>
+        <a href="{% url 'accounts:add_address' %}">Добавить адрес доставки</a> |
+        <a href="{% url 'accounts:edit_profile' %}">Редактировать профиль</a> |
+        <a href="{% url 'accounts:change_password_view' %}">Смена пароля</a> |
         <a href="{% url 'accounts:logout_view' %}">Выход</a>
-      </div>
+        </p>
+
+        <hr>
+        <h3>Адреса доставки</h3>
+        {% for address in addresses %}
+        <ul>
+            <li> {{ address }} | <a href="{% url 'accounts:delete_address' address.id %}">Удалить адрес</a></li>
+        </ul>
+        {% empty %}
+            <p> У вас пока нет сохраненных адресов </p>
+        {% endfor %}
+        <hr>
+
+
+    </div>
 {% endblock %}
