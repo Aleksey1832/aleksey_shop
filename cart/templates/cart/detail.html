@@ -5,62 +5,64 @@
 
 {% block content %}
 
-    <h1 class="head">В вашей корзине...</h1>
-    <div class="cart_container">
-        <div class="content_cart">
+    {% if total_items > 0 %}
 
-            <table class="cart">
-                <thead>
-                <tr>
-                    <th style="width: 120px">Изображение</th>
-                    <th style="width: 130px">Название</th>
-                    <th style="width: 150px">Количество</th>
-                    <th style="width: 130px">Убрать</th>
-                    <th style="width: 130px">Цена за штуку</th>
-                    <th style="width: 130px">Стоимость</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in cart %}
-                    {% with product=item.product %}
-                        <tr>
-                            <td>
-                                <hr>
-                                <a href="{{ product.get_absolute_url }}">
-                                    <img class="detail_img" alt="Упс!" src="
-                                        {% if product.image %}{{ product.image.url }}
-                                            {% else %}{% static "images/no_image.png" %} {% endif %}">
-                                </a>
-                            </td>
-
-                            <td>{{ product.name }} Код:{{ product.product_code }}</td>
-                            <td>
-                                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                                    {{ item.update_quantity_form.quantity }}
-                                    {{ item.update_quantity_form.override }}
-                                    <input class="update" type="submit" value="Обновить">
+        <!-- блок корзины -->
+        <h1 class="head">В вашей корзине...</h1>
+        <div class="cart_container">
+            <div class="content_cart">
+                <table class="cart">
+                    <thead>
+                    <tr>
+                        <th style="width: 120px">Изображение</th>
+                        <th style="width: 130px">Название</th>
+                        <th style="width: 150px">Количество</th>
+                        <th style="width: 130px">Убрать</th>
+                        <th style="width: 130px">Цена за штуку</th>
+                        <th style="width: 130px">Стоимость</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in cart %}
+                        {% with product=item.product %}
+                            <tr>
+                                <td>
                                     <hr>
-                                    {% csrf_token %}
-                                </form>
-                            </td>
-                            <td>
-                                <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                                    <input class="update" type="submit" value="Удалить">
-                                    {% csrf_token %}
-                                </form>
-                            </td>
-                            <td class="num">{{ item.price }} ₽</td>
-                            <td class="num">{{ item.total_price }} ₽
-                                <hr>
-                            </td>
-                        </tr>
-                    {% endwith %}
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img class="detail_img" alt="Упс!" src="
+                                            {% if product.image %}{{ product.image.url }}
+                                                {% else %}{% static "images/no_image.png" %} {% endif %}">
+                                    </a>
+                                </td>
 
-        <!-- блок "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" -->
+                                <td>{{ product.name }} Код:{{ product.product_code }}</td>
+                                <td>
+                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                        {{ item.update_quantity_form.quantity }}
+                                        {{ item.update_quantity_form.override }}
+                                        <input class="update" type="submit" value="Обновить">
+                                        <hr>
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                                        <input class="update" type="submit" value="Удалить">
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                                <td class="num">{{ item.price }} ₽</td>
+                                <td class="num">{{ item.total_price }} ₽
+                                    <hr>
+                                </td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+    <!-- блок "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" -->
         <div class="payment">
             <div class="text-right">
                 <form action="{% url "orders:order_create" %}" method="post">
@@ -70,6 +72,7 @@
             </div>
 
             <p style="font-size: 13px">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
+
             <hr>
             <div class="total">
                 <table class="display">
@@ -93,10 +96,9 @@
             </div>
 
         </div>
-
     </div>
 
-    <!-- блок "ПРОДОЛЖИТЬ ПОКУПКИ" -->
+        <!-- блок "ПРОДОЛЖИТЬ ПОКУПКИ" -->
     <br>
     <div class="text-light">
         <form action="{% url 'shop:product_list' %}" method="get">
@@ -104,5 +106,14 @@
             {% csrf_token %}
         </form>
     </div>
+
+        <!-- условие пустой корзины -->
+    {% else %}
+        <div class="cart_empty_info">
+            <p class="cart_empty">Ваша корзина пуста!</p>
+            <p class="cart_message">Что бы найти все что нужно, перейдите в
+                <a href="{% url 'shop:product_list' %}">каталог</a></p>
+        </div>
+    {% endif %}
 
 {% endblock %}

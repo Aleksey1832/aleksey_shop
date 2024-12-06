@@ -91,6 +91,7 @@
 
 /* текст внутри блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .total {
+    /*margin-top: 50px;*/
     font-size: 15px;
     font-weight: 600;
     background-image: radial-gradient(circle, #553c9a, #ee4b2b);
@@ -120,6 +121,28 @@
 
 .register:hover, .register:focus {
     background: #2cd754; /* Эффект при наведении — дополнительное оформление */
+}
+
+/* когда корзина пуста */
+.cart_empty_info {
+    color: #003559;
+    font-weight: bold;
+    text-align: left;
+    margin: 30px 0 30px 0;
+}
+
+.cart_empty {
+    font-size: 22px;
+}
+
+.cart_message{
+    font-size: 17px;
+    margin-bottom: 25em;
+}
+
+/* отступ с низу для страницы удаления адреса */
+.button_delete{
+    padding: 30px 0 120px 0;
 }
 
 /* кнопка "ПРОДОЛЖИТЬ ПОКУПКИ" */

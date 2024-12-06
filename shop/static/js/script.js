@@ -17,3 +17,24 @@ $(document).on('click', '.read-more-link', function () {
 $(document).on('click', '.read-less-link', function () {
     $(this).parent().hide().next().show();
 });
+
+
+
+// const openModalBtn = document.getElementById("openModal");
+// const modal = document.getElementById("modal");
+// const closeModalBtn = document.getElementById("closeModal");
+//
+// openModalBtn.addEventListener("click", function(e) {
+//   e.preventDefault(); // Предотвращает переход по ссылке
+//   modal.style.display = "block";
+// });
+//
+// closeModalBtn.addEventListener("click", function() {
+//   modal.style.display = "none";
+// });
+//
+// window.addEventListener("click", function(e) {
+//   if (e.target == modal) {
+//     modal.style.display = "none";
+//   }
+// });

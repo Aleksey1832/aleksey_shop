@@ -1,16 +1,12 @@
 /* стили для border страницы login */
 .log {
     color: rgb(252, 252, 247);
-    /*text-align: left;*/
     font-family: 'Exo 2', sans-serif;
-    background-color: rgba(52, 68, 75, 0.5);
+    background-color: rgba(102, 121, 129, 0.5);
     border: 3px solid rgba(81, 137, 157, 0.8); /* F4F7EECC */
-    /*border-radius: 8px;*/
     padding: 20px 20px 10px 20px;
-    margin: 150px auto;
-    margin-bottom: 200px;
+    margin: 80px auto;
     width: 400px;
-    /*vertical-align: middle;*/
 }
 
 /* для окон */
@@ -22,7 +18,7 @@
 .head_log1 > a {
     font-size: 15px;
     margin: 0 0 0 220px;
-    color: #02568a;
+    color: #06629b;
     font-family: 'Exo 2', sans-serif;
     font-weight: 700
 }
@@ -37,7 +33,7 @@
     margin: 7px 0 10px 0;
 }
 
-/* стили для bottom страницы login */
+/* стили для button страницы login */
 .bottom_log {
     display: block;
     /*height: 100vh;*/
@@ -164,131 +160,95 @@
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
 }
 
- /* для страницы profile.html */
+ /* для страницы личный кабинет profile.html */
 .profile_container {
-    font-family: Arial, sans-serif;
-    padding: 10px 20px 10px 50px;
-    margin: 20px auto;
+    /*font-family: Arial, sans-serif;*/
+    padding: 10px 50px 10px 50px;
+    margin: 30px auto;
     width: 900px;
     height: 710px;
-    /*max-width: 900px;*/
+    max-width: 900px;
+    /*background-color: rgb(244, 244, 244, 0.7);*/
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
 }
 
-* {
-    box-sizing: border-box;
+.container-tabs {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.3;
+    height: 550px;
+    overflow: auto;
+    color: #212529;
+    /*background-color: #fff;*/
+    background-color: rgb(244, 244, 244, 0.5);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    /*margin: 1rem;*/
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-bottom: 20px;
 }
 
-/*body {*/
-/*    font-family: "Open Sans";*/
-/*    background: #2c3e50;*/
-/*    color: #ecf0f1;*/
-/*    line-height: 1.618em;*/
-/*}*/
-
-.wrapper {
-    max-width: 50rem;
-    width: 100%;
-    margin: 0 auto;
+.container-tab {
+    display: flex;
+    flex-direction: column;
 }
 
-.tabs {
-    max-width: 50rem;
-    width: 100%;
-    position: relative;
-    margin: 15px 0;
-    background-color: rgba(201, 200, 200, 0.3);
-    height: 4rem;
-}
-
-.tabs > input[type="radio"] {
+.tab-nav-content > input[type="radio"] {
     display: none;
 }
 
-.tabs::before,
-.tabs::after {
-    content: "";
-    display: table;
-}
-
-.tabs::after {
-    clear: both;
-}
-
-.tab {
-    float: left;
-}
-
-.tab-switch {
+.container_table {
     display: none;
 }
 
-.tab-label {
-    position: relative;
+#content-1:has(~ .tab-nav-content > #tab-btn-1:checked),
+#content-2:has(~ .tab-nav-content > #tab-btn-2:checked),
+#content-3:has(~ .tab-nav-content > #tab-btn-3:checked),
+#content-4:has(~ .tab-nav-content > #tab-btn-4:checked) {
     display: block;
-    line-height: 2.75em;
-    height: 3em;
-    padding: 0 1.618em;
-    background-color: rgb(245, 50, 50);
-    border-right: 0.125rem solid #a01636;
-    color: #bbb8b8;
-    cursor: pointer;
-    top: 0;
-    transition: all 0.25s;
 }
 
-.tab-label:hover {
-    top: -0.25rem;
-    transition: top 0.25s;
+.tab-nav-content {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+    order: -1;
 }
 
-/*.tab-content {*/
-/*    height: 12rem;*/
-/*    position: absolute;*/
-/*    z-index: 1;*/
-/*    top: 2.75em;*/
-/*    left: 0;*/
-/*    padding: 1.618rem;*/
-/*    background: #fff;*/
-/*    color: #2c3e50;*/
-/*    border-bottom: 0.25rem solid #bdc3c7;*/
-/*    opacity: 0;*/
-/*    transition: all 0.35s;*/
-/*}*/
-
-.tab-switch:checked + .tab-label {
-    background: #d2efef;
-    color: #2c3e50;
-    border-bottom: 0;
-    border-right: 0.125rem solid #98c7d2;
-    transition: all 0.35s;
-    z-index: 1;
-    top: -0.0625rem;
+.tab-nav-content > label {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #0d6efd;
+    text-decoration: none;
+    background: 0 0;
+    border: 1px solid transparent;
+    margin-bottom: -1px;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    -webkit-appearance: button;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
-.tab-switch:checked + label + .tab-content {
-    z-index: 2;
-    opacity: 1;
-    transition: all 0.35s;
-}
-
-.container_table table{
-    border-radius: 5px;
-    font-size: 15px;
-    width: 800px; /* Ширина таблицы */
-    border-collapse: collapse;
-    margin: 25px 0 50px 0;
-    font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    display: none;
-    /*width: 100%;*/
-    /*margin: 0 auto;*/
+.tab-nav-content > input[type="radio"]:checked + label {
+    color: #000;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    cursor: default;
 }
 
 .container_table th {
     border-top: 1em solid transparent;
-    padding-left: 50px;
-    border-bottom: 16px solid transparent;
+    /*padding-left: 50px;*/
+    border-bottom: 20px solid transparent;
+    padding: 9px 15px;
+}
+
+.container_table td {
+    padding-left: 120px;
 }
