@@ -39,21 +39,6 @@
     transform: scale(1.35);
 }
 
-/* кнопки "ОБНОВИТЬ" и "УДАЛИТЬ" */
-/*.update*/
-/*{*/
-/*    border:2px solid rgb(240, 0, 60);*/
-/*    font-size: 15px;*/
-/*    color: #fcf7f7;*/
-/*    text-decoration: none;*/
-/*    padding: 1px 12px;*/
-/*    border-radius: 15px;*/
-/*    background: hsl(345deg 100% 47%);*/
-/*}*/
-/*.update:hover, .update:focus {*/
-/*  background: #f63b3b; !* Эффект при наведении — дополнительное оформление *!*/
-/*}*/
-
 .update {
     position: relative;
     display: inline-block;

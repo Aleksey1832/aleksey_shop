@@ -14,8 +14,7 @@
         <div class="container-tabs">
             <div class="container-tab">
 
-
-
+        <!-- Личные данные -->
                 <div class="container_table" id="content-1">
                     <table>
                         <tr>
@@ -51,6 +50,7 @@
                     </div>
                 </div>
 
+        <!-- Заказы -->
                 <div class="container_table" id="content-2">
                     <h4>Активные заказы</h4>
                     {% for order in active_orders %}
@@ -87,7 +87,7 @@
                     {% endfor %}
                 </div>
 
-
+        <!-- Адреса доставки -->
                 <div class="container_table" id="content-3">
                     <hr>
                     <h4>Адреса доставки</h4>
@@ -106,6 +106,7 @@
                     </p>
                 </div>
 
+        <!-- Смена пароля -->
                 <div class="container_table" id="content-4">
                     <hr>
                     <ul>
@@ -115,13 +116,14 @@
                     </ul>
 
                     <h1 class="registration_head">Изменение пароля</h1>
-                    <form method="post" class="registration_form__input">
+                    <form method="post" class="registration_form_input">
                         {{ form.as_p }}
                         {% csrf_token %}
                         <input class="registration_bottom" type="submit" value="Сохранить изменения">
                     </form>
                 </div>
 
+        <!-- Шапка личного кабинете -->
                 <div class="tab-nav-content">
                     <input checked id="tab-btn-1" name="tab-btn-head" type="radio" value="Личные данные">
                     <label for="tab-btn-1">Личные данные</label>

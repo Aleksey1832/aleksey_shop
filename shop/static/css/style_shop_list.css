@@ -1,6 +1,6 @@
 /* для list отступы страницы */
 .content {
-    margin-left: 20px;
+    margin-left: 10px;
     color: #003559;
 }
 
@@ -14,9 +14,9 @@
 /* заголовок для list "КАТЕГОРИЯ ТОВАРОВ" */
 .four {
     background-color: rgb(244, 247, 238, 0.8);
-    padding: 50px 40px;
+    padding: 43px 40px;
     text-align: left;
-    height: 150px;
+    height: 130px;
 }
 
 .four h1 {
@@ -59,21 +59,47 @@
 
 /* стили для выпадающего меню сортировки */
 .sort_form {
-    margin: 25px 0 25px 0;
+    margin: 15px 0 30px 246px;
     font-family: 'Exo 2', sans-serif;
-    width: 195px;
-    height: 25px;
+    width: 160px;
+    height: 15px;
     /*border: 1px solid #999999;*/
-    font-size: 16px;
+    font-size: 12px;
     background-color: #f3f3f3;
     /*border-radius: 5px;*/
 }
 
-/* для list вывод img и текста с низу */
+/* для контента */
+.layout{
+    width: 1900px;
+    margin: 10px;
+    position: relative;
+}
+
+/* бар с лева "поиск" */
+.left_bar{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 15px;
+    float: left;
+    width: 225px;  /* ширина бара */
+    display:flex;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px #d7d7d7 solid;
+    background-color: rgba(183, 232, 215, 0.3);
+    color: #003559;
+
+    border-radius: 10px;
+    /*background-color: rgba(183, 232, 215, 0.3);*/
+}
+
+ /*для list вывод img и текста с низу*/
 .gallery {
+    /*margin-left: 150px; !* Отступ слева *!*/
+    padding: 0 0 0 20px;
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 80vw;
     transform: translateX(-1%);
     text-align: center;
 }
@@ -86,14 +112,15 @@
 }
 
 .gallery img:hover {
-    border: 1px #888787 solid;
+    border: 1px #cccccc solid;
 }
 
 .border {
     border: 1px #00B344 solid;
-    margin: 10px 10px;
-    border-radius: 25px;
+    margin: 5px 10px;
+    border-radius: 10px;
     background-color: rgba(183, 232, 215, 0.3);
+    /*box-shadow: 0 0 5px rgba(73, 72, 72, 0.1);*/
 }
 
 /* для list вывод текста с низу по картинками */
@@ -101,6 +128,7 @@
 .item a,
 .item a:active {
     font-size: 15px;
+    font-family: 'Exo 2', sans-serif;
     font-weight: 700;
     text-decoration: none;
     color: #003559;

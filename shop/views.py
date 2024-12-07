@@ -4,19 +4,23 @@ from shop.models import (Product, Category, ProductConstruction,
                          ProductRangModelHearth, ProductType)
 from cart.forms import CartAddProductForm
 from shop.forms import ShopFormSorted
+from shop.filters import SearchFilter
 
 
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).order_by('name')
     sort_form = ShopFormSorted(request.POST or None)
     if sort_form.is_valid():
         products = sort_method(request)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-    cart_product_form = CartAddProductForm()
+
+    product_filter = SearchFilter(request.GET, queryset=products)
+    products = product_filter.qs
+    # cart_product_form = CartAddProductForm()
     return render(
         request,
         'shop/product/list.html',
@@ -24,8 +28,9 @@ def product_list(request, category_slug=None):
             'category': category,
             'categories': categories,
             'products': products,
-            'cart_product_form': cart_product_form,
-            'sort_form': sort_form
+            # 'cart_product_form': cart_product_form,
+            'sort_form': sort_form,
+            'filter': product_filter
         }
     )
 

@@ -31,17 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',         # админ
-    'django.contrib.auth',          # аутентификация
-    'django.contrib.contenttypes',  # проверка типов
-    'django.contrib.sessions',      # куки, хранит какую то информацию на стороне пользователя, когда он на нашем сайте
-    'django.contrib.messages',      # система сообщений
-    'django.contrib.staticfiles',   # система управления каскадами стилей, картинками
-    'phonenumber_field',
-    'shop.apps.ShopConfig',
-    'cart.apps.CartConfig',
-    'orders.apps.OrdersConfig',
-    'accounts.apps.AccountsConfig',
+    'django.contrib.admin',          # админ
+    'django.contrib.auth',           # аутентификация
+    'django.contrib.contenttypes',   # проверка типов
+    'django.contrib.sessions',       # куки, хранит какую то информацию на стороне пользователя, когда он на нашем сайте
+    'django.contrib.messages',       # система сообщений
+    'django.contrib.staticfiles',    # система управления каскадами стилей, картинками
+    # 'phonenumber_field',           # для валидации, печати телефонных номеров
+    'shop.apps.ShopConfig',          # активация приложения shop
+    'cart.apps.CartConfig',          # активация приложения cart
+    'orders.apps.OrdersConfig',      # активация приложения orders
+    'accounts.apps.AccountsConfig',  # активация приложения accounts
+    'django_filters'                 # для процесса фильтрации данных
 ]
 
 MIDDLEWARE = [

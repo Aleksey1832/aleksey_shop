@@ -23,7 +23,7 @@ def order_create(request):
                     order=order,
                     product=item['product'],
                     price=item['price'],
-                    quantity=item['quantity'],
+                    quantity=item['quantity']
                 )
             cart.clear()
             return render(
@@ -34,8 +34,7 @@ def order_create(request):
                     'total_items': total_items,
                     'total_price': total_orders['total_price'],
                     'ending_word': ending_word
-                }
-            )
+                })
 
     else:
         user = request.user
@@ -55,8 +54,7 @@ def order_create(request):
             'total_items': total_items,
             'total_price': total_orders['total_price'],
             'ending_word': ending_word
-        }
-    )
+        })
 
 
 def payment(request):
