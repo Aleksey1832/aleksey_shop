@@ -79,6 +79,7 @@
 /* бар с лева колонка "поиск товара" */
 .left_bar{
     font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
     font-size: 15px;
     float: left;
     width: 225px;  /* ширина бара */
@@ -93,7 +94,7 @@
     /*background-color: rgba(183, 232, 215, 0.3);*/
 }
 
- /* Для поиска "Продукт не найден" */
+ /* Для страницы поиска "Продукт не найден" */
 .centered-container {
     display: flex;
     justify-content: center; /* Центрирование по горизонтали */
