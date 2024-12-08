@@ -59,12 +59,12 @@
 
 /* стили для выпадающего меню сортировки */
 .sort_form {
-    margin: 15px 0 30px 246px;
+    margin: 12px 0 30px 255px;
     font-family: 'Exo 2', sans-serif;
-    width: 160px;
-    height: 15px;
+    width: 200px;
+    height: 12px;
     /*border: 1px solid #999999;*/
-    font-size: 12px;
+    font-size: 11px;
     background-color: #f3f3f3;
     /*border-radius: 5px;*/
 }
@@ -76,21 +76,41 @@
     position: relative;
 }
 
-/* бар с лева "поиск" */
+/* бар с лева колонка "поиск товара" */
 .left_bar{
     font-family: 'Exo 2', sans-serif;
     font-size: 15px;
     float: left;
     width: 225px;  /* ширина бара */
     display:flex;
-    margin-top: 50px;
+    margin-top: 6px;
+    margin-bottom: 100px;
     padding: 10px;
     border: 1px #d7d7d7 solid;
     background-color: rgba(183, 232, 215, 0.3);
     color: #003559;
-
     border-radius: 10px;
     /*background-color: rgba(183, 232, 215, 0.3);*/
+}
+
+ /* Для поиска "Продукт не найден" */
+.centered-container {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    height: 30vh; /* Занимает всю высоту viewport */
+    width: 100vw; /* Занимает всю ширину viewport */
+}
+
+.centered-content { /* Стили для "Продукт не найден" в рамке */
+    color: #003559;
+    padding: 15px;
+    text-align: center;
+    width: 550px; /* Пример ширины */
+    height: 150px; /* Пример высоты */
+    /*background-color: lightblue;*/
+    border: 2px solid #c44737;
+    border-radius: 10px;
 }
 
  /*для list вывод img и текста с низу*/

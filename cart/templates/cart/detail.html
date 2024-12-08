@@ -66,7 +66,7 @@
         <div class="payment">
             <div class="text-right">
                 <form action="{% url "orders:order_create" %}" method="post">
-                    <button class="register" type="submit">Перейти к оформлению</button>
+                    <button class="registration_bottom" type="submit">Перейти к оформлению</button>
                     {% csrf_token %}
                 </form>
             </div>
@@ -102,7 +102,7 @@
     <br>
     <div class="text-light">
         <form action="{% url 'shop:product_list' %}" method="get">
-            <button class="shopping" type="submit">Продолжить покупки</button>
+            <button class="registration_bottom" type="submit">Продолжить покупки</button>
             {% csrf_token %}
         </form>
     </div>

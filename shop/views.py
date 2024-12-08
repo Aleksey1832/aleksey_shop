@@ -20,7 +20,10 @@ def product_list(request, category_slug=None):
 
     product_filter = SearchFilter(request.GET, queryset=products)
     products = product_filter.qs
-    # cart_product_form = CartAddProductForm()
+
+    no_products_found = not products.exists()
+
+    cart_product_form = CartAddProductForm()
     return render(
         request,
         'shop/product/list.html',
@@ -28,9 +31,10 @@ def product_list(request, category_slug=None):
             'category': category,
             'categories': categories,
             'products': products,
-            # 'cart_product_form': cart_product_form,
+            'cart_product_form': cart_product_form,
             'sort_form': sort_form,
-            'filter': product_filter
+            'filter': product_filter,
+            'no_products_found': no_products_found
         }
     )
 

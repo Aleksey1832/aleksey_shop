@@ -9,14 +9,6 @@ SORT_CHOICES = [
 ]
 
 
-# class ShopFormSorted(forms.Form):
-#     form_sorted = forms.TypedChoiceField(
-#         label='',
-#         choices=SORT_CHOICES,
-#         coerce=str
-#     )
-
-
 class ShopFormSorted(forms.Form):
     form_sorted = forms.ChoiceField(
         choices=SORT_CHOICES,

@@ -15,22 +15,33 @@
         </div>
     </div>
 
+    <!-- Сортировка товаров -->
+    <form method="POST" id="sortForm" class="sort_form">
+        {% csrf_token %}
+        {{ sort_form.as_p }}
+    </form>
+
     <!-- контент страницы -->
     <div class="layout">
 
         <!-- Поиск товара -->
-        <div class="left_bar">
-            <form method="get">
-                {{ filter.form.as_p }}
-                <input class="filter" type="submit" value="Поиск">
-            </form>
-        </div>
+        {% if no_products_found %}
+            <div class="centered-container">
+                <div class="centered-content">
+                    <h4>К сожалению, товары по вашему запросу не найдены.</h4><br>
+                    <h5><a href="{% url 'shop:product_list' %}">Вернуться к полному списку товаров</a></h5>
+                </div>
+            </div>
+        {% else %}
+            <div class="left_bar">
+                <form method="get">
+                    <h5>Поиск товаров</h5>
+                    {{ filter.form.as_p }}
+                    <input class="filter" type="submit" value="Поиск">
+                </form>
+            </div>
+        {% endif %}
 
-        <!-- Сортировка товаров -->
-            <form method="POST" id="sortForm" class="sort_form">
-                {% csrf_token %}
-                {{ sort_form.as_p }}
-            </form>
         <!-- Карточки товаров -->
         <div class="gallery">
             {% for product in products %}

@@ -4,13 +4,19 @@
 {% block content %}
 
     <div class="cart_empty_info">
-        <h2>Удаление адреса</h2>
-        <p>
-            Вы уверены, что хотите удалить адрес? <br>"{{ address }}"?</p>
+        <h1>Удаление адреса</h1>
+
+        <h5>Вы уверены, что хотите удалить адрес?</h5><br>
+        <ul>
+            <li>
+                "{{ address }}"?
+            </li>
+        </ul>
+
         <form class="button_delete" method="POST">
             {% csrf_token %}
             <button type="submit">Да, хочу удалить</button>
-            <a href="{% url 'accounts:profile_view' %}">Назад</a>
+            <a href="{% url 'accounts:profile_view' %}">Нет, вернуться назад</a>
         </form>
     </div>
 

@@ -10,7 +10,7 @@
     border: 2px solid rgba(206, 245, 230, 0.5);
     padding: 10px 0 0 0;
     width: 750px;
-    border-radius: 25px;
+    border-radius: 10px;
     background: #ffffff;
 }
 
@@ -70,7 +70,7 @@
     padding: 15px 10px 0 10px;
     width: 300px;
     height: 385px;
-    border-radius: 25px;
+    border-radius: 10px;
     background: #ffffff;
 }
 
@@ -92,28 +92,18 @@
     margin: 10px 10px 15px 10px;
 }
 
-/* кнопка меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" */
-.register {
-    border: 2px solid rgb(34, 201, 72);
-    font-size: 16px;
-    color: #fcf7f7;
-    text-decoration: none;
-    padding: 3px 15px;
-    border-radius: 15px;
-    background: hsl(134, 71%, 46%);
-    margin-bottom: 15px;
-}
+/*!* кнопка registration_bottom меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" *!*/
+/* Смотреть style_order_create.css */
 
-.register:hover, .register:focus {
-    background: #2cd754; /* Эффект при наведении — дополнительное оформление */
-}
+/* кнопка registration_bottom "ПРОДОЛЖИТЬ ПОКУПКИ" */
+/* Смотреть style_order_create.css */
 
 /* когда корзина пуста */
 .cart_empty_info {
     color: #003559;
     font-weight: bold;
     text-align: left;
-    margin: 30px 0 30px 0;
+    margin: 50px 0 30px 30px;
 }
 
 .cart_empty {
@@ -128,19 +118,4 @@
 /* отступ с низу для страницы удаления адреса */
 .button_delete{
     padding: 30px 0 120px 0;
-}
-
-/* кнопка "ПРОДОЛЖИТЬ ПОКУПКИ" */
-.shopping {
-    border: 2px solid rgb(34, 201, 72);
-    font-size: 20px;
-    color: #fcf7f7;
-    text-decoration: none;
-    padding: 3px 15px;
-    border-radius: 15px;
-    background: hsl(134, 71%, 46%);
-}
-
-.shopping:hover, .shopping:focus {
-    background: #2ede57; /* Эффект при наведении — дополнительное оформление */
 }

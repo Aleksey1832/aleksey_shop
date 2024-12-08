@@ -43,10 +43,10 @@
                         </tr>
                     </table>
                     <hr>
-                    <div>
-                        <p>
+                    <div class="bold-links">
+                        <h6>
                             <a href="{% url 'accounts:edit_profile' %}">Редактировать профиль</a>
-                        </p>
+                        </h6>
                     </div>
                 </div>
 
@@ -56,8 +56,9 @@
                     {% for order in active_orders %}
                         <ul>
                             <li>
-                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
-                                <a href="{% url 'orders:cancel_order' order.id %}">Отменить заказ</a>
+                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб.
+                                <a href="{% url 'orders:cancel_order' order.id %}">
+                                    <br>Отменить заказ</a>
                             </li>
                          </ul>
                     {% empty %}
@@ -68,7 +69,7 @@
                     {% for order in completed_orders %}
                         <ul>
                             <li>
-                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб.
                             </li>
                         </ul>
                     {% empty %}
@@ -79,7 +80,7 @@
                     {% for order in canceled_orders %}
                         <ul>
                             <li>
-                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }}
+                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб.
                             </li>
                         </ul>
                     {% empty %}
@@ -94,14 +95,15 @@
                     {% for address in addresses %}
                         <ul>
                             <li>
-                                {{ address }} | <a href="{% url 'accounts:delete_address' address.id %}">Удалить адрес</a>
+                                {{ address }}<br>
+                                <a href="{% url 'accounts:delete_address' address.id %}">Удалить адрес</a>
                             </li>
                         </ul>
                     {% empty %}
                         <p> У вас пока нет сохраненных адресов </p>
                     {% endfor %}
                     <hr>
-                    <p>
+                    <p class="bold-links">
                         <a href="{% url 'accounts:add_address' %}">Добавить адрес доставки</a>
                     </p>
                 </div>
@@ -110,7 +112,7 @@
                 <div class="container_table" id="content-4">
                     <hr>
                     <ul>
-                        <li>
+                        <li class="bold-links" >
                             <a href="{% url 'accounts:change_password_view' %}">Сменить пароль</a>
                         </li>
                     </ul>
@@ -139,7 +141,7 @@
 
         </div>
 
-        <div>
+        <div class="bold-links">
             <h5>
                 <a href="{% url 'accounts:logout_view' %}">Выход</a>
             </h5>
