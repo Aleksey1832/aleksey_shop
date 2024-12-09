@@ -119,7 +119,7 @@
 
                     <h1 class="registration_head">Изменение пароля</h1>
                     <form method="post" class="registration_form_input">
-                        {{ form.as_p }}
+                        {{ form.as_div }}
                         {% csrf_token %}
                         <input class="registration_bottom" type="submit" value="Сохранить изменения">
                     </form>

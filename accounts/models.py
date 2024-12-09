@@ -23,18 +23,18 @@ class Address(models.Model):
     def __str__(self):
         return (
             f' {self.country},'
-            f' {self.region},'
-            f' {self.city},'
-            f' {self.street},'
-            f' {self.house_number},'
-            f' {self.litter_number},'
-            f' {self.apartments_number},'
-            f' {self.floor},'
-            # f' {self.elevator},'
-            f' {'Да' if self.elevator else 'Нет'},'
-            # f' {self.intercom},'
-            f' {'Да' if self.intercom else 'Нет'},'
-            f' {self.postal_code}'
+            f' рег. {self.region},'
+            f' г./нп {self.city},'
+            f' ул./пр. {self.street},'
+            f' д. {self.house_number},'
+            f' корп./лит. {self.litter_number},'
+            f' кв. {self.apartments_number},'
+            # f' {self.floor},'
+            # # f' {self.elevator},'
+            # f' {'Да' if self.elevator else 'Нет'},'
+            # # f' {self.intercom},'
+            # f' {'Да' if self.intercom else 'Нет'},'
+            # f' {self.postal_code}'
         )
 
 

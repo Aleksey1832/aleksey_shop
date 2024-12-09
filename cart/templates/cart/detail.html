@@ -65,7 +65,7 @@
     <!-- блок "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" -->
         <div class="payment">
             <div class="text-right">
-                <form action="{% url "orders:order_create" %}" method="post">
+                <form action="{% url "orders:order_create" %}" method="get">
                     <button class="registration_bottom" type="submit">Перейти к оформлению</button>
                     {% csrf_token %}
                 </form>

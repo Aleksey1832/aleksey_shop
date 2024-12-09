@@ -134,15 +134,31 @@
 
 /* Вывод предварительно заказа для страницы success.html */
 .preliminarily {
-    font-size: 25px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
     text-align: center;
-    padding: 10px 20px 10px 20px;
-    margin: 110px auto;
-    width: 400px;
+    padding: 20px 20px 10px 20px;
+    margin: 130px auto;
+    width: 500px;
+    height: 210px;
     max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Страница при успешной оплате и при перезагрузке success.html */
+.purchase-successful{
+    font-family: Arial, sans-serif;
+    position: unset;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    margin: 180px auto 250px auto;
+    width: 500px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
 }
 
 /* для бокового окна create.html */

@@ -49,6 +49,6 @@ class SearchFilter(django_filters.FilterSet):
     def clean_max_price(self):
         """ Функция, ограничивающая максимальное значение """
         value = self.form.cleaned_data.get['max_price']
-        if value is not None and value < MAX_PRICE:
+        if value is not None and value > MAX_PRICE:
             value = MAX_PRICE
         return value
