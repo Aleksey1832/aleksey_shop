@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',          # активация приложения cart
     'orders.apps.OrdersConfig',      # активация приложения orders
     'accounts.apps.AccountsConfig',  # активация приложения accounts
-    'django_filters'                 # для процесса фильтрации данных
+    'django_filters',                # для процесса фильтрации данных
+    'coupons.apps.CouponsConfig',    # активация приложения coupons
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware', # исключает возможность подделки запросов
+    'django.middleware.csrf.CsrfViewMiddleware',  # исключает возможность подделки запросов
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
