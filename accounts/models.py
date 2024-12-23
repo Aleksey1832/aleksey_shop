@@ -14,9 +14,7 @@ class Address(models.Model):
     litter_number = models.CharField(max_length=100, verbose_name='Корпус/литера/строение')
     apartments_number = models.CharField(max_length=100, verbose_name='Квартира/помещение')
     floor = models.CharField(max_length=100, verbose_name='Этаж')
-    # elevator = models.CharField(max_length=100, verbose_name='Наличие лифта')
     elevator = models.BooleanField(null=True, blank=True, default=False, verbose_name='Наличие лифта')
-    # intercom = models.CharField(max_length=100, verbose_name='Наличие домофона')
     intercom = models.BooleanField(null=True, blank=True, default=False, verbose_name='Наличие домофона')
     postal_code = models.CharField(max_length=12, blank=True, verbose_name='Почтовый код')
 
@@ -24,17 +22,11 @@ class Address(models.Model):
         return (
             f' {self.country},'
             f' рег. {self.region},'
-            f' г./нп {self.city},'
+            f' г./нп. {self.city},'
             f' ул./пр. {self.street},'
             f' д. {self.house_number},'
             f' корп./лит. {self.litter_number},'
-            f' кв. {self.apartments_number},'
-            # f' {self.floor},'
-            # # f' {self.elevator},'
-            # f' {'Да' if self.elevator else 'Нет'},'
-            # # f' {self.intercom},'
-            # f' {'Да' if self.intercom else 'Нет'},'
-            # f' {self.postal_code}'
+            f' кв./офис {self.apartments_number},'
         )
 
 

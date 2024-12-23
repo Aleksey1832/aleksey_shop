@@ -5,26 +5,13 @@
 
 {% block content %}
 
-{#    {% if total_items > 0 %}#}
-        <div class="preliminarily">
-            <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
-            <p> В корзине: {{ total_items }} {{ ending_word }} </p>
-            <p> Общая сумма: {{ total_price }} ₽ </p>
-                <form action="{% url 'orders:payment' %}" method="get">
-                    <input class="registration_bottom" type="submit" value="Перейти к оплате">
-                </form>
-        </div>
-{#    {% else %}#}
-{##}
-{#        <div class="purchase-successful">#}
-{#            <h4>Ваш заказ успешно оплачен!</h4><br>#}
-{#            <form action="{% url 'shop:product_list' %}" method="get">#}
-{#                <button class="registration_bottom" type="submit">Вернуться в магазин</button>#}
-{#                {% csrf_token %}#}
-{#            </form>#}
-{#        </div>#}
-{#    {% endif %}#}
-
-
+    <div class="preliminarily">
+        <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
+        <p> В корзине: {{ total_items }} {{ ending_word }} </p>
+        <p> Общая сумма: {{ cart.get_total_price_sale }} ₽ </p>
+            <form action="{% url 'orders:payment' %}" method="get">
+                <input class="registration_bottom" type="submit" value="Перейти к оплате">
+            </form>
+    </div>
 
 {% endblock %}

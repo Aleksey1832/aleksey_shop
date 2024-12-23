@@ -16,9 +16,10 @@
 
             <!-- блок с права от картинки-->
             <div class="product_price">
-                <div class="category_product">Категория товаров: <a href="{{ product.category.get_absolute_url }}"
-                                                                    target="_blank">
-                    <u>{{ product.category }}</u></a>
+                <div class="category_product">Категория товаров:
+                    <a href="{{ product.category.get_absolute_url }}" target="_blank">
+                    <u>{{ product.category }}</u>
+                    </a>
                 </div>
                 <div class="cod_product">Код товара:
                     {{ product.product_code }}

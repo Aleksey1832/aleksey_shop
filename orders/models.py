@@ -32,6 +32,8 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
     def __str__(self):
         return f'Order №: {self.id}'

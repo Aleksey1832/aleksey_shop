@@ -70,14 +70,9 @@ class CustomUserCreationForm(UserCreationForm):
     birth_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'autofocus': 'autofocus'}),
                                  required=True,
                                  label='Дата рождения')
-    # gender = forms.CharField(max_length=7, required=True, label='Пол')
-    # tel = forms.CharField(max_length=11, required=True, label='Телефон')
-    # postal_code = forms.CharField(max_length=5, required=True, label='Почтовый индекс')
-    # city = forms.CharField(max_length=50, required=True, label='Город')
-    # street = forms.CharField(max_length=50, required=True, label='Улица')
-    # address = forms.CharField(max_length=100, required=True, label='Дом/корпус, кв. или офис')
 
-    def save(self, commit=True):  # эти поля создаются при первичной регистрации на сайте
+    def save(self, commit=True):
+        """ Эти поля создаются при первичной регистрации на сайте """
         user = super().save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -92,6 +87,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    """ Для редактирования профиля """
     gender = forms.ChoiceField(choices=[
         ('', 'Выберите пол'),
         ('Женский', 'Женский'),
@@ -102,30 +98,11 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = [
             'gender',
-            'phone_number',
-
-            # 'birth_date'
-            # 'country',
-            # 'region',
-            # 'city',
-            # 'street',
-            # 'house_number',
-            # 'litter_number',
-            # 'apartments_number',
-            # 'postal_code'
+            'phone_number'
         ]
         labels = [
             'Пол',
-            'Телефон',
-            # 'Дата рождения'
-            # 'Страна',
-            # 'Регион',
-            # 'Город',
-            # 'Улица',
-            # 'Номер дома',
-            # 'Корпус/литера/строение',
-            # 'Квартира/помещение',
-            # 'Почтовый код'
+            'Телефон'
         ]
 
     def __init__(self, *args, **kwargs):

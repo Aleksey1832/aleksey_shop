@@ -8,6 +8,7 @@ from shop.filters import SearchFilter
 
 
 def product_list(request, category_slug=None):
+    """ Отображение всего каталога, страница list.html """
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True).order_by('name')
@@ -40,6 +41,7 @@ def product_list(request, category_slug=None):
 
 
 def product_detail(request, id, slug):
+    """ Отображение детализации одного товара, страница detail.html """
     product = get_object_or_404(
         Product,
         id=id,
@@ -71,18 +73,22 @@ def product_detail(request, id, slug):
 
 
 def home(request):
+    """ Главная """
     return render(request, 'shop/product/home.html')
 
 
 def about(request):
+    """ О нас """
     return render(request, 'shop/product/about.html')
 
 
 def how_buy(request):
+    """ Как купить """
     return render(request, 'shop/product/how_buy.html')
 
 
 def price_list(request, category_slug=None):
+    """ Прайс-лист """
     category = None
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -97,6 +103,7 @@ def price_list(request, category_slug=None):
 
 
 def sort_method(request):
+    """ Метод сортировки товаров для list.html """
     sort_form = ShopFormSorted(request.POST)
     products = Product.objects.filter(available=True)
     if sort_form.is_valid():

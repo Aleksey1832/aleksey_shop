@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def order_create(request):
     cart = Cart(request)
-    total_orders = cart.get_total_price()
     total_items = len(cart)
     ending_word = ending_word_items(total_items)
     if request.method == 'POST':
@@ -25,14 +24,13 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity']
                 )
-            cart.clear()
+            # cart.clear()
             return render(
                 request,
                 'orders/order/success.html',
                 {
                     'order': order,
                     'total_items': total_items,
-                    'total_price': total_orders['total_price'],
                     'ending_word': ending_word
                 })
 
@@ -52,12 +50,13 @@ def order_create(request):
             'cart': cart,
             'form': form,
             'total_items': total_items,
-            'total_price': total_orders['total_price'],
             'ending_word': ending_word
         })
 
 
 def payment(request):
+    cart = Cart(request)
+    cart.clear()
     return render(request, 'orders/order/payment.html')
 
 

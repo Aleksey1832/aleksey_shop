@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from shop.models import Product
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
+from coupons.forms import CouponApplyForm
 
 
 @require_POST
@@ -32,12 +33,17 @@ def cart_detail(request):
     cart = Cart(request)
     total_items = len(cart)
     ending_word = ending_word_items(len(cart))
-    total_price_info = cart.get_total_price()
+    total_price = cart.get_total_price()  # общая цена
+    discount_price = cart.get_discount()  # цена скидки
+    final_price = cart.get_total_price_sale()  # окончательная цена
+
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
             initial={'quantity': item['quantity'],
                      'override': True}
         )
+
+    coupon_form = CouponApplyForm
     return render(
         request,
         'cart/detail.html',
@@ -45,9 +51,10 @@ def cart_detail(request):
             'cart': cart,
             'total_items': total_items,
             'ending_word': ending_word,
-            'total_price': total_price_info['total_price'],
-            'discounted_price': total_price_info['discounted_price'],
-            'discount': total_price_info['discount']
+            'total_price': total_price,
+            'discount_price': discount_price,
+            'final_price': final_price,
+            'coupon_form': coupon_form
         }
     )
 

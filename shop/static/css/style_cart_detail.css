@@ -19,7 +19,7 @@
 }
 
 .cart {
-    color: #000;
+    color: #003559;
     font-family: 'Exo 2', sans-serif;
     text-align: center;
     margin: 0;
@@ -68,28 +68,70 @@
     margin-left: 20px;
     border: 2px solid rgba(206, 245, 230, 0.5);
     padding: 15px 10px 0 10px;
-    width: 300px;
-    height: 385px;
+    width: 360px;
+    /*height: 505px;*/
     border-radius: 10px;
     background: #ffffff;
 }
 
 /* текст внутри блока "ПЕРЕЙТИ К ОФРМЛЕНИЮ" */
 .total {
-    /*margin-top: 50px;*/
+    padding: 10px;
     font-size: 15px;
     font-weight: 600;
     background-image: radial-gradient(circle, #553c9a, #ee4b2b);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
 }
 
 .display {
-    height: 130px;
+    height: 100%;
     width: 100%;
-    margin: 10px 10px 15px 10px;
+    /*padding: 10px 0 15px 0;*/
+}
+
+/* Форма купона */
+.coupon_form {
+    padding: 5px 0 10px 0;
+    width: auto;
+    font-size: 15px;
+}
+
+/* Кнопка "Применить" купон */
+.btn-coupon {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 24px;
+    margin: 0 15px 20px 0;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    height: 37px;
+    line-height: 37px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: normal;
+    text-decoration: none;
+    color: #07bc4c;
+    background-color: #fff;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    transition: box-shadow .18s ease-out,background .18s ease-out,color .18s ease-out;
+    box-shadow: 0 1px 1px 0  #cfcfcf, 0 2px 5px 0  #cfcfcf;
+}
+.btn-coupon:focus-visible {
+    box-shadow: 0 0 0 3px lightskyblue;
+}
+.btn-coupon:hover {
+    background-color: #4caf50;
+    color: #efefef;
+}
+.btn-coupon:active {
+    background-color: #cfcfcf !important;
 }
 
 /*!* кнопка registration_bottom меню с права "ПЕРЕЙТИ К ОФОРМЛЕНИЮ" *!*/

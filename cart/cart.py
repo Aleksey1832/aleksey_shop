@@ -1,15 +1,25 @@
 from django.conf import settings
 from shop.models import Product
-from decimal import *
+from decimal import Decimal
+from coupons.models import Coupon
 
 
 class Cart:
     def __init__(self, request):
         self.session = request.session
-        cart = self.session.get('cart')
+        cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        self.coupon = self.session.get('coupon_id')
+
+    def get_coupon(self):
+        if self.coupon:
+            try:
+                return Coupon.objects.get(id=self.coupon)
+            except Coupon.DoesNotExist:
+                pass
+            return None
 
     def save(self):
         self.session.modified = True
@@ -49,21 +59,19 @@ class Cart:
             yield item
 
     def __len__(self):
-        """
-        Считаем товарные позиции
-        """
+        """ Считаем товарные позиции """
         return sum(item['quantity'] for item in self.cart.values())
 
+    def get_discount(self):
+        """ Считаем сумму скидки """
+        if self.coupon:
+            return (self.get_coupon().discount / Decimal(100)) * self.get_total_price()
+        return 0
+
     def get_total_price(self):
-        """
-        Считаем общую сумму товаров, выводим скидку и общую сумму товаров с учетом скидки
-        """
-        # return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
-        discount = 2
-        total_price = sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
-        discounted_price = total_price * (100 - discount) / 100
-        return {
-            'total_price': total_price,
-            'discounted_price': discounted_price,
-            'discount': discount
-        }
+        """ Считаем общую сумму всех товаров без скидки """
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def get_total_price_sale(self):
+        """ Считаем общую сумму всех товаров минус скидка """
+        return self.get_total_price() - self.get_discount()

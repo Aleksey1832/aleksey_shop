@@ -10,7 +10,7 @@
         <hr class="hr-shelf">
         <h6 style="text-decoration: underline;"> Оформление заказа</h6>
         <p> В вашей корзине: {{ total_items }} {{ ending_word }} </p>
-        <p> На общую сумму: {{ total_price }} ₽ </p>
+        <p> На общую сумму: {{ cart.get_total_price_sale }} ₽ </p>
         <hr class="hr-shelf">
     </div>
 
@@ -21,7 +21,11 @@
             <form method="post" class="registration_form_input">
                 {{ form.as_p }}
                 {% csrf_token %}
+                <p class="bold-links">
+                    <a style="float: right" href="{% url 'accounts:add_address' %}">Добавить адрес доставки</a>
+                </p>
                 <input class="registration_bottom" type="submit" value="Заказать">
+
             </form>
         </div>
     </div>

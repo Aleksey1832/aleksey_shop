@@ -70,31 +70,50 @@
                     {% csrf_token %}
                 </form>
             </div>
-
-            <p style="font-size: 13px">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
-
-            <hr>
             <div class="total">
+                <p style="font-size: 13px; color: #003559">Доступные способы и время доставки можно выбрать при оформлении заказа</p>
+                <hr class="hr-shelf">
                 <table class="display">
-                    <tr>
-                        <th><b>В вашей корзине:</b></th>
-                        <th><b>{{ total_items }} {{ ending_word }}</b></th>
-                    </tr>
-                    <tr>
-                        <td>На сумму:</td>
-                        <td>{{ total_price }} ₽</td>
-                    </tr>
-                    <tr>
-                        <td>Скидка:</td>
-                        <td>{{ discount }} %</td>
-                    </tr>
-                </table>
-            </div>
-            <hr>
-            <div>
-                <h4>Итого:&emsp;&emsp;&emsp;{{ discounted_price }} ₽</h4>
-            </div>
+                    <tbody>
+                        <tr>
+                            <td><b>Ваша корзина:</b></td>
+                            <td></td>
+                            <td style="text-align: right"><b>{{ total_items }} {{ ending_word }}</b></td>
+                        {% if cart.coupon %}
+                        <tr>
+                            <td>Без скидки</td>
+                            <td></td>
+                            <td style="text-align: right">{{ cart.get_total_price }} р.</td>
+                        </tr>
+                        <tr>
+                            <td>{{ cart.get_coupon.code }} - {{ cart.get_coupon.discount }}%</td>
+                            <td></td>
+                            <td style="text-align: right">{{ cart.get_discount }} р.</td>
+                        </tr>
+                        {% endif %}
 
+                    </tbody>
+                </table>
+                <div class="coupon_form">
+                    <h4>Купон</h4>
+                    <form action="{% url 'coupons:coupon_apply' %}" method="post">
+                        {{ coupon_form }}
+                        {% csrf_token %}
+                        <input  class="btn-coupon" type="submit" value="ПРИМЕНИТЬ">
+                    </form>
+                </div>
+                <hr class="hr-shelf">
+                <table class="display">
+                    <tbody>
+                        <tr style="font-size: 20px">
+                            <td>Итого:</td>
+                            <td></td>
+                            <td style="text-align: right"><b>{{ cart.get_total_price_sale }} р.</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="hr-shelf">
+            </div>
         </div>
     </div>
 
