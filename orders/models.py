@@ -1,8 +1,10 @@
 from django.db import models
 # from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
+from coupons.models import Coupon
 from shop.models import Product
 from accounts.models import Address
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 ORDER_STATUS_CHOICES = (
@@ -29,6 +31,17 @@ class Order(models.Model):
                               choices=ORDER_STATUS_CHOICES,
                               default='active',
                               verbose_name='Статус заказа')
+
+    """ Если удаляется купон, весь заказ не удаляется """
+    coupon = models.ForeignKey(Coupon,
+                               on_delete=models.SET_NULL,
+                               null=True,
+                               blank=True,
+                               verbose_name='Промокод')
+    """ Что бы при удалении промокода в базе осталась информация о скидки """
+    discount = models.IntegerField(default=0,
+                                   validators=[MinValueValidator(1),
+                                               MaxValueValidator(100)])
 
     class Meta:
         ordering = ['-created_at']
