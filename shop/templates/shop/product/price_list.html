@@ -14,7 +14,7 @@
                 <th>Название</th>
                 <th>Код товара</th>
                 <th>Цена</th>
-                <th style="text-align: center">Купить</th>
+                <th style="text-align: center">Описание товара</th>
             </tr>
             </thead>
 
@@ -26,7 +26,8 @@
                     <td>{{ product.price }} ₽</td>
                     <td>
                         <form style="text-align: center" action="{{ product.get_absolute_url }}" method="post">
-                            <input class="button_pay" type="submit" title="Посмотреть подробности" value="Оформить">
+
+                            <input class="button_pay" type="submit" title="Посмотреть страницу товара" value="Открыть">
                             {% csrf_token %}
                         </form>
                     </td>
