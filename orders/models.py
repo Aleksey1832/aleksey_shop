@@ -5,6 +5,7 @@ from coupons.models import Coupon
 from shop.models import Product
 from accounts.models import Address
 from django.core.validators import MinValueValidator, MaxValueValidator
+from decimal import Decimal
 
 
 ORDER_STATUS_CHOICES = (
@@ -51,8 +52,19 @@ class Order(models.Model):
     def __str__(self):
         return f'Order №: {self.id}'
 
-    def get_total_cost(self):
+    def get_total_cost_before_discount(self):
+        """ Вычисляет общую стоимость товаров в заказе без учета скидки """
         return sum(item.total_price() for item in self.orderitem_set.all())
+
+    def get_discount(self):
+        """ Вычисляет сумму скидки, применяя процент скидки (self.discount) к общей стоимости заказа без скидки """
+        if self.discount > 0:
+            return self.get_total_cost_before_discount() * (self.discount / Decimal(100))
+        return Decimal(0)
+
+    def get_total_cost(self):
+        """ Вычисляет общую стоимость заказа с учетом скидки """
+        return self.get_total_cost_before_discount() - self.get_discount()
 
 
 class OrderItem(models.Model):
