@@ -6,11 +6,14 @@
 {% block content %}
 
     <div class="info_order">
-        <h3>Доставка товара</h3>
+        <h4>Доставка товара</h4>
         <hr class="hr-shelf">
         <h6 style="text-decoration: underline;"> Оформление заказа</h6>
-        <p> В вашей корзине: {{ total_items }} {{ ending_word }} </p>
-        <p> На общую сумму: {{ cart.get_total_price_sale }} ₽ </p>
+        <p> В вашей корзине: <b>{{ total_items }} {{ ending_word }}</b></p>
+        <p> На общую сумму: <b>{{ cart.get_total_price_sale }} руб.</b></p>
+        {% if cart.coupon %}
+            <p>Скидка составила: <b>{{ cart.get_discount }} руб.</b></p>
+        {% endif %}
         <hr class="hr-shelf">
     </div>
 

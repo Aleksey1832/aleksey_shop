@@ -4,6 +4,7 @@ from orders.forms import OrderCreateForm
 from orders.models import OrderItem, Order
 from cart.views import ending_word_items
 from django.contrib.auth.decorators import login_required
+from coupons.models import Coupon
 
 
 @login_required
@@ -16,6 +17,10 @@ def order_create(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user
+            if cart.coupon:
+                coupon = Coupon.objects.get(id=cart.coupon)
+                order.coupon = coupon
+                order.discount = coupon.discount
             order.save()
             for item in cart:
                 OrderItem.objects.create(
@@ -31,7 +36,8 @@ def order_create(request):
                 {
                     'order': order,
                     'total_items': total_items,
-                    'ending_word': ending_word
+                    'ending_word': ending_word,
+                    # 'address': address
                 })
 
     else:
@@ -57,6 +63,7 @@ def order_create(request):
 def payment(request):
     cart = Cart(request)
     cart.clear()
+    cart.del_coupon()
     return render(request, 'orders/order/payment.html')
 
 

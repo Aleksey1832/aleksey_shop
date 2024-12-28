@@ -161,7 +161,7 @@
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
 }
 
-/* для бокового окна create.html */
+/* для информационного окна с права create.html */
 .info_order {
     /*float: left;*/
     font-size: 12px;
@@ -172,8 +172,8 @@
     margin: -20px 120px 0 0;
     padding: 10px 20px 10px 20px;
     /*margin: 0 100px 0 -10px;*/
-    width: 200px;
-    max-width: 200px;
+    width: auto;
+    max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
@@ -277,6 +277,34 @@
 }
 
 /*  */
-.bold-links :hover{
+.bold-links :hover {
     color: #e6855f;
 }
+
+/* Для страницы FAQ */
+.faq-rang-container {
+    font-family: Arial, sans-serif;
+    position: unset;
+    color: #003559;
+    padding: 20px 20px 20px 20px;
+    margin: 40px auto;
+    width: 800px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+}
+
+.faq-rang-container p {
+    text-align:justify
+}
+
+.faq-rang-head {
+    color: #0b80d0;
+}
+
+.faq-rang-img {
+    width: 550px;
+    height: 350px;
+    margin: 20px 0 20px 100px;
+}
+

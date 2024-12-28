@@ -117,12 +117,14 @@
                         </li>
                     </ul>
 
-                    <h3 class="registration_head">Изменение пароля</h3>
-                    <form method="post" class="registration_form_input">
-                        {{ form.as_div }}
-                        {% csrf_token %}
-                        <input class="registration_bottom" type="submit" value="Сохранить изменения">
-                    </form>
+
+{#                    <h3 class="registration_head">Изменение пароля</h3>#}
+{##}
+{#                        <form method="post" class="registration_form_input" target="_new">#}
+{#                            {{ form.as_div }}#}
+{#                            {% csrf_token %}#}
+{#                            <input class="registration_bottom" type="submit" value="Сохранить изменения">#}
+{#                        </form>#}
                 </div>
 
         <!-- Шапка личного кабинете -->
@@ -134,7 +136,7 @@
                     <input id="tab-btn-3" name="tab-btn-head" type="radio" value="Адреса доставки">
                     <label for="tab-btn-3">Адреса доставки</label>
                     <input id="tab-btn-4" name="tab-btn-head" type="radio" value="Сменить пароль">
-                    <label for="tab-btn-4">Сменить пароль</label>
+                    <label for="tab-btn-4">Безопасность</label>
                 </div>
 
             </div>

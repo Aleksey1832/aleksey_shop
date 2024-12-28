@@ -12,6 +12,7 @@
             <form action="{% url 'orders:payment' %}" method="get">
                 <input class="registration_bottom" type="submit" value="Перейти к оплате">
             </form>
+        <p>{{ account.addresses }}</p>
     </div>
 
 {% endblock %}

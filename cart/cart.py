@@ -1,6 +1,6 @@
 from django.conf import settings
 from shop.models import Product
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from coupons.models import Coupon
 
 
@@ -47,6 +47,10 @@ class Cart:
         del self.session[settings.CART_SESSION_ID]
         self.save()
 
+    def del_coupon(self):
+        del self.session['coupon_id']
+        self.save()
+
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
@@ -65,13 +69,16 @@ class Cart:
     def get_discount(self):
         """ Считаем сумму скидки """
         if self.coupon:
-            return (self.get_coupon().discount / Decimal(100)) * self.get_total_price()
-        return 0
+            discount = (self.get_coupon().discount / Decimal(100)) * self.get_total_price()
+            return discount.quantize(Decimal('0.00'), ROUND_HALF_UP)
+        return Decimal(0).quantize(Decimal('0.00'), ROUND_HALF_UP)
 
     def get_total_price(self):
         """ Считаем общую сумму всех товаров без скидки """
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        total = sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return total.quantize(Decimal('0.00'), ROUND_HALF_UP)
 
     def get_total_price_sale(self):
         """ Считаем общую сумму всех товаров минус скидка """
-        return self.get_total_price() - self.get_discount()
+        total_sale = self.get_total_price() - self.get_discount()
+        return total_sale.quantize(Decimal('0.00'), ROUND_HALF_UP)

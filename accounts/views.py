@@ -79,7 +79,7 @@ def change_password_view(request):
             return redirect('accounts:profile_view')
     else:
         form = CustomPasswordChangeForm(request.user)
-    return render(request, 'registration/profile.html', {'form': form})
+    return render(request, 'registration/change_password.html', {'form': form})
 
 
 @login_required

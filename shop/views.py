@@ -87,6 +87,11 @@ def how_buy(request):
     return render(request, 'shop/product/how_buy.html')
 
 
+def faq(request):
+    """ Часто задаваемые вопросы """
+    return render(request, 'shop/product/faq.html')
+
+
 def price_list(request, category_slug=None):
     """ Прайс-лист """
     category = None

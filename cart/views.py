@@ -33,9 +33,6 @@ def cart_detail(request):
     cart = Cart(request)
     total_items = len(cart)
     ending_word = ending_word_items(len(cart))
-    total_price = cart.get_total_price()  # общая цена
-    discount_price = cart.get_discount()  # цена скидки
-    final_price = cart.get_total_price_sale()  # окончательная цена
 
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
@@ -51,9 +48,6 @@ def cart_detail(request):
             'cart': cart,
             'total_items': total_items,
             'ending_word': ending_word,
-            'total_price': total_price,
-            'discount_price': discount_price,
-            'final_price': final_price,
             'coupon_form': coupon_form
         }
     )
