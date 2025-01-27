@@ -67,7 +67,7 @@ class Cart:
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_discount(self):
-        """ Считаем сумму скидки """
+        """ Считаем сумму скидки товаров """
         if self.coupon:
             discount = (self.get_coupon().discount / Decimal(100)) * self.get_total_price()
             return discount.quantize(Decimal('0.00'), ROUND_HALF_UP)
