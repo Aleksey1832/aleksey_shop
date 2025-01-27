@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from coupons.models import Coupon
 from coupons.forms import CouponApplyForm
 from django.utils import timezone
+from django.contrib import messages
 
 
 @require_POST
@@ -18,7 +19,24 @@ def coupon_apply(request):
                 valid_to__gte=time_now,
                 active=True
             )
-            request.session['coupon_id'] = coupon.id
+
+            if coupon.max_uses == 0:  # неограниченное количество использований
+                print('1', coupon.max_uses, coupon.uses)
+                messages.success(request, 'Купон применен!')
+                request.session['coupon_id'] = coupon.id
+
+            elif coupon.max_uses > coupon.uses:
+                coupon.uses += 1
+                coupon.save()
+                print('2', coupon.max_uses, coupon.uses)
+                messages.success(request, 'Купон применен!')
+                request.session['coupon_id'] = coupon.id
+
+            elif coupon.max_uses > 0 and coupon.max_uses == coupon.uses:
+                print('3', coupon.max_uses, coupon.uses)
+                messages.success(request, "Этот купон уже достиг своего максимального количества использований.")
+
         except Coupon.DoesNotExist:
+            messages.error(request, 'Купон не найден или уже использован.')
             request.session['coupon_id'] = None
     return redirect('cart:cart_detail')

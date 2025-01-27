@@ -37,7 +37,6 @@ def order_create(request):
                     'order': order,
                     'total_items': total_items,
                     'ending_word': ending_word,
-                    # 'address': address
                 })
 
     else:
