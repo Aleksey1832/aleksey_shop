@@ -21,6 +21,9 @@ class Coupon(models.Model):
     discount = models.IntegerField(validators=[MinValueValidator(0),
                                                MaxValueValidator(100)], verbose_name='Выбрать размер скидки-%')
     active = models.BooleanField(default=True, verbose_name='Активность')
+    max_uses = models.PositiveIntegerField(default=1,
+                                           help_text='Максимальное количество использований купона (0 - неограниченно)')
+    uses = models.PositiveIntegerField(default=0, editable=False)
     type = models.ForeignKey(CouponType, on_delete=models.CASCADE, verbose_name='Выбрать тип промокода')
 
     class Meta:
