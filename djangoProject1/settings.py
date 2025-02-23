@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ocvm#-@lqr_e4o&=8-g7!!o!stt)wh!pha0ged$yensmxmgpjz'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +47,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',  # активация приложения accounts
     'django_filters',                # для процесса фильтрации данных
     'coupons.apps.CouponsConfig',    # активация приложения coupons
+    'django_extensions',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -91,14 +96,23 @@ WSGI_APPLICATION = 'djangoProject1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project_1',
-        'USER': 'postgres',
-        'PASSWORD': 'rt5u7s2W4bNx92M',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        # "OPTIONS": {
+        #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        # }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -118,6 +132,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTH
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.vk.VKOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('VK_ID')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('VK_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -144,6 +171,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 CART_SESSION_ID = 'cart'
+
+""" Настройка почтового - backend """
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Backend для отправки сообщений по электронной почте
+EMAIL_HOST = 'smtp.mail.ru'  # SMTP=сервер MAIL.RU
+EMAIL_PORT = os.getenv('BACKEND_EMAIL_PORT')  # Порт для отправки писем через SSL/TLS
+EMAIL_USE_SSL = os.getenv('BACKEND_EMAIL_USE_SSL')  # Используем шифрование SSL/TLS
+EMAIL_HOST_USER = os.getenv('BACKEND_EMAIL_HOST_USER')  # Ваш логин на MAIL.RU
+EMAIL_HOST_PASSWORD = os.getenv('BACKEND_EMAIL_HOST_PASSWORD')  # Ваш пароль от почтового ящика (Django_project1)
+DEFAULT_FROM_EMAIL = os.getenv('BACKEND_DEFAULT_FROM_EMAIL')  # Адрес, с которого будут отправляться письма
+
+MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
