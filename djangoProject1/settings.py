@@ -145,6 +145,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('VK_ID')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('VK_SECRET')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_REDIRECT_URL_HTTPS = True
+
+CSRF_TRUSTED_ORIGINS = ['https://76c7-162-19-226-62.ngrok-free.app']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
