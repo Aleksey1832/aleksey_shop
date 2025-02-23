@@ -101,6 +101,12 @@
                         {% csrf_token %}
                         <input  class="btn-coupon" type="submit" value="ПРИМЕНИТЬ">
                     </form>
+                
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <hr class="hr-shelf">
                 <table class="display">

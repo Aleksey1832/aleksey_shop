@@ -76,7 +76,8 @@ class Cart:
     def get_total_price(self):
         """ Считаем общую сумму всех товаров без скидки """
         total = sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
-        return total.quantize(Decimal('0.00'), ROUND_HALF_UP)
+        # return total.quantize(Decimal('0.00'), ROUND_HALF_UP)
+        return Decimal(total).quantize(Decimal('0.00'), ROUND_HALF_UP)
 
     def get_total_price_sale(self):
         """ Считаем общую сумму всех товаров минус скидка """

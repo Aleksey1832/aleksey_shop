@@ -39,7 +39,7 @@ class Order(models.Model):
                                null=True,
                                blank=True,
                                verbose_name='Промокод')
-    """ Что бы при удалении промокода в базе осталась информация о скидки """
+    """ При удалении промокода в базе осталась информация о скидки """
     discount = models.IntegerField(default=0,
                                    validators=[MinValueValidator(1),
                                                MaxValueValidator(100)])

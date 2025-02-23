@@ -5,6 +5,7 @@ from orders.models import OrderItem, Order
 from cart.views import ending_word_items
 from django.contrib.auth.decorators import login_required
 from coupons.models import Coupon
+from orders.tasks import order_created
 
 
 @login_required
@@ -30,6 +31,9 @@ def order_create(request):
                     quantity=item['quantity']
                 )
             # cart.clear()
+            #
+            # cart.del_coupon()
+            order_created.delay(order.id)  # отправка письма
             return render(
                 request,
                 'orders/order/success.html',
