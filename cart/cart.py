@@ -48,7 +48,8 @@ class Cart:
         self.save()
 
     def del_coupon(self):
-        del self.session['coupon_id']
+        if 'coupon_id' in self.session:
+            del self.session['coupon_id']
         self.save()
 
     def __iter__(self):

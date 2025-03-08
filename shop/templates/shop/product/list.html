@@ -69,6 +69,16 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- РЕЙТИНГ ТОВАРОВ -->
+    <div>
+    <ul>
+    {% for p in product_top %}
+        <li>{{ p.name }}</li>
+    {% endfor %}
+    </ul>
+    </div>
+
     <a class="return_back" href="#top">Вернуться в начало</a>
 
 

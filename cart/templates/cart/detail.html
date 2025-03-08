@@ -27,7 +27,7 @@
                         {% with product=item.product %}
                             <tr>
                                 <td>
-                                    <hr>
+                                    <hr class="hr-shelf">
                                     <a href="{{ product.get_absolute_url }}">
                                         <img class="detail_img" alt="Упс!" src="
                                             {% if product.image %}{{ product.image.url }}
@@ -41,7 +41,7 @@
                                         {{ item.update_quantity_form.quantity }}
                                         {{ item.update_quantity_form.override }}
                                         <input class="update" type="submit" value="Обновить">
-                                        <hr>
+                                        <hr class="hr-shelf">
                                         {% csrf_token %}
                                     </form>
                                 </td>
@@ -53,7 +53,7 @@
                                 </td>
                                 <td class="num">{{ item.price }} ₽</td>
                                 <td class="num">{{ item.total_price }} ₽
-                                    <hr>
+                                    <hr class="hr-shelf">
                                 </td>
                             </tr>
                         {% endwith %}
@@ -80,16 +80,22 @@
                             <td></td>
                             <td style="text-align: right"><b>{{ total_items }} {{ ending_word }}</b></td>
                         {% if cart.coupon %}
-                        <tr>
-                            <td>Без скидки</td>
-                            <td></td>
-                            <td style="text-align: right">{{ cart.get_total_price }} р.</td>
-                        </tr>
-                        <tr>
-                            <td>{{ cart.get_coupon.code }} - {{ cart.get_coupon.discount }}%</td>
-                            <td></td>
-                            <td style="text-align: right">{{ cart.get_discount }} р.</td>
-                        </tr>
+                            <tr>
+                                <td>Без скидки</td>
+                                <td></td>
+                                <td style="text-align: right">{{ cart.get_total_price }} р.</td>
+                            </tr>
+                            <tr>
+                                <td>{{ cart.get_coupon.code }} - {{ cart.get_coupon.discount }}%</td>
+                                <td></td>
+                                <td style="text-align: right">{{ cart.get_discount }} р.</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Без скидки</td>
+                                <td></td>
+                                <td style="text-align: right">{{ cart.get_total_price }} р.</td>
+                            </tr>
                         {% endif %}
 
                     </tbody>
@@ -101,6 +107,12 @@
                         {% csrf_token %}
                         <input  class="btn-coupon" type="submit" value="ПРИМЕНИТЬ">
                     </form>
+
+{#                    <form action="{% url 'cart:del_coupon' %}" method="post">#}
+{#                        {{ coupon_form }}#}
+{#                        {% csrf_token %}#}
+{#                        <input  class="btn-coupon" type="submit" value="Отменить">#}
+{#                    </form>#}
                 
                     {% if messages %}
                         {% for message in messages %}

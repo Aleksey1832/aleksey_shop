@@ -13,9 +13,15 @@
                 {{ form.as_div }}
                 {% csrf_token %}
                 <input class="registration_bottom" type="submit" value="Login">
+
+
+
+                <div><a href="{% url 'social:begin' 'vk-oauth2' %}">Войти через VK</a> </div>
+                <div><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a> </div>
             </form>
             <a class="head_log1" href="{% url 'accounts:register_view' %}">Создать аккаунт</a>
         </div>
+
     </div>
 
 {% endblock %}

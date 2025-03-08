@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -105,12 +105,13 @@ DATABASES = {
 }
 
 CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        # "OPTIONS": {
-        #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        # }
+    'default': {  # храним сессии пользователей
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    },
+    'views': {  # храним просмотры пользователей
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/10',
     }
 }
 
@@ -150,7 +151,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_REDIRECT_URL_HTTPS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://76c7-162-19-226-62.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://5dd5-141-94-16-245.ngrok-free.app']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

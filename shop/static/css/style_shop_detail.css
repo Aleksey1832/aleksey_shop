@@ -18,7 +18,7 @@
 
 .product_price /* для detail общие параметры для блока с права от img */
 {
-    padding: 53px 0 20px 450px;
+    padding: 40px 0 20px 450px;
     font-size: 17px;
     font-weight: bolder;
 }
@@ -44,12 +44,21 @@
     font-weight: bolder;
 }
 
+.view_counter { /* счетчик просмотров */
+    font-size: 15px;
+    color: #fafaf9;
+    background-color: #528fe8;
+    /*border: 1px solid #0c52bb;*/
+    padding:10px;
+    width: 275px;
+}
+
 /* для detail кнопка registration_bottom "ПОКУПКА ТОВАРОВ" */
 /* Смотреть style_order_create.css */
 
 .name /* для detail "МАРКА ТОВАРА" под картинкой */
 {
-    margin-top: 35px;
+    margin-top: 20px;
     margin-bottom: 35px;
     margin-left: 35px;
     font-size: 20px;

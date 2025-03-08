@@ -41,6 +41,11 @@
                     {% csrf_token %}
                     <input class="registration_bottom" type="submit" value="Добавить в корзину">
                 </form>
+
+                <!-- Счетчик просмотров -->
+                <div class="view_counter">
+                    Этот товар просматривали <b> {{ view_count }}</b> раз!
+                </div>
             </div>
         </div>
     </div>
@@ -141,6 +146,7 @@
 
             </div>
         </details>
+
         <a class="return_back" href="#top">Вернуться в начало</a>
     </div>
 

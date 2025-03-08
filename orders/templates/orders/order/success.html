@@ -6,13 +6,20 @@
 {% block content %}
 
     <div class="preliminarily">
-        <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
-        <p> В корзине: {{ total_items }} {{ ending_word }} </p>
-        <p> Общая сумма: {{ cart.get_total_price_sale }} ₽ </p>
-            <form action="{% url 'orders:payment' %}" method="get">
-                <input class="registration_bottom" type="submit" value="Перейти к оплате">
-            </form>
-        <p>{{ account.addresses }}</p>
+        {% if total_items == 0 %}
+            <p><b>Ваша корзина пуста!</b></p>
+                <form action="{% url 'shop:product_list' %}" method="get">
+                    <input class="registration_bottom" type="submit" value="Вернуться в магазин">
+                </form>
+        {% else %}
+            <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
+            <p> В корзине: {{ total_items }} {{ ending_word }} </p>
+            <p> Общая сумма: {{ cart.get_total_price_sale }} ₽ </p>
+                <form action="{% url 'orders:payment' %}" method="get">
+                    <input class="registration_bottom" type="submit" value="Перейти к оплате">
+                </form>
+            <p>{{ account.addresses }}</p>
+        {% endif %}
     </div>
 
 {% endblock %}

@@ -5,6 +5,30 @@ from shop.models import (Product, Category, ProductConstruction,
 from cart.forms import CartAddProductForm
 from shop.forms import ShopFormSorted
 from shop.filters import SearchFilter
+from django.core.cache import caches
+
+
+views_cache = caches['views']
+TOP_VIEWS = 'top_product_views'
+TOP_VIEWS_LIMIT = 10
+
+
+def product_views_tracker(product_id):
+    """ Трекер просмотров """
+    key = f'product_views:{product_id}'
+    if views_cache.get(key) is None:
+        views_cache.set(key, 0)
+
+    views_cache.incr(key, delta=1)
+    # views_cache.zincrby(TOP_VIEWS, 1, product_id)
+    return views_cache.get(key, 0)
+
+
+def get_product_top_view(limit=TOP_VIEWS_LIMIT):
+    """ Список самых просматриваемых товаров """
+    top = views_cache.zrevrange(TOP_VIEWS, 0, limit-1)
+    top_ids = [int(item[0]) for item in top]
+    return top_ids
 
 
 def product_list(request, category_slug=None):
@@ -13,6 +37,10 @@ def product_list(request, category_slug=None):
     categories = Category.objects.all()
     products = Product.objects.filter(available=True).order_by('name')
     sort_form = ShopFormSorted(request.POST or None)
+
+    # Вызов рейтинга в каталоге
+    # products_top = Product.objects.filter(id__in=get_product_top_view())
+
     if sort_form.is_valid():
         products = sort_method(request)
     if category_slug:
@@ -35,7 +63,8 @@ def product_list(request, category_slug=None):
             'cart_product_form': cart_product_form,
             'sort_form': sort_form,
             'filter': product_filter,
-            'no_products_found': no_products_found
+            'no_products_found': no_products_found,
+            # 'product_top': products_top,  # отрисовка рейтинга на странице
         }
     )
 
@@ -48,6 +77,7 @@ def product_detail(request, id, slug):
         slug=slug,
         available=True
     )
+    view_count = product_views_tracker(product.id)
     categories = Category.objects.all()
     construction = ProductConstruction.objects.all()
     fire_class = ProductFireclass.objects.all()
@@ -67,7 +97,8 @@ def product_detail(request, id, slug):
             'usage': usage,
             'rang_model_hearth': rang_model_hearth,
             'product_type': product_type,
-            'cart_product_form': cart_product_form
+            'cart_product_form': cart_product_form,
+            'view_count': view_count,
         }
     )
 
