@@ -100,19 +100,23 @@
 
                     </tbody>
                 </table>
+
+            <!-- Применение купона -->
                 <div class="coupon_form">
                     <h4>Купон</h4>
-                    <form action="{% url 'coupons:coupon_apply' %}" method="post">
+
+                    {% if request.session.coupon_id %}
+                        <form action="{% url 'coupons:coupon_remove' %}" method="post">
+                        {% csrf_token %}
+                        <input  class="btn-coupon" type="submit" value="Отменить действие купона">
+                        </form>
+                    {% else %}
+                        <form action="{% url 'coupons:coupon_apply' %}" method="post">
                         {{ coupon_form }}
                         {% csrf_token %}
                         <input  class="btn-coupon" type="submit" value="ПРИМЕНИТЬ">
                     </form>
-
-{#                    <form action="{% url 'cart:del_coupon' %}" method="post">#}
-{#                        {{ coupon_form }}#}
-{#                        {% csrf_token %}#}
-{#                        <input  class="btn-coupon" type="submit" value="Отменить">#}
-{#                    </form>#}
+                    {% endif %}
                 
                     {% if messages %}
                         {% for message in messages %}

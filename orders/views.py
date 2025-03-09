@@ -10,6 +10,7 @@ from orders.tasks import order_created
 
 @login_required
 def order_create(request):
+    """ Создание нового заказа """
     cart = Cart(request)
     total_items = len(cart)
     ending_word = ending_word_items(total_items)
@@ -72,6 +73,7 @@ def payment(request):
 
 @login_required
 def cancel_order(request, order_id):
+    """ Отмена заказа из личного кабинета """
     order = Order.objects.get(id=order_id)
     if request.method == 'POST':
         order.status = 'canceled'

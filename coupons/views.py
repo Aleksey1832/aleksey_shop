@@ -8,6 +8,7 @@ from django.contrib import messages
 
 @require_POST
 def coupon_apply(request):
+    """ Добавление купона (использование) """
     time_now = timezone.now()
     form = CouponApplyForm(request.POST)
     if form.is_valid():
@@ -22,14 +23,14 @@ def coupon_apply(request):
 
             if coupon.max_uses == 0:  # неограниченное количество использований
                 print('1', coupon.max_uses, coupon.uses)
-                messages.success(request, 'Купон применен!')
+                messages.success(request, 'Купон успешно применен!')
                 request.session['coupon_id'] = coupon.id
 
             elif coupon.max_uses > coupon.uses:
                 coupon.uses += 1
                 coupon.save()
                 print('2', coupon.max_uses, coupon.uses)
-                messages.success(request, 'Купон применен!')
+                messages.success(request, 'Купон успешно применен!')
                 request.session['coupon_id'] = coupon.id
 
             elif coupon.max_uses > 0 and coupon.max_uses == coupon.uses:
@@ -39,4 +40,15 @@ def coupon_apply(request):
         except Coupon.DoesNotExist:
             messages.error(request, 'Купон не найден или уже использован.')
             request.session['coupon_id'] = None
+    return redirect('cart:cart_detail')
+
+
+@require_POST
+def coupon_remove(request):
+    """ Отмена действия купона """
+    if 'coupon_id' in request.session:
+        del request.session['coupon_id']
+        messages.success(request, 'Купон успешно отменён')
+    else:
+        messages.error(request, 'Активный купон не найден')
     return redirect('cart:cart_detail')
