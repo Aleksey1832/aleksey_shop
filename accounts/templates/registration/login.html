@@ -14,10 +14,19 @@
                 {% csrf_token %}
                 <input class="registration_bottom" type="submit" value="Login">
 
+                <table class="icon_row">
+                    <tr>
+                        <th>
+                            <div><a href="{% url 'social:begin' 'vk-oauth2' %}"><img class="icon_reg" alt="/static/images/no_image.png" src="/static/images/vk.png"></a></div>
+                        </th>
+                        <th>
+                            <div><a href="{% url 'social:begin' 'google-oauth2' %}"><img class="icon_reg" alt="/static/images/no_image.png" src="/static/images/google.png"></a></div>
+                        </th>
+                    </tr>
+                </table>
 
-
-                <div><a href="{% url 'social:begin' 'vk-oauth2' %}">Войти через VK</a> </div>
-                <div><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a> </div>
+{#                <div><a href="{% url 'social:begin' 'vk-oauth2' %}">Войти через VK</a> </div>#}
+{#                <div><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a> </div>#}
             </form>
             <a class="head_log1" href="{% url 'accounts:register_view' %}">Создать аккаунт</a>
         </div>

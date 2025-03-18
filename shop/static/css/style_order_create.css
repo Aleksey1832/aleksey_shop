@@ -106,6 +106,22 @@
     box-sizing: border-box;
 }
 
+/* Иконки для регистрации через соцсети для login.html */
+.icon_row {
+    margin-left: 150px;
+    width: 130px;
+
+}
+
+.icon_reg {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    /*display: flex;*/
+    /*align-items: center;*/
+    margin: -5px 5px 0 5px;
+}
+
 /* Для всех зеленых кнопок */
 .registration_bottom {
     background-color: #3e9842; /* #4CAF50 */
