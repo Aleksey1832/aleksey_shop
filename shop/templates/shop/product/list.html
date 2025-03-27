@@ -37,7 +37,22 @@
                 <form method="get">
                     <h5>Поиск товаров</h5>
                     {{ filter.form.as_p }}
-                    <input class="filter" type="submit" value="Поиск">
+                    <input class="filter_btn" type="submit" value="Поиск">
+
+                    <hr class="hr-shelf">
+
+                    <!-- РЕЙТИНГ ТОВАРОВ -->
+                    <div>
+                        <h5>Наш ТОР-10:</h5>
+                            <ul>
+                                {% for p in product_top %}
+                                    <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+
+                    <hr class="hr-shelf">
+
                 </form>
             </div>
         {% endif %}
@@ -68,15 +83,6 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
-
-    <!-- РЕЙТИНГ ТОВАРОВ -->
-    <div>
-    <ul>
-    {% for p in product_top %}
-        <li>{{ p.name }}</li>
-    {% endfor %}
-    </ul>
     </div>
 
     <a class="return_back" href="#top">Вернуться в начало</a>

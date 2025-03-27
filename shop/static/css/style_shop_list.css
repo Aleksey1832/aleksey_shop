@@ -77,21 +77,55 @@
 }
 
 /* бар с лева колонка "поиск товара" */
-.left_bar{
+.left_bar {
     font-family: 'Exo 2', sans-serif;
     font-weight: 700;
     font-size: 15px;
     float: left;
     width: 225px;  /* ширина бара */
-    display:flex;
+    display: flex;
     margin-top: 10px;
     margin-bottom: 100px;
     padding: 10px;
     border: 1px #d7d7d7 solid;
-    background-color: rgba(183, 232, 215, 0.3);
+    background-color: rgba(168, 168, 168, 0.3);
     color: #003559;
     border-radius: 10px;
     /*background-color: rgba(183, 232, 215, 0.3);*/
+}
+
+/* Кнопка ПОИСК */
+.filter_btn {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin: 0 15px 15px 0;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #4464a1;
+    background-color: #c2defa;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+}
+
+.filter_btn:focus-visible {
+    box-shadow: 0 0 0 2px #666;
+}
+
+.filter_btn:hover {
+    background-color: #DBE7F2;
+}
+
+.filter_btn:active {
+    transform: scale(0.96);
 }
 
  /* Для страницы поиска "Продукт не найден" */
@@ -133,15 +167,16 @@
 }
 
 .gallery img:hover {
-    border: 1px #cccccc solid;
+    border: 1px #d77171 solid;
 }
 
 .border {
-    border: 1px #00B344 solid;
+
     margin: 10px 10px;
     border-radius: 10px;
-    background-color: rgba(183, 232, 215, 0.3);
+    background-color: rgba(168, 168, 168, 0.3); /*rgba(183, 232, 215, 0.3)*/
     /*box-shadow: 0 0 5px rgba(73, 72, 72, 0.1);*/
+    border: 5px #ef7369 solid; /*#00B344*/
 }
 
 /* для list вывод текста с низу по картинками */

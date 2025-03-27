@@ -17,10 +17,16 @@
                 <table class="icon_row">
                     <tr>
                         <th>
-                            <div><a href="{% url 'social:begin' 'vk-oauth2' %}"><img class="icon_reg" alt="/static/images/no_image.png" src="/static/images/vk.png"></a></div>
+                            <div><a href="{% url 'social:begin' 'vk-oauth2' %}"><img class="icon_reg" alt="Упс!" src="/static/images/vk.png" onerror="this.src='/static/images/no_image.png';"></a></div>
                         </th>
                         <th>
-                            <div><a href="{% url 'social:begin' 'google-oauth2' %}"><img class="icon_reg" alt="/static/images/no_image.png" src="/static/images/google.png"></a></div>
+                            <div><a href="{% url 'social:begin' 'google-oauth2' %}"><img class="icon_reg" alt="Упс!" src="/static/images/google.png" onerror="this.src='/static/images/no_image.png';"></a></div>
+                        </th>
+                        <th>
+                            <div><a href="#"><img class="icon_reg" alt="Упс!" src="/static/images/mail.png" onerror="this.src='/static/images/no_image.png';"></a></div>
+                        </th>
+                        <th>
+                            <div><a href="#"><img class="icon_reg" alt="Упс!" src="/static/images/yandex.png" onerror="this.src='/static/images/no_image.png';"></a></div>
                         </th>
                     </tr>
                 </table>

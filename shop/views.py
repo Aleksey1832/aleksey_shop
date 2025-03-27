@@ -6,6 +6,7 @@ from cart.forms import CartAddProductForm
 from shop.forms import ShopFormSorted
 from shop.filters import SearchFilter
 from django.core.cache import caches
+from django.db.models import Case, When, IntegerField
 
 
 views_cache = caches['views']
@@ -15,20 +16,24 @@ TOP_VIEWS_LIMIT = 10
 
 def product_views_tracker(product_id):
     """ Трекер просмотров """
+    redis_client = views_cache.client.get_client()
     key = f'product_views:{product_id}'
-    if views_cache.get(key) is None:
-        views_cache.set(key, 0)
 
-    views_cache.incr(key, delta=1)
-    # views_cache.zincrby(TOP_VIEWS, 1, product_id)
-    return views_cache.get(key, 0)
+    # Увеличиваем счетчик просмотров
+    redis_client.incr(key)
+
+    # Обновляем рейтинг популярных товаров
+    redis_client.zincrby(TOP_VIEWS, 1, product_id)
+
+    return int(redis_client.get(key) or 0)
 
 
 def get_product_top_view(limit=TOP_VIEWS_LIMIT):
     """ Список самых просматриваемых товаров """
-    top = views_cache.zrevrange(TOP_VIEWS, 0, limit-1)
-    top_ids = [int(item[0]) for item in top]
-    return top_ids
+    redis_client = views_cache.client.get_client()
+    top = redis_client.zrevrange(TOP_VIEWS, 0, limit - 1, withscores=False)
+
+    return [int(item) for item in top]
 
 
 def product_list(request, category_slug=None):
@@ -38,8 +43,16 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True).order_by('name')
     sort_form = ShopFormSorted(request.POST or None)
 
-    # Вызов рейтинга в каталоге
-    # products_top = Product.objects.filter(id__in=get_product_top_view())
+    # Вызов топ-10 рейтинга в каталоге
+    top_product_ids = get_product_top_view()
+
+    # Case When
+    preserved = Case(
+        *[When(id=pk, then=pos) for pos, pk in enumerate(top_product_ids)],
+        output_field=IntegerField()
+    )
+
+    products_top = Product.objects.filter(id__in=top_product_ids).order_by(preserved)
 
     if sort_form.is_valid():
         products = sort_method(request)
@@ -64,7 +77,7 @@ def product_list(request, category_slug=None):
             'sort_form': sort_form,
             'filter': product_filter,
             'no_products_found': no_products_found,
-            # 'product_top': products_top,  # отрисовка рейтинга на странице
+            'product_top': products_top,  # отрисовка рейтинга на странице
         }
     )
 
