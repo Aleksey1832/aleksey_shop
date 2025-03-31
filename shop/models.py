@@ -1,8 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.db.models import Avg
 
 
-class Category(models.Model):                         # категория
+class Category(models.Model):
+    """ Категория товаров """
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -16,6 +20,9 @@ class Category(models.Model):                         # категория
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Категория товара'
         verbose_name_plural = 'Категории товаров'
 
@@ -29,7 +36,8 @@ class Category(models.Model):                         # категория
         )
 
 
-class ProductConstruction(models.Model):              # конструкция
+class ProductConstruction(models.Model):
+    """ Конструкция товаров """
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -42,6 +50,9 @@ class ProductConstruction(models.Model):              # конструкция
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Конструкция товара'
         verbose_name_plural = 'Конструкции товаров'
 
@@ -49,7 +60,8 @@ class ProductConstruction(models.Model):              # конструкция
         return self.name
 
 
-class ProductFireclass(models.Model):                 # класс пожара
+class ProductFireclass(models.Model):
+    """ Класс пожара """
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -63,6 +75,9 @@ class ProductFireclass(models.Model):                 # класс пожара
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Класс пожара'
         verbose_name_plural = 'Класс пожара'
 
@@ -71,6 +86,7 @@ class ProductFireclass(models.Model):                 # класс пожара
 
 
 class ProductUsage(models.Model):                     # использование
+    """ Использование товаров (применение) """
     name = models.CharField(
         max_length=200,
         unique=True,
@@ -84,6 +100,9 @@ class ProductUsage(models.Model):                     # использовани
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Применение товара'
         verbose_name_plural = 'Применение товаров'
 
@@ -91,7 +110,8 @@ class ProductUsage(models.Model):                     # использовани
         return self.name
 
 
-class ProductRangModelHearth(models.Model):           # ранг модельного очага
+class ProductRangModelHearth(models.Model):
+    """ Ранг модельного очага """
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -105,6 +125,9 @@ class ProductRangModelHearth(models.Model):           # ранг модельн�
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Ранг модельного очага'
         verbose_name_plural = 'Ранг модельного очага'
 
@@ -112,7 +135,8 @@ class ProductRangModelHearth(models.Model):           # ранг модельн�
         return self.name
 
 
-class ProductType(models.Model):                      # тип товара
+class ProductType(models.Model):
+    """ Тип товаров """
     name = models.CharField(
         max_length=150,
         unique=True,
@@ -126,6 +150,9 @@ class ProductType(models.Model):                      # тип товара
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['name'])
+        ]
         verbose_name = 'Тип товара'
         verbose_name_plural = 'Тип товара'
 
@@ -140,7 +167,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_img', verbose_name='Фото')  # адреса картинок
     description = models.TextField(blank=True, verbose_name='Описание')  # описание
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создание товара')  # создание товара
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Изменение товара')  # изменение товара (описания или изменение цены)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Изменение товара')  # изменение товара
     available = models.BooleanField(default=True, verbose_name='Наличие товара')  # товар доступен или нет
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL-товара')  # для ссылок поисковых машин
 
@@ -183,6 +210,11 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['name']
+        indexes = [  # обращение к базе данных для индексации
+            models.Index(fields=['id', 'slug']),
+            models.Index(fields=['name']),
+            models.Index(fields=['-created_at']),
+        ]
         verbose_name = 'Товара'
         verbose_name_plural = 'Все товары'
 
@@ -190,7 +222,30 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
+        """ Получение абсолютной ссылки """
         return reverse(
             'shop:product_detail',
             args=[self.id, self.slug]
         )
+
+    def average_rating(self):
+        """ Считает на уровне базы среднее значение отзывов """
+        avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        return round(avg, 1) if avg else 0
+
+
+class Review(models.Model):
+    """ Отзыв о конкретном товаре """
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.IntegerField(choices=settings.RATING_CHOICES)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        """ Пользователь не может написать больше одного отзыва """
+        ordering = ['-created']  # В начале свежие отзывы
+        unique_together = ('product', 'user')  # Один товар - один пользователь
+
+    def __str__(self):
+        return f'Отзыв от {self.user.username}'
