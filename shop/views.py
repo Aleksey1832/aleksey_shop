@@ -1,12 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from shop.models import (Product, Category, ProductConstruction,
                          ProductFireclass, ProductUsage,
                          ProductRangModelHearth, ProductType)
 from cart.forms import CartAddProductForm
+from shop.forms import ReviewAddForm
 from shop.forms import ShopFormSorted
 from shop.filters import SearchFilter
 from django.core.cache import caches
 from django.db.models import Case, When, IntegerField
+from django.views.decorators.http import require_POST
 
 
 views_cache = caches['views']
@@ -43,15 +45,16 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True).order_by('name')
     sort_form = ShopFormSorted(request.POST or None)
 
-    # Вызов топ-10 рейтинга в каталоге
+    # Получает список ID топ-10 самых просматриваемых товаров
     top_product_ids = get_product_top_view()
 
-    # Case When
+    # Создает объект Case/When для сохранения порядка товаров, как он был получен из Redis
     preserved = Case(
         *[When(id=pk, then=pos) for pos, pk in enumerate(top_product_ids)],
         output_field=IntegerField()
     )
 
+    # Запрашивает объекты Product с ID из top_product_ids и сортирует их согласно порядку, заданному preserved
     products_top = Product.objects.filter(id__in=top_product_ids).order_by(preserved)
 
     if sort_form.is_valid():
@@ -90,14 +93,17 @@ def product_detail(request, id, slug):
         slug=slug,
         available=True
     )
-    view_count = product_views_tracker(product.id)
+    reviews = product.reviews.all()  # Получаем все отзывы, связанные с данным товаром
+
+    view_count = product_views_tracker(product.id)  # трек просмотры
+    review_add_form = ReviewAddForm()  # отзывы
     categories = Category.objects.all()
     construction = ProductConstruction.objects.all()
     fire_class = ProductFireclass.objects.all()
     usage = ProductUsage.objects.all()
     rang_model_hearth = ProductRangModelHearth.objects.all()
     product_type = ProductType.objects.all()
-    cart_product_form = CartAddProductForm()
+    cart_product_form = CartAddProductForm()  # Форма для добавления количества товара в корзину
 
     return render(
         request,
@@ -112,6 +118,8 @@ def product_detail(request, id, slug):
             'product_type': product_type,
             'cart_product_form': cart_product_form,
             'view_count': view_count,
+            'review_add_form': review_add_form,
+            'reviews': reviews,
         }
     )
 
@@ -164,3 +172,15 @@ def sort_method(request):
         elif needed_sort == 'price_desc':
             products = products.order_by('-price')
     return products
+
+
+@require_POST
+def product_add(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    form = ReviewAddForm(request.POST)
+    if form.is_valid():
+        review = form.save(commit=False)
+        review.user = request.user
+        review.product = product
+        review.save()
+    return redirect('shop:product_detail')

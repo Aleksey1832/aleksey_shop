@@ -28,6 +28,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
+RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
+
 ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
 
 

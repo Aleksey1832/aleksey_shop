@@ -1,4 +1,6 @@
 from django import forms
+from shop.models import Review
+from django.conf import settings
 
 
 SORT_CHOICES = [
@@ -18,3 +20,13 @@ class ShopFormSorted(forms.Form):
         }),
         label=''
     )
+
+
+class ReviewAddForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'text']
+        widgets = {
+            'text': forms.Textarea(attrs={'rows': 4}),
+            'rating': forms.RadioSelect(choices=settings.RATING_CHOICES),
+        }
