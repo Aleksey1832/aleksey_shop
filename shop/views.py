@@ -176,6 +176,10 @@ def sort_method(request):
 
 @require_POST
 def product_add(request, product_id):
+    """
+        Обрабатывает добавление отзыва к товару.
+        Запрос приходит методом POST.
+    """
     product = get_object_or_404(Product, id=product_id)
     form = ReviewAddForm(request.POST)
     if form.is_valid():

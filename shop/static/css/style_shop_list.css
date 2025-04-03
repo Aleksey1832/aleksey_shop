@@ -59,9 +59,9 @@
 
 /* стили для выпадающего меню сортировки */
 .sort_form {
-    margin: 12px 0 30px 255px;
+    margin: 12px 0 30px 281px;
     font-family: 'Exo 2', sans-serif;
-    width: 200px;
+    width: 202px;
     height: 12px;
     /*border: 1px solid #999999;*/
     font-size: 11px;
@@ -78,42 +78,49 @@
 
 /* бар с лева колонка "поиск товара" */
 .left_bar {
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Cambria', sans-serif;
     font-weight: 700;
     font-size: 15px;
     float: left;
-    width: 225px;  /* ширина бара */
+    width: 245px;  /* ширина бара */
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 100px;
-    padding: 10px;
+    /*padding: 10px;*/
     border: 1px #d7d7d7 solid;
-    background-color: rgba(168, 168, 168, 0.3);
+    background-color: #fff;
     color: #003559;
-    border-radius: 10px;
-    /*background-color: rgba(183, 232, 215, 0.3);*/
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.left_bar_border {
+    border: 1px #d7d6d6 solid;
+    margin: 12px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 /* Кнопка ПОИСК */
 .filter_btn {
-    display: inline-block;
-    box-sizing: border-box;
+    /*display: inline-block;*/
+    /*box-sizing: border-box;*/
     padding: 0 20px;
-    margin: 0 15px 15px 0;
-    outline: none;
+    margin: 5px 15px 15px 5px;
+    /*outline: none;*/
     border: none;
     border-radius: 6px;
     height: 40px;
     line-height: 40px;
     font-size: 17px;
     font-weight: 600;
-    text-decoration: none;
+    /*text-decoration: none;*/
     color: #4464a1;
     background-color: #c2defa;
-    cursor: pointer;
-    user-select: none;
-    appearance: none;
-    touch-action: manipulation;
+    /*cursor: pointer;*/
+    /*user-select: none;*/
+    /*appearance: none;*/
+    /*touch-action: manipulation;*/
 }
 
 .filter_btn:focus-visible {
@@ -126,6 +133,11 @@
 
 .filter_btn:active {
     transform: scale(0.96);
+}
+
+
+.top_rating {
+    color: #f32727;
 }
 
  /* Для страницы поиска "Продукт не найден" */
@@ -151,39 +163,49 @@
  /*для list вывод ГАЛЕРЕИ - img и текста с низу*/
 .gallery {
     /*margin-left: 150px; !* Отступ слева *!*/
-    padding: 0 0 0 20px;
+    padding: 0 0 0 30px;
     display: flex;
     flex-wrap: wrap;
-    width: 80vw;
+    width: 85vw;
     transform: translateX(-1%);
     text-align: center;
 }
 
 /* для list вывод img */
 .gallery img {
-    width: 120px;
-    height: 120px;
-    margin: 20px;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
 }
 
 .gallery img:hover {
-    border: 1px #d77171 solid;
+    border: 1px #ccbbbb solid;
 }
 
+/* Рамка наружная карточки */
 .border {
-
-    margin: 10px 10px;
-    border-radius: 10px;
-    background-color: rgba(168, 168, 168, 0.3); /*rgba(183, 232, 215, 0.3)*/
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    margin: 15px 15px;
+    width: 200px;
+    /*background-color: rgba(255, 255, 255, 0.9); !*rgba(168, 168, 168, 0.3)*!*/
     /*box-shadow: 0 0 5px rgba(73, 72, 72, 0.1);*/
     border: 5px #ef7369 solid; /*#00B344*/
+}
+
+/* Рамка внутренняя карточки */
+.border_2 {
+    border: 1px #d7d6d6 solid;
+    margin: 12px;
+    border-radius: 5px;
 }
 
 /* для list вывод текста с низу по картинками */
 .item,
 .item a,
 .item a:active {
-    font-size: 15px;
+    font-size: 12px;
     font-family: 'Exo 2', sans-serif;
     font-weight: 700;
     text-decoration: none;
@@ -194,6 +216,17 @@
     color: #0946e3;
 }
 
+/* Цена в карточке товара */
+.prices {
+    border: #BFD6E2;
+    box-shadow: 3px 3px 10px #999;
+    background-color: #fafaf9;
+    width: 130px;
+    font-size: 20px;
+    color: #003559;
+    text-align: center;
+    font-weight: bolder;
+}
 /* для кнопки "В КОРЗИНУ" */
 .pushable {
     margin-bottom: 15px;
@@ -220,7 +253,6 @@
 }
 
 .edge {
-
     position: absolute;
     top: 0;
     left: 0;

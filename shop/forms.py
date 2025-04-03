@@ -12,6 +12,7 @@ SORT_CHOICES = [
 
 
 class ShopFormSorted(forms.Form):
+    """ Сортировка товаров """
     form_sorted = forms.ChoiceField(
         choices=SORT_CHOICES,
         widget=forms.Select(attrs={
@@ -23,7 +24,12 @@ class ShopFormSorted(forms.Form):
 
 
 class ReviewAddForm(forms.ModelForm):
+    """
+        Определяет форму для добавления отзыва к товару.
+        Наследуется от forms.ModelForm, что позволяет связать форму с моделью Review
+    """
     class Meta:
+        """ Метакласс для определения настроек формы, связанных с моделью Review """
         model = Review
         fields = ['rating', 'text']
         widgets = {

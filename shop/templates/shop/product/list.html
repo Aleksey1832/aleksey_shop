@@ -34,26 +34,28 @@
             </div>
         {% else %}
             <div class="left_bar">
-                <form method="get">
-                    <h5>Поиск товаров</h5>
-                    {{ filter.form.as_p }}
-                    <input class="filter_btn" type="submit" value="Поиск">
+                <div class="left_bar_border">
+                    <form method="get">
+                        <h5>Поиск товаров</h5>
+                        {{ filter.form.as_p }}
+                        <input class="filter_btn" type="submit" value="Поиск">
 
-                    <hr class="hr-shelf">
+                        <hr class="hr-shelf">
 
-                    <!-- РЕЙТИНГ ТОВАРОВ -->
-                    <div>
-                        <h5>Наш ТОР-10:</h5>
-                            <ul>
-                                {% for p in product_top %}
-                                    <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                    </div>
+                        <!-- РЕЙТИНГ ТОВАРОВ -->
+                        <div>
+                            <h5>Наш ТОР-10:</h5>
+                                <ul class="top_rating">
+                                    {% for p in product_top %}
+                                        <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                        </div>
 
-                    <hr class="hr-shelf">
+                        <hr class="hr-shelf">
 
-                </form>
+                    </form>
+                </div>
             </div>
         {% endif %}
 
@@ -61,24 +63,26 @@
         <div class="gallery">
             {% for product in products %}
                 <div class="border">
-                    <a href="{{ product.get_absolute_url }}">
-                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
-                    </a>
-                    <div class="item">
-                        <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
-                            <p>{{ product.product_type }}</p>
-                            <p>{{ product.name }}</p>
+                    <div class="border_2">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
                         </a>
-                        <p>{{ product.price }} ₽</p>
-                        <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
-                            <p>{{ cart_product_form }}</p>
-                            <button class="pushable" type="submit">
-                                <span class="shadow"></span>
-                                <span class="edge"></span>
-                                <span class="front">В корзину</span>
-                            </button>
-                            {% csrf_token %}
-                        </form>
+                        <div class="item">
+                            <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
+                                <p>{{ product.product_type }} {{ product.name }}</p>
+{#                                <p>{{ product.name }}</p>#}
+                            </a>
+                            <p class="prices">{{ product.price }} ₽</p>
+                            <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
+                                <p>{{ cart_product_form }}</p>
+                                <button class="pushable" type="submit">
+                                    <span class="shadow"></span>
+                                    <span class="edge"></span>
+                                    <span class="front">В корзину</span>
+                                </button>
+                                {% csrf_token %}
+                            </form>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
