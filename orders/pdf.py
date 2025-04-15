@@ -22,7 +22,8 @@ def generate_pdf(order):
         pdf.drawString(100, 690, f'Сумма: {order.get_total_cost():.2f} руб.')
         pdf.save()
         buffer.seek(0)
-        return buffer
+
+        return buffer.getvalue()
 
     except FileNotFoundError:
         return f'Шрифт {font_path} не найден'

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from cart.cart import Cart
 from orders.forms import OrderCreateForm
 from orders.models import OrderItem, Order
-from cart.views import ending_word_items
+from cart.views import pluralize
 from django.contrib.auth.decorators import login_required
 from coupons.models import Coupon
 from orders.tasks import order_created
@@ -13,7 +13,7 @@ def order_create(request):
     """ Создание нового заказа """
     cart = Cart(request)
     total_items = len(cart)
-    ending_word = ending_word_items(total_items)
+    ending_word = pluralize(total_items, ['товар', 'товара', 'товаров'])
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -34,7 +34,9 @@ def order_create(request):
             # cart.clear()
             #
             # cart.del_coupon()
+
             order_created.delay(order.id)  # отправка письма
+
             return render(
                 request,
                 'orders/order/success.html',

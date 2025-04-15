@@ -3,12 +3,16 @@ from shop.models import (Product, Category, ProductConstruction,
                          ProductFireclass, ProductUsage,
                          ProductRangModelHearth, ProductType)
 from cart.forms import CartAddProductForm
+from cart.views import pluralize
 from shop.forms import ReviewAddForm
 from shop.forms import ShopFormSorted
 from shop.filters import SearchFilter
 from django.core.cache import caches
+from django.db import IntegrityError
+from django.contrib import messages
 from django.db.models import Case, When, IntegerField
 from django.views.decorators.http import require_POST
+from orders.models import OrderItem
 
 
 views_cache = caches['views']
@@ -66,7 +70,7 @@ def product_list(request, category_slug=None):
     product_filter = SearchFilter(request.GET, queryset=products)
     products = product_filter.qs
 
-    no_products_found = not products.exists()
+    products_found = products.exists()
 
     cart_product_form = CartAddProductForm()
     return render(
@@ -79,7 +83,7 @@ def product_list(request, category_slug=None):
             'cart_product_form': cart_product_form,
             'sort_form': sort_form,
             'filter': product_filter,
-            'no_products_found': no_products_found,
+            'products_found': products_found,
             'product_top': products_top,  # отрисовка рейтинга на странице
         }
     )
@@ -95,8 +99,16 @@ def product_detail(request, id, slug):
     )
     reviews = product.reviews.all()  # Получаем все отзывы, связанные с данным товаром
 
+    # Оставил ли пользователь отзыв об этом товаре
+    has_reviewed = False
+    if request.user.is_authenticated:
+        has_reviewed = product.reviews.filter(user=request.user).exists()
+
     view_count = product_views_tracker(product.id)  # трек просмотры
-    review_add_form = ReviewAddForm()  # отзывы
+    review_add_form = ReviewAddForm()  # Создание пустой формы для отправки отзыва. В шаблоне отобразится как <input>.
+    reviews_count = product.reviews.count()  # подсчет количества отзывов товара
+    pluralize_extended = pluralize(reviews_count, ['отзыв', 'отзыва', 'отзывов'])
+
     categories = Category.objects.all()
     construction = ProductConstruction.objects.all()
     fire_class = ProductFireclass.objects.all()
@@ -120,6 +132,9 @@ def product_detail(request, id, slug):
             'view_count': view_count,
             'review_add_form': review_add_form,
             'reviews': reviews,
+            'has_reviewed': has_reviewed,
+            'reviews_count': reviews_count,
+            'pluralize_extended': pluralize_extended
         }
     )
 
@@ -175,16 +190,48 @@ def sort_method(request):
 
 
 @require_POST
-def product_add(request, product_id):
+def review_add(request, product_id):
     """
         Обрабатывает добавление отзыва к товару.
         Запрос приходит методом POST.
     """
     product = get_object_or_404(Product, id=product_id)
+
+    # Проверка, был ли заказ у user (user не должен оставить отзыв не купив товар)
+    if request.user.is_authenticated:
+        has_ordered = OrderItem.objects.filter(
+            order__user=request.user,
+            product=product,
+            order__status='completed'
+        ).exists()
+
+        if not has_ordered:
+            return redirect(
+                'shop:product_detail',
+                id=product.id,
+                slug=product.slug
+            )
+
+    # Проверка отзывов
+    existing_review = product.reviews.filter(user_id=request.user).first()
+
+    if existing_review:
+        return redirect(
+            'shop:product_detail',
+            id=product.id,
+            slug=product.slug
+        )
+
     form = ReviewAddForm(request.POST)
     if form.is_valid():
         review = form.save(commit=False)
         review.user = request.user
         review.product = product
-        review.save()
-    return redirect('shop:product_detail')
+        try:
+            review.save()
+            messages.success(request, 'Отзыв успешно добавлен!')
+        except IntegrityError:
+            messages.error(request, 'Вы не можете оставить более одного отзыва на этот товар!')
+    else:
+        messages.error(request, 'Проверьте правильность заполнения формы.')
+    return redirect('shop:product_detail', id=product.id, slug=product.slug)

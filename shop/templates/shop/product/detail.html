@@ -31,6 +31,7 @@
                     </svg>
                 </div>
 
+                <!-- Цена товара -->
                 <div class="price">{{ product.price }} ₽
                 </div>
                 <br><br>
@@ -43,10 +44,32 @@
                 </form>
 
                 <!-- Счетчик просмотров -->
-                <div class="view_counter">
+                <div class="view_counters">
                     Этот товар просматривали <b> {{ view_count }}</b> раз!
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Отображение рейтинга товара -->
+    <div class="rating_star">
+        <div class="rating">
+            <a href="#reviews">
+                {% with rating=product.average_rating %}
+                    {% for i in "12345" %}
+{#                        <span class="star {% if i < rating %}full{% elif i == rating|add:"-0.5"|floatformat:0 %}half{% endif %}">★</span>#}
+{#                        <span class="star {% if i == rating|add:"-0.5"|floatformat:0 %}half {% elif i < rating %}full{% endif %}">★</span>#}
+{#                        <span class="star{% if i < rating|floatformat:0 %}full{% elif rating|floatformat:0 == i and not rating|divisibleby:"1" %}half{% endif %}">★</span>#}
+                        <span class="star {% if i <= product.average_rating|floatformat:0 %}full{% endif %}">★</span>
+                    {% endfor %}
+                {% endwith %}
+
+                ({{ product.average_rating }} / 5)
+
+                {% with reviews_count=reviews|length %}
+                    • {{ reviews_count }} {{ pluralize_extended}}
+                {% endwith %}
+            </a>
         </div>
     </div>
 
@@ -146,6 +169,75 @@
 
             </div>
         </details>
+
+    <!-- Отзывы о товаре -->
+    <div id="reviews" class="reviews-detail">
+        <h2>Отзывы о товаре <label class="review_info">{{ reviews_count }}</label></h2>
+
+        <div class="review_add">
+            {% if user.is_authenticated %}
+                {% if not has_reviewed %}  <!-- Проверяем, оставил ли пользователь отзыв ##### -->
+                    <h4>Вы можете добавить отзыв</h4>
+                    <form method="post" action="{% url 'shop:review_add' product.id %}">
+{#                        {{ review_add_form.as_p }}#}
+                        {% csrf_token %}
+
+                        <div class="leave_review">
+                            <label>Ваша оценка:</label>
+                            <div class="">
+                                {% for i in "12345" %}
+                                    <input type="radio" id="full_star{{ i }}" name="rating" value="{{ i }}"
+                                        {% if review_add_form.rating.value == i %}checked{% endif %}/>
+                                    <label  for="full_star{{ i }}" title="{{ i }} звезд">{{ i }}<span class="full_star">★</span></label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form_review" type=text>{{ review_add_form.text }}</div>
+                        <button class="registration_bottom" type="submit">Оставить отзыв</button>
+                    </form>
+
+                {% else %}
+                    <p>Вы уже оставили отзыв об этом товаре.</p>
+                {% endif %}
+
+            {% else %}
+                <p>Что бы оставить комментарии, <a href="{% url 'accounts:login_view' %}" class="link_blue">войдите</a> в аккаунт или зарегистрируйтесь!</p>
+            {% endif %}
+        </div>
+        <div class="#">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            {% for review in reviews %}
+                    <table class="every_review">
+                        <tr>
+                            <th style="padding-left: 10px">
+                                <h5>{{ review.user.first_name }}.{{ review.user.last_name|slice:":1" }} -
+                                    {% for i in "x"|ljust:review.rating %}
+                                        <span class="full_star">★</span>
+                                    {% endfor %}
+                                </h5>
+                            </th>
+                            <th style="text-align: right; padding-right: 20px; color: #2870c5">
+                                {{ review.created|date:"d M Y" }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 10px">
+                                <i>{{ review.text }}</i>
+                            </td>
+                        </tr>
+                    </table>
+            {% empty %}
+                <div>
+                    <p>Пока нет отзывов</p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
 
         <a class="return_back" href="#top">Вернуться в начало</a>
     </div>

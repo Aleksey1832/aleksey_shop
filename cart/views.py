@@ -32,7 +32,7 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     total_items = len(cart)
-    ending_word = ending_word_items(len(cart))
+    ending_word = pluralize(len(cart), ['товар', 'товара', 'товаров'])
 
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
@@ -53,10 +53,11 @@ def cart_detail(request):
     )
 
 
-def ending_word_items(count):
+def pluralize(count, words):
+    """ Выбирает правильное окончание слова """
     if count % 10 == 1 and count % 100 != 11:
-        return 'товар'
+        return words[0]
     elif count % 10 in (2, 3, 4) and count % 100 not in (12, 13, 14):
-        return 'товара'
+        return words[1]
     else:
-        return 'товаров'
+        return words[2]

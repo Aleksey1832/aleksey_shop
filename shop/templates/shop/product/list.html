@@ -7,32 +7,29 @@
 
 {% block content %}
 
-    <div id="top" class="content">
+    <!-- Поиск товара -->
+    {% if products_found %}
 
-        <!-- Заголовок ВСЕ ТОВАРЫ -->
-        <div id="main" class="four">
-            <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
-        </div>
-    </div>
+        <div id="top" class="content">
 
-    <!-- Сортировка товаров -->
-    <form method="POST" id="sortForm" class="sort_form">
-        {% csrf_token %}
-        {{ sort_form.as_p }}
-    </form>
-
-    <!-- контент страницы -->
-    <div class="layout">
-
-        <!-- Поиск товара -->
-        {% if no_products_found %}
-            <div class="centered-container">
-                <div class="centered-content">
-                    <h4>К сожалению, товары по вашему запросу не найдены.</h4><br>
-                    <h5><a href="{% url 'shop:product_list' %}">Вернуться к полному списку товаров</a></h5>
-                </div>
+            <!-- Заголовок ВСЕ ТОВАРЫ -->
+            <div id="main" class="four">
+                <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
             </div>
-        {% else %}
+        </div>
+
+        <!-- Сортировка товаров -->
+        <form method="POST" id="sortForm" class="sort_form">
+            {% csrf_token %}
+            {{ sort_form.as_p }}
+        </form>
+
+        <!-- контент страницы -->
+        <div class="layout">
+
+{#        <!-- Поиск товара -->#}
+{#        {% if products_found %}#}
+
             <div class="left_bar">
                 <div class="left_bar_border">
                     <form method="get">
@@ -42,12 +39,12 @@
 
                         <hr class="hr-shelf">
 
-                        <!-- РЕЙТИНГ ТОВАРОВ -->
+                        <!-- РЕЙТИНГ ТОВАРОВ Топ-10 -->
                         <div>
                             <h5>Наш ТОР-10:</h5>
                                 <ul class="top_rating">
                                     {% for p in product_top %}
-                                        <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+                                        <li><a class="link_blue" href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                         </div>
@@ -57,37 +54,44 @@
                     </form>
                 </div>
             </div>
-        {% endif %}
+    {% else %}
+        <div class="centered-container">
+            <div class="centered-content">
+                <h4>К сожалению, товары по вашему запросу не найдены.</h4><br>
+                <h5><a href="{% url 'shop:product_list' %}">Вернуться к полному списку товаров</a></h5>
+            </div>
+        </div>
+    {% endif %}
 
-        <!-- Карточки товаров -->
-        <div class="gallery">
-            {% for product in products %}
-                <div class="border">
-                    <div class="border_2">
-                        <a href="{{ product.get_absolute_url }}">
-                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
-                        </a>
-                        <div class="item">
-                            <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
-                                <p>{{ product.product_type }} {{ product.name }}</p>
-{#                                <p>{{ product.name }}</p>#}
+            <!-- Карточки товаров -->
+            <div class="gallery">
+                {% for product in products %}
+                    <div class="border">
+                        <div class="border_2">
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ product.name }}" title="Посмотреть подробности">
                             </a>
-                            <p class="prices">{{ product.price }} ₽</p>
-                            <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
-                                <p>{{ cart_product_form }}</p>
-                                <button class="pushable" type="submit">
-                                    <span class="shadow"></span>
-                                    <span class="edge"></span>
-                                    <span class="front">В корзину</span>
-                                </button>
-                                {% csrf_token %}
-                            </form>
+                            <div class="item">
+                                <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
+                                    <p>{{ product.product_type }} {{ product.name }}</p>
+    {#                                <p>{{ product.name }}</p>#}
+                                </a>
+                                <p class="prices">{{ product.price }} ₽</p>
+                                <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
+                                    <p>{{ cart_product_form }}</p>
+                                    <button class="pushable" type="submit">
+                                        <span class="shadow"></span>
+                                        <span class="edge"></span>
+                                        <span class="front">В корзину</span>
+                                    </button>
+                                    {% csrf_token %}
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
 
     <a class="return_back" href="#top">Вернуться в начало</a>
 

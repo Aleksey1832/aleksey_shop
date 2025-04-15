@@ -4,6 +4,7 @@
     font-size: 25px;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 150px;
     color: #003559;
 }
 
@@ -12,6 +13,7 @@
     font-family: 'Exo 2', sans-serif;
     width: 700px;
     border: none;
+    margin-left: 75px;
     margin-bottom: 20px;
     border-collapse: separate;
     color: #003559;

@@ -25,8 +25,7 @@ class ShopFormSorted(forms.Form):
 
 class ReviewAddForm(forms.ModelForm):
     """
-        Определяет форму для добавления отзыва к товару.
-        Наследуется от forms.ModelForm, что позволяет связать форму с моделью Review
+        Определяет форму для добавления отзыва к товару, позволяет связать форму с моделью Review
     """
     class Meta:
         """ Метакласс для определения настроек формы, связанных с моделью Review """
@@ -35,4 +34,8 @@ class ReviewAddForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'rows': 4}),
             'rating': forms.RadioSelect(choices=settings.RATING_CHOICES),
+        }
+        labels = {
+            'text': 'Текст отзыва:',
+            'rating': 'Рейтинг товара:'
         }

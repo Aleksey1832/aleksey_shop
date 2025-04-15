@@ -30,7 +30,7 @@
 
 .cod_product /* для detail параметры "КОД ТОВАРА" с права от img */
 {
-    padding-bottom: 25px;
+    padding-bottom: 10px;
 }
 
 .price /* для detail параметры "ЦЕНА" с права от img */
@@ -44,13 +44,9 @@
     font-weight: bolder;
 }
 
-.view_counter { /* счетчик просмотров */
+.view_counters { /* счетчик просмотров */
     font-size: 15px;
-    color: #fafaf9;
-    background-color: #528fe8;
-    /*border: 1px solid #0c52bb;*/
-    padding:10px;
-    width: 275px;
+    /*color: #3b2020;*/
 }
 
 /* для detail кнопка registration_bottom "ПОКУПКА ТОВАРОВ" */
@@ -58,9 +54,7 @@
 
 .name /* для detail "МАРКА ТОВАРА" под картинкой */
 {
-    margin-top: 20px;
-    margin-bottom: 35px;
-    margin-left: 35px;
+    padding: 2px 0 20px 45px;
     font-size: 20px;
     text-align: left;
     font-weight: bold;
@@ -88,22 +82,121 @@
 a:link /*  */
 {
     text-decoration: none;
-    color: #2a78c7;
+    color: #2870c5;
 }
 
 a:visited /*  */
 {
     text-decoration: none;
-    color: #2a78c7;
+    color: #15212d;
 }
 
 a:hover /*  */
 {
-    text-decoration: underline;
+    text-decoration: none;
     color: #0048ff;
 }
 
 a:active /*  */
 {
     text-decoration: underline;
+}
+
+/* Стили для звездочек рейтинга */
+.rating_star {
+    padding: 25px 0 0 45px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.rating .star {
+    font-size: 20px; /* Размер звезд */
+    color: #ddd; /* Цвет пустых звезд */
+}
+
+.rating .full {
+    color: #f5981c; /* Цвет полных звезд */
+}
+
+.rating .half {
+    color: #f5981c;
+    position: relative;
+}
+.rating .half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%; /* Половина ширины звезды */
+    overflow: hidden;
+    color: #f5981c; /* Цвет полных звезд */
+}
+.rating .half::after {
+    content: '☆';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    color: #ddd;
+    overflow: hidden;
+}
+
+
+/* Цвет ссылки "войдите в аккаунт" синий */
+.link_blue, a:link, a:visited{
+    color: #0d2be7;
+    font-weight: 700;
+}
+
+/* Отзывы о товаре (Количество отзывов) */
+.review_info {
+    font-size: 20px;
+    color: #fcf7f7;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 11px;
+    border-radius: 15px;
+    background: hsl(345deg 100% 47%);
+    font-weight: bold; /* жирный текст */
+}
+
+/* Отзывы о товаре */
+.reviews-detail {
+    padding-left: 35px;
+}
+
+.review_add {
+    padding-bottom: 15px;
+}
+
+/* Блок для каждого отзыва */
+.every_review {
+    margin: 0 20px 20px 0;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.6);
+    border-top: 1px solid #bbd9f1;
+    box-shadow: 6px 6px 10px #999;
+    border-radius: 5px;
+    width: 500px;
+    height: 100px;
+}
+
+/* Цвет звезды в блоке */
+.full_star {
+    color: #f5981c; /* Цвет полных звезд */
+}
+#full_star{
+    color: #f5981c; /* Цвет полных звезд */
+}
+
+.leave_review {
+    padding: 15px 0 20px 0;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Форма для отзыва */
+.form_review[type=text] {
+    padding-bottom: 20px;
 }

@@ -230,8 +230,10 @@ class Product(models.Model):
 
     def average_rating(self):
         """ Считает на уровне базы среднее значение отзывов """
-        avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
-        return round(avg, 1) if avg else 0
+        # avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        # return round(avg, 0) if avg else 0
+        avg = self.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+        return round(avg, 1)
 
 
 class Review(models.Model):
