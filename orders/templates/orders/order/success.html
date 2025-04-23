@@ -15,7 +15,7 @@
             <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
             <p> В корзине: {{ total_items }} {{ ending_word }} </p>
             <p> Общая сумма: {{ cart.get_total_price_sale }} ₽ </p>
-                <form action="{% url 'orders:payment' %}" method="get">
+                <form action="{% url 'orders:payment' order.id %}" method="get">
                     <input class="registration_bottom" type="submit" value="Перейти к оплате">
                 </form>
             <p>{{ account.addresses }}</p>

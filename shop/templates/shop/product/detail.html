@@ -57,9 +57,6 @@
             <a href="#reviews">
                 {% with rating=product.average_rating %}
                     {% for i in "12345" %}
-{#                        <span class="star {% if i < rating %}full{% elif i == rating|add:"-0.5"|floatformat:0 %}half{% endif %}">★</span>#}
-{#                        <span class="star {% if i == rating|add:"-0.5"|floatformat:0 %}half {% elif i < rating %}full{% endif %}">★</span>#}
-{#                        <span class="star{% if i < rating|floatformat:0 %}full{% elif rating|floatformat:0 == i and not rating|divisibleby:"1" %}half{% endif %}">★</span>#}
                         <span class="star {% if i <= product.average_rating|floatformat:0 %}full{% endif %}">★</span>
                     {% endfor %}
                 {% endwith %}

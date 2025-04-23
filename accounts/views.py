@@ -33,11 +33,13 @@ def logout_view(request):
 @login_required(login_url='accounts:login_view')
 def profile_view(request):
     active_orders = Order.objects.filter(user=request.user, status='active').order_by('-created_at')
-    canceled_orders = Order.objects.filter(user=request.user, status='canceled').order_by('-created_at')
+    paid_orders = Order.objects.filter(user=request.user, status='paid').order_by('-created_at')
     completed_orders = Order.objects.filter(user=request.user, status='completed').order_by('-created_at')
+    canceled_orders = Order.objects.filter(user=request.user, status='canceled').order_by('-created_at')
     addresses = Address.objects.filter(user=request.user)
 
     context = {'active_orders': active_orders,
+               'paid_orders': paid_orders,
                'canceled_orders': canceled_orders,
                'completed_orders': completed_orders,
                'addresses': addresses}

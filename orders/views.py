@@ -19,6 +19,7 @@ def order_create(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user
+            order.status = 'active'  # статус при создании
             if cart.coupon:
                 coupon = Coupon.objects.get(id=cart.coupon)
                 order.coupon = coupon
@@ -35,16 +36,17 @@ def order_create(request):
             #
             # cart.del_coupon()
 
-            order_created.delay(order.id)  # отправка письма
+            # order_created.delay(order.id)  # отправка письма
 
-            return render(
-                request,
-                'orders/order/success.html',
-                {
-                    'order': order,
-                    'total_items': total_items,
-                    'ending_word': ending_word,
-                })
+            return redirect('orders:order_success', order_id=order.id)
+            # return render(
+            #     request,
+            #     'orders/order/success.html',
+            #     {
+            #         'order': order,
+            #         'total_items': total_items,
+            #         'ending_word': ending_word,
+            #     })
 
     else:
         user = request.user
@@ -66,11 +68,30 @@ def order_create(request):
         })
 
 
-def payment(request):
+@login_required
+def order_success(request, order_id):
+    order = Order.objects.get(id=order_id)
+    # if request.method == 'POST':
+
+    order.save()
+
+    # return redirect('orders:payment', order_id=order.id)
+    return render(
+        request,
+        'orders/order/success.html',
+        {'order': order}
+    )
+
+
+def payment(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order_created.delay(order.id)  # отправка письма
+    order.status = 'paid'  # статус при подтверждении
+    order.save()
     cart = Cart(request)
     cart.clear()
     cart.del_coupon()
-    return render(request, 'orders/order/payment.html')
+    return render(request, 'orders/order/payment.html', {'order': order})
 
 
 @login_required

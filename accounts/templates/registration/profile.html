@@ -62,7 +62,20 @@
                             </li>
                          </ul>
                     {% empty %}
-                        <p> У вас пока нет заказов </p>
+                        <p> У вас пока нет активных заказов </p>
+                    {% endfor %}
+                    <hr>
+                    <h4>Оплаченные заказы</h4>
+                    {% for order in paid_orders %}
+                        <ul>
+                            <li>
+                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб.
+                                <a href="{% url 'shop:how_buy' %}">
+                                    <br>Отследить заказ</a>
+                            </li>
+                         </ul>
+                    {% empty %}
+                        <p> У вас пока нет оплаченных заказов </p>
                     {% endfor %}
                     <hr>
                     <h4>Завершенные заказы</h4>
