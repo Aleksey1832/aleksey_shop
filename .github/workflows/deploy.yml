@@ -19,7 +19,7 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@{{ secrets.SERVER_IP }} '
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} '
             git config --global --add safe.directory ${{ secrets.PROJECT_DIR }} &&
             cd ${{ secrets.PROJECT_DIR }} &&
             git pull origin main &&
