@@ -189,7 +189,10 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="form_review" type=text>{{ review_add_form.text }}</div>
+                        <div class="form_review" type=text>
+                            {{ review_add_form.text }}
+                            {{ review_add_form.captcha }}
+                        </div>
                         <button class="registration_bottom" type="submit">Оставить отзыв</button>
                     </form>
 
