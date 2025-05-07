@@ -1,6 +1,7 @@
 from django import forms
 from shop.models import Review
 from django.conf import settings
+from mixin.form_mixin import RecaptchaFormMixin
 
 
 SORT_CHOICES = [
@@ -23,10 +24,12 @@ class ShopFormSorted(forms.Form):
     )
 
 
-class ReviewAddForm(forms.ModelForm):
+class ReviewAddForm(RecaptchaFormMixin, forms.ModelForm):
     """
         Определяет форму для добавления отзыва к товару, позволяет связать форму с моделью Review
     """
+    rating = forms.IntegerField(widget=forms.HiddenInput(), initial=3)
+
     class Meta:
         """ Метакласс для определения настроек формы, связанных с моделью Review """
         model = Review
