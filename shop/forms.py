@@ -42,4 +42,3 @@ class ReviewAddForm(RecaptchaFormMixin, forms.ModelForm):
             'text': 'Текст отзыва:',
             'rating': 'Рейтинг товара:'
         }
-
