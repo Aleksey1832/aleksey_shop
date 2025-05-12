@@ -202,7 +202,7 @@ def review_add(request, product_id):
         has_ordered = OrderItem.objects.filter(
             order__user=request.user,
             product=product,
-            order__status='completed'
+            order__status='paid'
         ).exists()
 
         if not has_ordered:
