@@ -172,16 +172,16 @@
         <h2>Отзывы о товаре <label class="review_info">{{ reviews_count }}</label></h2>
 
         <div class="review_add">
-            {% if user.is_authenticated %}
-                {% if not has_reviewed %}  <!-- Проверяем, оставил ли пользователь отзыв ##### -->
+            {% if user.is_authenticated %}  <!-- Проверка, авторизован ли пользователь -->
+                {% if not has_reviewed %}  <!-- Проверка, оставил ли пользователь отзыв ##### -->
                     <h4>Вы можете добавить отзыв</h4>
                     <form method="post" action="{% url 'shop:review_add' product.id %}">
 {#                        {{ review_add_form.as_p }}#}
                         {% csrf_token %}
 
-                        <div class="leave_review">
+                        <div class="leave_review">  <!-- Звездочки -->
                             <label>Ваша оценка:</label>
-                            <div class="">
+                            <div>
                                 {% for i in "12345" %}
                                     <input type="radio" id="full_star{{ i }}" name="rating" value="{{ i }}"
                                         {% if review_add_form.rating.value == i %}checked{% endif %}/>
@@ -204,7 +204,7 @@
                 <p>Что бы оставить комментарии, <a href="{% url 'accounts:login_view' %}" class="link_blue">войдите</a> в аккаунт или зарегистрируйтесь!</p>
             {% endif %}
         </div>
-        <div class="#">
+        <div>
             {% if messages %}
                 {% for message in messages %}
                     <p>{{ message }}</p>
