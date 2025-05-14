@@ -207,4 +207,3 @@ MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
-
