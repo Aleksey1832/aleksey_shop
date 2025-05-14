@@ -203,10 +203,8 @@ EMAIL_HOST_USER = os.getenv('BACKEND_EMAIL_HOST_USER')  # Ваш логин на
 EMAIL_HOST_PASSWORD = os.getenv('BACKEND_EMAIL_HOST_PASSWORD')  # Ваш пароль от почтового ящика (Django_project1)
 DEFAULT_FROM_EMAIL = os.getenv('BACKEND_DEFAULT_FROM_EMAIL')  # Адрес, с которого будут отправляться письма
 
-""" Хранит сообщения в сессии """
 MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-""" RECAPTCHA """
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
