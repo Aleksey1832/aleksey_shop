@@ -49,16 +49,16 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True).order_by('name')
     sort_form = ShopFormSorted(request.POST or None)
 
-    # Получает список ID топ-10 самых просматриваемых товаров
+    """ Получает список ID топ-10 самых просматриваемых товаров """
     top_product_ids = get_product_top_view()
 
-    # Создает объект Case/When для сохранения порядка товаров, как он был получен из Redis
+    """ Создает объект Case/When для сохранения порядка товаров, как он был получен из Redis """
     preserved = Case(
         *[When(id=pk, then=pos) for pos, pk in enumerate(top_product_ids)],
         output_field=IntegerField()
     )
 
-    # Запрашивает объекты Product с ID из top_product_ids и сортирует их согласно порядку, заданному preserved
+    """ Запрашивает объекты Product с ID из top_product_ids и сортирует их согласно порядку, заданному preserved """
     products_top = Product.objects.filter(id__in=top_product_ids).order_by(preserved)
 
     if sort_form.is_valid():
@@ -99,14 +99,21 @@ def product_detail(request, id, slug):
     )
     reviews = product.reviews.all()  # Получаем все отзывы, связанные с данным товаром
 
-    # Оставил ли пользователь отзыв об этом товаре
-    has_reviewed = False
+    """ Купил ли пользователь товар """
+    user_has_ordered = False
+    """ Оставил ли пользователь отзыв об этом товаре """
+    user_has_reviewed = False
     if request.user.is_authenticated:
-        has_reviewed = product.reviews.filter(user=request.user).exists()
+        user_has_reviewed = product.reviews.filter(user=request.user).exists()
+        user_has_ordered = OrderItem.objects.filter(
+            order__user=request.user,
+            product=product,
+            order__status='paid'
+        ).exists()
 
-    view_count = product_views_tracker(product.id)  # трек просмотры
+    view_count = product_views_tracker(product.id)  # Трек просмотры - этот товар просматривали раз
     review_add_form = ReviewAddForm()  # Создание пустой формы для отправки отзыва. В шаблоне отобразится как <input>.
-    reviews_count = product.reviews.count()  # подсчет количества отзывов товара
+    reviews_count = product.reviews.count()  # Подсчет количества отзывов товара
     pluralize_extended = pluralize(reviews_count, ['отзыв', 'отзыва', 'отзывов'])
 
     categories = Category.objects.all()
@@ -132,7 +139,8 @@ def product_detail(request, id, slug):
             'view_count': view_count,
             'review_add_form': review_add_form,
             'reviews': reviews,
-            'has_reviewed': has_reviewed,
+            'user_has_reviewed': user_has_reviewed,
+            'user_has_ordered': user_has_ordered,
             'reviews_count': reviews_count,
             'pluralize_extended': pluralize_extended
         }
@@ -197,7 +205,7 @@ def review_add(request, product_id):
     """
     product = get_object_or_404(Product, id=product_id)
 
-    # Проверка, был ли заказ у user (user не должен оставить отзыв не купив товар)
+    """ Проверка, был ли заказ у user (user не должен оставить отзыв не купив товар) """
     if request.user.is_authenticated:
         has_ordered = OrderItem.objects.filter(
             order__user=request.user,
@@ -212,7 +220,7 @@ def review_add(request, product_id):
                 slug=product.slug
             )
 
-    # Проверка отзывов
+    """ Проверка наличия уже оставленного отзыва """
     existing_review = product.reviews.filter(user_id=request.user).first()
 
     if existing_review:
