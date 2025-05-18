@@ -172,11 +172,12 @@
         <h2>Отзывы о товаре <label class="review_info">{{ reviews_count }}</label></h2>
 
         <div class="review_add">
-            {% if user.is_authenticated %}  <!-- Проверка, авторизован ли пользователь -->
-                {% if not has_reviewed %}  <!-- Проверка, оставил ли пользователь отзыв ##### -->
+            <!-- Проверка, авторизован ли пользователь -->
+            {% if user.is_authenticated %}
+                <!-- Проверка, оставил ли пользователь отзыв и купил ли товар ##### -->
+                {% if not user_has_reviewed and user_has_ordered %}
                     <h4>Вы можете добавить отзыв</h4>
                     <form method="post" action="{% url 'shop:review_add' product.id %}">
-{#                        {{ review_add_form.as_p }}#}
                         {% csrf_token %}
 
                         <div class="leave_review">  <!-- Звездочки -->
@@ -196,8 +197,10 @@
                         <button class="registration_bottom" type="submit">Оставить отзыв</button>
                     </form>
 
+                {% elif user_has_reviewed %}
+                    <p>Вы уже оставили отзыв на этот товар.</p>
                 {% else %}
-                    <p>Вы уже оставили отзыв об этом товаре.</p>
+                    <p>Для оставления отзыва необходимо купить этот товар.</p>
                 {% endif %}
 
             {% else %}
