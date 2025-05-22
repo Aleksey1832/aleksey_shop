@@ -6,7 +6,7 @@ from accounts.forms import (CustomAuthenticationForm,
                             ProfileEditForm,
                             AddressForm)
 from django.contrib.auth.decorators import login_required
-from orders.models import Order
+from orders.models import Order, OrderItem
 from accounts.models import Address
 
 
@@ -38,11 +38,43 @@ def profile_view(request):
     canceled_orders = Order.objects.filter(user=request.user, status='canceled').order_by('-created_at')
     addresses = Address.objects.filter(user=request.user)
 
-    context = {'active_orders': active_orders,
-               'paid_orders': paid_orders,
-               'canceled_orders': canceled_orders,
-               'completed_orders': completed_orders,
-               'addresses': addresses}
+    # Все заказы пользователя
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    order_id = request.GET.get('order_id')
+
+    if order_id:
+        try:
+            order_id = int(order_id)
+            orders = orders.filter(id=order_id)  # Фильтр списка заказов по id
+            orders_item = OrderItem.objects.filter(
+                order__id=order_id,
+                order__user=request.user
+            ).select_related('product')
+
+        except (ValueError, TypeError):
+            # Если order_id некорректный, то показывает все заказы
+            orders_item = OrderItem.objects.filter(order__in=orders).select_related('product')
+
+    else:  # Если order_id не указан, получаем товары для всех заказов пользователя
+        orders_item = OrderItem.objects.filter(order__in=orders).select_related('product')
+
+    product_data = []
+    for item in orders_item:
+        product_name = item.product.name
+        product_image = item.product.image
+
+        product_data.append({'name': product_name, 'image': product_image})
+
+    context = {
+        'active_orders': active_orders,
+        'paid_orders': paid_orders,
+        'canceled_orders': canceled_orders,
+        'completed_orders': completed_orders,
+        'addresses': addresses,
+        'orders': orders,  # Передаем все заказы
+        'orders_item': orders_item,  # Передаем все товары
+        'product_data': product_data,
+    }
 
     return render(request, 'registration/profile.html', context)
 

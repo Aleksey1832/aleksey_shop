@@ -217,7 +217,7 @@
                     <table class="every_review">
                         <tr>
                             <th style="padding-left: 10px">
-                                <h5>{{ review.user.first_name }}.{{ review.user.last_name|slice:":1" }} -
+                                <h5>{{ review.user.first_name }}. {{ review.user.last_name|slice:":1" }} -
                                     {% for i in "x"|ljust:review.rating %}
                                         <span class="full_star">★</span>
                                     {% endfor %}

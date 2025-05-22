@@ -26,10 +26,6 @@
 
         <!-- контент страницы -->
         <div class="layout">
-
-{#        <!-- Поиск товара -->#}
-{#        {% if products_found %}#}
-
             <div class="left_bar">
                 <div class="left_bar_border">
                     <form method="get">
@@ -74,7 +70,6 @@
                             <div class="item">
                                 <a href="{{ product.get_absolute_url }}" title="Посмотреть подробности">
                                     <p>{{ product.product_type }} {{ product.name }}</p>
-    {#                                <p>{{ product.name }}</p>#}
                                 </a>
                                 <p class="prices">{{ product.price }} ₽</p>
                                 <form class="" action="{% url "cart:cart_add" product.id %}" method="post">
