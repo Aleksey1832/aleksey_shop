@@ -68,11 +68,21 @@
                     <h4>Оплаченные заказы</h4>
                     {% for order in paid_orders %}
                         <ul>
-                            <li>
-                                Заказы № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб.
-                                <a href="{% url 'shop:how_buy' %}">
-                                    <br>Отследить заказ</a>
-                            </li>
+                            Заказ № {{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} на сумму {{ order.get_total_cost }} руб. |
+                            <a href="{% url 'shop:how_buy' %}">
+                                Отследить заказ</a>
+                                <ul>
+                                    {% for item in orders_item %}
+                                        {% if item.order.id == order.id %}
+                                            <li>
+                                                <img class="paid_product" src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="{{ item.product.name }}" title="Оставить отзыв">
+                                                {{ item.product.name }}
+                                                <a href="{{ item.product.get_absolute_url }}">Оставить отзыв</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                <hr class="hr-shelf"><br>
+                                </ul>
                          </ul>
                     {% empty %}
                         <p> У вас пока нет оплаченных заказов </p>
@@ -86,7 +96,7 @@
                             </li>
                         </ul>
                     {% empty %}
-                        <p> Ни один заказ пока не выполнен </p>
+                        <p> Ни один заказ пока не выполнен (!!!сайт в процессе разработки, здесь должны отображаться заказы, уже доставленные покупателю!!!)</p>
                     {% endfor %}
                     <hr>
                     <h4>Отмененные заказы</h4>
