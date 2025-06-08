@@ -31,6 +31,9 @@ DEBUG = os.getenv('DEBUG')
 RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
 
 ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
+""" localhost """
+# ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -110,14 +113,14 @@ DATABASES = {
 CACHES = {
     'default': {  # храним сессии пользователей
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_DEFAULT")}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     },
     'views': {  # храним просмотры пользователей
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/10',
+        'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_VIEWS")}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -160,7 +163,11 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_REDIRECT_URL_HTTPS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://5dd5-141-94-16-245.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://5dd5-141-94-16-245.ngrok-free.app',
+    'http://localhost',
+    'http://web'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -190,7 +197,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
+SESSION_COOKIE_AGE = (int(os.getenv('COOKIE_SECONDS')) *
+                      int(os.getenv('COOKIE_MINUTES')) *
+                      int(os.getenv('COOKIE_HOURS')) *
+                      int(os.getenv('COOKIE_DAYS')))
 
 CART_SESSION_ID = 'cart'
 
@@ -203,7 +213,9 @@ EMAIL_HOST_USER = os.getenv('BACKEND_EMAIL_HOST_USER')  # Ваш логин на
 EMAIL_HOST_PASSWORD = os.getenv('BACKEND_EMAIL_HOST_PASSWORD')  # Ваш пароль от почтового ящика (Django_project1)
 DEFAULT_FROM_EMAIL = os.getenv('BACKEND_DEFAULT_FROM_EMAIL')  # Адрес, с которого будут отправляться письма
 
+""" Хранит сообщения в сессии """
 MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+""" RECAPTCHA """
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
