@@ -38,16 +38,16 @@
                                 <td>{{ product.name }} Код:{{ product.product_code }}</td>
                                 <td>
                                     <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                        {% csrf_token %}
                                         {{ item.update_quantity_form.quantity }}
                                         {{ item.update_quantity_form.override }}
                                         <input class="update" type="submit" value="Обновить">
-                                        {% csrf_token %}
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                                        <input class="update" type="submit" value="Удалить">
                                         {% csrf_token %}
+                                        <input class="update" type="submit" value="Удалить">
                                     </form>
                                 </td>
                                 <td class="num">{{ item.price }} ₽</td>
@@ -66,7 +66,7 @@
             <div class="text-right">
                 <form action="{% url "orders:order_create" %}" method="get">
                     <button class="registration_bottom" type="submit">Перейти к оформлению</button>
-                    {% csrf_token %}
+{#                    {% csrf_token %}#}
                 </form>
             </div>
             <div class="total">
