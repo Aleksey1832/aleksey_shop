@@ -1,9 +1,8 @@
 services:
   web:
-    build:  # для deploy эту удалить
-      context: .  # для deploy эту удалить
-      dockerfile: Dockerfile  # для deploy эту удалить
-    # image: aleks1832/djangoproject1-web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: sh -c "python manage.py collectstatic --noinput && gunicorn djangoProject1.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/app
