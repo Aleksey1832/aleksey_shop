@@ -35,12 +35,15 @@ DEBUG = os.getenv('DEBUG')
 
 RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
 
-""" localhost """
+""" localhost:8000 """
 # ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
+""" localhost """
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 """ Deploy """
-ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
+# ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
+# ALLOWED_HOSTS = ['77.232.130.43', 'localhost']
 
 # Application definition
 
@@ -204,10 +207,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
-SESSION_COOKIE_AGE = (int(os.getenv('COOKIE_SECONDS')) *
-                      int(os.getenv('COOKIE_MINUTES')) *
-                      int(os.getenv('COOKIE_HOURS')) *
-                      int(os.getenv('COOKIE_DAYS')))
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 CART_SESSION_ID = 'cart'
 
