@@ -30,12 +30,15 @@ DEBUG = os.getenv('DEBUG')
 
 RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
 
-""" localhost """
+""" localhost:8000 """
 # ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
+""" localhost """
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 """ Deploy """
-ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
+# ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
+# ALLOWED_HOSTS = ['77.232.130.43', 'localhost']
 
 # Application definition
 
@@ -153,6 +156,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_SECRET')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
@@ -186,6 +190,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = 'media/'
@@ -198,10 +203,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
-SESSION_COOKIE_AGE = (int(os.getenv('COOKIE_SECONDS')) *
-                      int(os.getenv('COOKIE_MINUTES')) *
-                      int(os.getenv('COOKIE_HOURS')) *
-                      int(os.getenv('COOKIE_DAYS')))
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 CART_SESSION_ID = 'cart'
 
