@@ -1,0 +1,90 @@
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx_cert:/etc/nginx/certs
+      - ./nginx/vhost.d:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+      - ./static:/static:ro
+      - ./media:/media:ro
+    restart: unless-stopped
+    networks:
+      - webnet
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
+      DEFAULT_EMAIL: khitrov.aleksey@inbox.ru
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx_cert:/etc/nginx/certs
+      - ./nginx/vhost.d:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    restart: unless-stopped
+    networks:
+      - webnet
+
+  nginx-static:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./static:/static:ro
+      - ./media:/media:ro
+      - ./nginx/static.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - VIRTUAL_HOST=shieldfire.ru
+      - VIRTUAL_PATH=/static
+    restart: unless-stopped
+    networks:
+      - webnet
+
+  web:
+    image: aleks1832/djangoproject1-web:latest
+    command: sh -c "python manage.py collectstatic --noinput && gunicorn djangoProject1.wsgi:application --bind 0.0.0.0:8000"
+    expose:
+      - "8000"
+    volumes:
+      - ./static:/app/static
+      - ./media:/app/media
+    environment:
+      - VIRTUAL_HOST=shieldfire.ru
+      - LETSENCRYPT_HOST=shieldfire.ru
+      - LETSENCRYPT_EMAIL=khitrov.aleksey@inbox.ru
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - webnet
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - webnet
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - webnet
+
+volumes:
+  postgres_data:
+  nginx_cert:
+  nginx_html:
+
+networks:
+  webnet:
