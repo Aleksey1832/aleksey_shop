@@ -117,14 +117,16 @@ DATABASES = {
 CACHES = {
     'default': {  # храним сессии пользователей
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_DEFAULT")}',
+        'LOCATION': os.getenv('REDIS_SESSION_URL'),
+        # 'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_DEFAULT")}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     },
     'views': {  # храним просмотры пользователей
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_VIEWS")}',
+        'LOCATION': os.getenv('REDIS_VIEWS_URL'),
+        # 'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_VIEWS")}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -169,9 +171,10 @@ LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_REDIRECT_URL_HTTPS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://5dd5-141-94-16-245.ngrok-free.app',
-    'http://localhost',
-    'http://web'
+    os.getenv('CSRF_HTTPS'),
+    os.getenv('CSRF_HTTP'),
+    os.getenv('CSRF_LOCAL'),
+    os.getenv('CSRF_WEB')
 ]
 
 # Internationalization
@@ -190,11 +193,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

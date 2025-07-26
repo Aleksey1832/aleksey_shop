@@ -88,6 +88,16 @@
     width: 95%;
 }
 
+.hr-shelf1 {
+    margin: -20px 0 5px 10px;
+    padding: 0;
+    height: 20px;
+    border: none;
+    border-bottom: 1px solid #007df6;
+    box-shadow: 0 20px 20px -20px #333;
+    width: 95%;
+}
+
 /* Вывод предварительно заказа для страницы success.html */
 .preliminarily {
     font-family: Arial, sans-serif;
