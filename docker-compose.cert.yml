@@ -12,9 +12,9 @@ services:
       - nginx_html:/usr/share/nginx/html
       - ./static:/static:ro
       - ./media:/media:ro
-    restart: unless-stopped
     networks:
       - webnet
+    restart: unless-stopped
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -28,22 +28,33 @@ services:
       - nginx_cert:/etc/nginx/certs
       - ./nginx/vhost.d:/etc/nginx/vhost.d
       - nginx_html:/usr/share/nginx/html
-    restart: unless-stopped
     networks:
       - webnet
+    restart: unless-stopped
 
   nginx-static:
-    image: nginx:1.27-alpine
+    image: nginx:alpine
     volumes:
       - ./static:/static:ro
+      - ./nginx/static.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - VIRTUAL_HOST=shieldfire.ru
+      - VIRTUAL_PATH=/static
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  nginx-media:
+    image: nginx:alpine
+    volumes:
       - ./media:/media:ro
       - ./nginx/static.conf:/etc/nginx/conf.d/default.conf
     environment:
       - VIRTUAL_HOST=shieldfire.ru
       - VIRTUAL_PATH=/static
-    restart: unless-stopped
     networks:
       - webnet
+    restart: unless-stopped
 
   web:
     image: aleks1832/djangoproject1-web:latest
@@ -59,7 +70,23 @@ services:
       - LETSENCRYPT_EMAIL=khitrov.aleksey@inbox.ru
     env_file:
       - .env
+    networks:
+      - webnet
     restart: unless-stopped
+
+  celery:
+    image: aleks1832/djangoproject1-web:latest
+    command: celery -A djangoProject1 worker --loglevel=info --concurrency=2
+    volumes:
+      - ./static:/app/static
+      - ./media:/app/media
+    env_file:
+      - .env
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+    depends_on:
+      - redis
     networks:
       - webnet
 
@@ -71,19 +98,19 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
     networks:
       - webnet
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
-    restart: unless-stopped
     networks:
       - webnet
+    restart: unless-stopped
 
 volumes:
   postgres_data:
-  nginx_cert:
+  nginx_certs:
   nginx_html:
 
 networks:
