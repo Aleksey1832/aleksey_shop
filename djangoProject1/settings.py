@@ -28,7 +28,23 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
+# Rating - review (shop/forms)
 RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
+
+# Sort (shop/forms)
+SORT_CHOICES = [
+    ('default', 'По умолчанию'),
+    ('name', 'По имени'),
+    ('price_asc', 'Цена по возрастанию'),
+    ('price_desc', 'Цена по убыванию')
+]
+
+# System of views (shop/views)
+TOP_VIEWS = 'top_product_views'
+TOP_VIEWS_LIMIT = 10
+
+# FONTS (orders/pdf)
+PDF_ORDER_FONT = 'shop/static/fonts/arial.ttf'
 
 """ localhost:8000 """
 # ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
@@ -117,6 +133,7 @@ DATABASES = {
 CACHES = {
     'default': {  # храним сессии пользователей
         'BACKEND': 'django_redis.cache.RedisCache',
+
         'LOCATION': os.getenv('REDIS_SESSION_URL'),
         # 'LOCATION': f'redis://{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/{os.getenv("REDIS_DB_DEFAULT")}',
         'OPTIONS': {
