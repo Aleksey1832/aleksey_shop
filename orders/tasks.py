@@ -28,7 +28,6 @@ def order_created(order_id):
         from_email=settings.EMAIL_HOST_USER,
         to=[order.email]
     )
-
     email.attach(
         filename=f'order_{order.id}_{order.created_at.strftime("%d.%m.%Y")}.pdf',
         content=pdf_file.getvalue(),
