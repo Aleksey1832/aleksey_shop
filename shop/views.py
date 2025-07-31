@@ -12,12 +12,11 @@ from django.db import IntegrityError
 from django.contrib import messages
 from django.db.models import Case, When, IntegerField
 from django.views.decorators.http import require_POST
+from django.conf import settings
 from orders.models import OrderItem
 
 
 views_cache = caches['views']
-TOP_VIEWS = 'top_product_views'
-TOP_VIEWS_LIMIT = 10
 
 
 def product_views_tracker(product_id):
@@ -29,15 +28,15 @@ def product_views_tracker(product_id):
     redis_client.incr(key)
 
     # Обновляем рейтинг популярных товаров
-    redis_client.zincrby(TOP_VIEWS, 1, product_id)
+    redis_client.zincrby(settings.TOP_VIEWS, 1, product_id)
 
     return int(redis_client.get(key) or 0)
 
 
-def get_product_top_view(limit=TOP_VIEWS_LIMIT):
+def get_product_top_view(limit=settings.TOP_VIEWS_LIMIT):
     """ Список самых просматриваемых товаров """
     redis_client = views_cache.client.get_client()
-    top = redis_client.zrevrange(TOP_VIEWS, 0, limit - 1, withscores=False)
+    top = redis_client.zrevrange(settings.TOP_VIEWS, 0, limit - 1, withscores=False)
 
     return [int(item) for item in top]
 

@@ -7,7 +7,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 
 def generate_pdf(order):
-    font_path = os.path.join(settings.BASE_DIR, 'shop/static/fonts/arial.ttf')
+    font_path = os.path.join(settings.BASE_DIR, settings.PDF_ORDER_FONT)
     buffer = BytesIO()
 
     try:

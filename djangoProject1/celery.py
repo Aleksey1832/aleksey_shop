@@ -9,7 +9,7 @@ app = Celery('djangoProject1')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject1.settings')
 
-# Переключение на Redis
+# Switching to Redis
 app.conf.broker_url = os.getenv('CELERY_BROKER_URL')
 app.conf.result_backend = os.getenv('CELERY_RESULT_BACKEND')
 
