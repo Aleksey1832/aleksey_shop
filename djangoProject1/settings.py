@@ -46,13 +46,13 @@ TOP_VIEWS_LIMIT = 10
 # FONTS (orders/pdf)
 PDF_ORDER_FONT = 'shop/static/fonts/arial.ttf'
 
-""" localhost:8000 """
+# """ localhost:8000 """
 # ALLOWED_HOSTS = ['5dd5-141-94-16-245.ngrok-free.app', 'localhost', '127.0.0.1']
 
-""" localhost """
+# """ localhost """
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
-""" Deploy """
+# """ Deploy """
 # ALLOWED_HOSTS = ['178.250.246.96', 'localhost']
 # ALLOWED_HOSTS = ['77.232.130.43', 'localhost']
 
@@ -226,7 +226,7 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 CART_SESSION_ID = 'cart'
 
-""" Настройка почтового - backend """
+# """ Setting up mail - backend """
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Backend для отправки сообщений по электронной почте
 EMAIL_HOST = 'smtp.mail.ru'  # SMTP=сервер MAIL.RU
 EMAIL_PORT = os.getenv('BACKEND_EMAIL_PORT')  # Порт для отправки писем через SSL/TLS
@@ -235,9 +235,9 @@ EMAIL_HOST_USER = os.getenv('BACKEND_EMAIL_HOST_USER')  # Ваш логин на
 EMAIL_HOST_PASSWORD = os.getenv('BACKEND_EMAIL_HOST_PASSWORD')  # Ваш пароль от почтового ящика (Django_project1)
 DEFAULT_FROM_EMAIL = os.getenv('BACKEND_DEFAULT_FROM_EMAIL')  # Адрес, с которого будут отправляться письма
 
-""" Хранит сообщения в сессии """
+# """ Stores messages in a session """
 MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-""" RECAPTCHA """
+# """ RECAPTCHA """
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
