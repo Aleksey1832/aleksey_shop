@@ -34,5 +34,5 @@ def order_created(order_id):
         content=pdf_file,
         mimetype='application/pdf'
     )
-    pdf_file.close()
+    # pdf_file.close()
     email.send()
