@@ -18,21 +18,34 @@ def sent_email_after_order_created(order_id):
 
 @shared_task
 def order_created(order_id):
-    order = Order.objects.get(id=order_id)
-    pdf_file = generate_pdf(order)
-    email = EmailMessage(
-        subject=f'Заказ № {order_id} от {order.created_at.strftime("%d.%m.%Y")}',
-        body=f'Уважаемый(ая), {order.first_name}!\n'
-             f'Ваш заказ № {order_id} успешно оформлен!\n'
-             f'На сумму {order.get_total_cost()}',
-        from_email=settings.EMAIL_HOST_USER,
-        to=[order.email]
-    )
+    print(f"Starting order_created task for order_id: {order_id}")
+    try:
+        order = Order.objects.get(id=order_id)
+        print(f"Order found: {order.id}, email: {order.email}")
+        pdf_file = generate_pdf(order)
+        print("PDF generated.")
+        email = EmailMessage(
+            subject=f'Заказ № {order_id} от {order.created_at.strftime("%d.%m.%Y")}',
+            body=f'Уважаемый(ая), {order.first_name}!\n'
+                 f'Ваш заказ № {order_id} успешно оформлен!\n'
+                 f'На сумму {order.get_total_cost()}',
+            from_email=settings.EMAIL_HOST_USER,
+            to=[order.email]
+        )
+        print("Email object created.")
 
-    email.attach(
-        filename=f'order_{order.id}_{order.created_at.strftime("%d.%m.%Y")}.pdf',
-        content=pdf_file,
-        mimetype='application/pdf'
-    )
-    # pdf_file.close()
-    email.send()
+        email.attach(
+            filename=f'order_{order.id}_{order.created_at.strftime("%d.%m.%Y")}.pdf',
+            content=pdf_file,
+            # content=pdf_file.getvalue(),
+            mimetype='application/pdf'
+        )
+        print("PDF attached to email.")
+        # pdf_file.close()
+        email.send()
+        print("Email sent successfully!")
+    except Exception as e:
+        print(f"An error occurred in order_created task: {e}")
+        import traceback
+        traceback.print_exc()
+
