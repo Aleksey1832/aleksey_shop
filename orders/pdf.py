@@ -23,6 +23,7 @@ def generate_pdf(order):
         pdf.save()
         buffer.seek(0)
 
+        # return buffer
         return buffer.getvalue()
 
     except FileNotFoundError:

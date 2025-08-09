@@ -48,4 +48,3 @@ def order_created(order_id):
         print(f"An error occurred in order_created task: {e}")
         import traceback
         traceback.print_exc()
-
