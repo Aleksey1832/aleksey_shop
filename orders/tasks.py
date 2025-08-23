@@ -23,7 +23,7 @@ def order_created(order_id):
         order = Order.objects.get(id=order_id)
         print(f"Order found: {order.id}, email: {order.email}")
         pdf_file = generate_pdf(order)
-        print("PDF generated.", pdf_file)
+        print("PDF generated.")
         email = EmailMessage(
             subject=f'Заказ № {order_id} от {order.created_at.strftime("%d.%m.%Y")}',
             body=f'Уважаемый(ая), {order.first_name}!\n'
@@ -40,7 +40,7 @@ def order_created(order_id):
             # content=pdf_file.getvalue(),
             mimetype='application/pdf'
         )
-        print("PDF attached to email.")
+        print("PDF attached to email.", email.attach(content=pdf_file))
         # pdf_file.close()
         email.send()
         print("Email sent successfully!")
