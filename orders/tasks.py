@@ -22,7 +22,7 @@ def order_created(order_id):
     try:
         order = Order.objects.get(id=order_id)
         print(f"Order found: {order.id}, email: {order.email}")
-        pdf_file = generate_pdf(order)
+        pdf_file_content = generate_pdf(order)
         print("PDF generated.")
         email = EmailMessage(
             subject=f'Заказ № {order_id} от {order.created_at.strftime("%d.%m.%Y")}',
@@ -34,13 +34,16 @@ def order_created(order_id):
         )
         print("Email object created.")
 
-        email.attach(
-            filename=f'order_{order.id}_{order.created_at.strftime("%d.%m.%Y")}.pdf',
-            content=pdf_file,
-            # content=pdf_file.getvalue(),
-            mimetype='application/pdf'
-        )
-        print("PDF attached to email.", email.attach(content=pdf_file))
+        if pdf_file_content:
+            email.attach(
+                filename=f'order_{order.id}_{order.created_at.strftime("%d.%m.%Y")}.pdf',
+                content=pdf_file_content,
+                # content=pdf_file.getvalue(),
+                mimetype='application/pdf'
+            )
+            print("PDF attached to email.")
+        else:
+            print(f"Warning: PDF could not be generated for order {order_id}. Email will be sent without attachment.")
         # pdf_file.close()
         email.send()
         print("Email sent successfully!")
