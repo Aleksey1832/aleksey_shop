@@ -4,8 +4,7 @@ from shop.models import (Product, Category, ProductConstruction,
                          ProductRangModelHearth, ProductType)
 from cart.forms import CartAddProductForm
 from cart.views import pluralize
-from shop.forms import ReviewAddForm
-from shop.forms import ShopFormSorted
+from shop.forms import ReviewAddForm, ShopFormSorted
 from shop.filters import SearchFilter
 from django.core.cache import caches
 from django.db import IntegrityError
