@@ -13,4 +13,5 @@ urlpatterns = [
     path('password_change/', views.change_password_view, name='change_password_view'),
     path('address/new/', views.add_address, name='add_address'),
     path('address/delete/<int:address_id>/', views.delete_address, name='delete_address'),
+    path('check_code/verify/', views.login_verify_code, name='login_verify_code'),
 ]
