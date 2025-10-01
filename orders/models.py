@@ -28,6 +28,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
     paid = models.BooleanField(default=False, verbose_name='Статус оплаты')
+    payment_id = models.CharField(max_length=255, blank=True, null=True, verbose_name='Идентификатор оплаты')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     status = models.CharField(max_length=20,
                               choices=ORDER_STATUS_CHOICES,
