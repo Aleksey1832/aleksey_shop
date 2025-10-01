@@ -5,32 +5,118 @@
 
 {% block content %}
 
-    <div class="info_order">
-        <h4>Доставка товара</h4>
-        <hr class="hr-shelf">
-        <h6 style="text-decoration: underline;"> Оформление заказа</h6>
-        <p> В вашей корзине: <b>{{ total_items }} {{ ending_word }}</b></p>
-        <p> На общую сумму: <b>{{ cart.get_total_price_sale }} руб.</b></p>
-        {% if cart.coupon %}
-            <p>Скидка составила: <b>{{ cart.get_discount }} руб.</b></p>
-        {% endif %}
-        <hr class="hr-shelf">
-    </div>
+{#    <div class="info_order">#}
+{#        <h4>Содержимое корзины</h4>#}
+{#        <hr class="hr-shelf">#}
+{#        <h6 style="text-decoration: underline;"> Оформление заказа</h6>#}
+{#        <p> В вашей корзине: <b>{{ total_items }} {{ ending_word }}</b></p>#}
+{#        <p> На общую сумму: <b>{{ cart.get_total_price_sale }} руб.</b></p>#}
+{#        {% if cart.coupon %}#}
+{#            <p>Скидка составила: <b>{{ cart.get_discount }} руб.</b></p>#}
+{#        {% endif %}#}
+{#        <hr class="hr-shelf">#}
+{#    </div>#}
+{##}
+{#    <div class="registration_body">#}
+{#        <div class="registration_container">#}
+{#            <h1 class="registration_head">Ваш заказ</h1>#}
+{#            <h6>Пожалуйста, заполните эту форму, чтобы оформить покупку.</h6>#}
+{#            <form method="post" class="registration_form_input">#}
+{#                {{ form.as_p }}#}
+{#                {% csrf_token %}#}
+{#                <ul style="float: right">#}
+{#                    <li>#}
+{#                        <p class="bold-links">#}
+{#                            <a href="{% url 'accounts:add_address' %}">Добавить адрес доставки</a>#}
+{#                        </p>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <p class="bold-links">#}
+{#                            <a href="{% url 'cart:cart_detail' %}">Вернуться в корзину</a>#}
+{#                        </p>#}
+{#                    </li>#}
+{#                </ul>#}
+{#                <input class="registration_bottom" type="submit" value="Заказать">#}
+{##}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{##}
 
-    <div class="registration_body">
-        <div class="registration_container">
-            <h1 class="registration_head">Форма заказа</h1>
-            <h6>Пожалуйста, заполните эту форму, чтобы оформить покупку.</h6>
-            <form method="post" class="registration_form_input">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <p class="bold-links">
-                    <a style="float: right" href="{% url 'accounts:add_address' %}">Добавить адрес доставки</a>
-                </p>
-                <input class="registration_bottom" type="submit" value="Заказать">
+    <div class="registration_container_create">
+        <div class="registration_form_input">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Ваш заказ</h1>
+                    <p class="bold-links">
+                        В вашей корзине: {{ total_items }} {{ ending_word }}.
+                        <a href="{% url 'cart:cart_detail' %}">Вернуться в корзину</a>
+                    </p>
+                    <h2>Информация о доставке</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <hr class="hr-shelf">
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {% if field.name == 'shipping_address' %}
+                                    {{ field }}
+                                    <small class="bold-links">
+                                        <a style="float: right" href="{% url 'accounts:add_address' %}">Добавить новый адрес</a>
+                                    </small>
+                                {% else %}
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
 
-            </form>
+                        <input class="registration_bottom" type="submit" value="Оформить заказ">
+{#                        <button type="submit" class="btn btn-primary mt-3">Оформить заказ</button>#}
+                    </form>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Содержимое корзины</h2>
+                    {% for item in cart %}
+                        <div class="card mb-2">
+                            <div class="card-body">
+{#                                <h5 class="card-title">{{ item.product.name }}</h5>#}
+                                <div class="card-text-content"> <!-- Переименовали для ясности -->
+                                    <div class="item-details"> <!-- Этот div будет содержать текст -->
+                                        <h5>{{ item.product.name }}</h5>
+                                        Цена: {{ item.price }} руб. <br>
+                                        Количество: {{ item.quantity }} <br>
+                                        Итого: {{ item.total_price }} руб.
+                                    </div>
+                                    <div class="image-wrapper"> <!-- Новый оберточный div для картинки -->
+                                        <img class="item-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr class="hr-shelf">
+                    <p class="h4 text-end">
+                        Общая сумма: {{ cart.get_total_price }} руб.
+                    </p>
+                    {% if cart.coupon %}
+                        <p class="h5 text-success text-end">
+                            Скидка ({{ cart.coupon.code }}): -{{ cart.get_discount }} руб.
+                        </p>
+                        <p class="h4 text-end">
+                            Итого к оплате: {{ cart.get_total_price_after_discount }} руб.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
+
 
 {% endblock %}

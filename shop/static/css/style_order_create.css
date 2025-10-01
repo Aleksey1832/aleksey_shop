@@ -16,7 +16,8 @@
     color: #0c28de;
 }
 
-/* формы регистраций для login.html, registration.html, change_password.html, edit_profile.html, create.html */
+/* формы регистраций для login.html, registration.html,
+ change_password.html, edit_profile.html, create.html, verify_code.html */
 .registration_body {
     font-family: Arial, sans-serif;
     position: unset;
@@ -25,9 +26,20 @@
 
 .registration_container {
     padding: 20px 20px 20px 20px;
-    margin: 40px auto;
+    margin: 20px auto;
     width: 500px;
+    height: auto;
     max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+}
+
+/* для формы create.html второй вариант */
+.registration_container_create {
+    padding: 20px 20px 20px 20px;
+    margin: 20px auto;
+    /*height: auto;*/
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
@@ -40,7 +52,7 @@
 
 .registration_form_input {
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 20px 0 20px;
     margin: 2px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -48,11 +60,52 @@
     box-sizing: border-box;
 }
 
+
+.card-text-content {
+  display: flex; /* Включаем Flexbox */
+  justify-content: space-between; /* Размещаем элементы по краям */
+  align-items: flex-start; /* Выравниваем по верхней границе */
+  gap: 10px; /* Небольшой отступ между текстом и контейнером картинки */
+  flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку, если не хватает места */
+}
+
+.item-details {
+  flex-grow: 1; /* Позволяем текстовому блоку занять всё доступное пространство */
+  flex-basis: 200px; /* Задаем базовую ширину, чтобы текст не сжимался слишком сильно */
+  min-width: 150px; /* Минимальная ширина, чтобы текст оставался читаемым */
+}
+
+.image-wrapper {
+  flex-shrink: 0; /* Предотвращаем сжатие контейнера картинки */
+  flex-basis: 100px; /* Задаем базовую ширину контейнера картинки, чтобы она не была слишком большой */
+  display: flex; /* Делаем обертку flex-контейнером для выравнивания картинки внутри */
+  justify-content: center; /* Центрируем картинку внутри обертки */
+  align-items: center; /* Центрируем картинку по вертикали внутри обертки */
+}
+
+.item-image {
+    margin-top: -10px;
+    width: 100px; /* Задаем желаемую ширину картинки */
+    height: auto; /* Сохраняем пропорции */
+    display: block; /* Убираем лишний отступ под картинкой */
+}
+
+/* Стили для общей суммы и скидки, как у вас были */
+.h4.text-end {
+    margin-top: 20px; /* Добавим небольшой отступ сверху */
+    text-align: center;
+}
+.h5.text-success.text-end {
+    margin-top: 10px;
+}
+
+
+
+
 /* Иконки для регистрации через соцсети для login.html */
 .icon_row {
     margin-left: 130px;
     width: 130px;
-
 }
 
 .icon_reg {
@@ -78,6 +131,23 @@
     background-color: #4CAF50; /* #3e9842 */
 }
 
+/* Для всех серых кнопок */
+.request-button {
+    background-color: #eeefee; /* #4CAF50 */
+    color: #1f1f1f;
+    padding: 10px 17px;
+    margin: 0 0 15px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.request-button:hover {
+    background-color: #d8dcd9; /* #3e9842 */
+}
+
+/* для синих линий */
 .hr-shelf {
     margin: -40px 0 5px 10px;
     padding: 0;
@@ -98,7 +168,7 @@
     width: 95%;
 }
 
-/* Вывод предварительно заказа для страницы success.html */
+/* Вывод успешного заказа для страницы success.html */
 .preliminarily {
     font-family: Arial, sans-serif;
     font-size: 18px;
@@ -106,7 +176,7 @@
     padding: 20px 20px 10px 20px;
     margin: 130px auto;
     width: 500px;
-    height: 210px;
+    height: auto;
     max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
@@ -288,4 +358,177 @@
     border: 1px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     margin: 20px 0 20px 0;
+}
+
+/*  формы регистраций для verify.html */
+.registration_body_verify {
+    font-family: Arial, sans-serif;
+    position: unset;
+    text-align: center;
+    font-size: 18px;
+    /*background-color: rgb(244, 244, 244, 0.5);*/
+}
+
+/* для таймера */
+.timer-code {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1em;
+    color: #333; /* Цвет текста "Осталось времени:" */
+}
+
+/* Стилизация самого счетчика */
+#countdown {
+    font-weight: bold;
+    color: #007bff; /* Начальный цвет цифр таймера */
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #e9ecef; /* Светлый фон для цифр */
+    display: inline-block; /* Позволяет применять padding и margin */
+    min-width: 60px; /* Минимальная ширина, чтобы цифры не "прыгали" */
+    text-align: center;
+    transition: color 0.5s ease, background-color 0.5s ease; /* Плавное изменение цвета */
+}
+
+/* Пример "анимации" - изменение цвета при приближении к концу */
+/* Это будет работать, если JavaScript будет добавлять класс, например, 'warning' или 'danger' */
+#countdown.warning {
+    color: #ffc107; /* Желтый при приближении к концу */
+}
+
+#countdown.danger {
+    color: #dc3545; /* Красный, когда время почти истекло */
+    background-color: #f8d7da; /* Легкий красный фон */
+}
+
+/* Просто анимированный переход для цвета, без смены класса */
+/* Это не будет работать как таймер, но добавит плавности */
+@keyframes colorChange {
+    0% { color: #007bff; }
+    /*50% { color: #ffc107; }*/
+    /*100% { color: #dc3545; }*/
+}
+
+/* Если бы вы хотели, чтобы сам span менял цвет плавно,
+   но это не будет зависеть от реального времени */
+#countdown {
+    animation: colorChange 10s infinite alternate;
+}
+
+/* При наведении на сам счетчик */
+#countdown:hover {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Легкая тень при наведении */
+}
+
+/*  формы регистраций для "Не получили код?" verify.html */
+.request-new-code {
+    margin-top: 50px;
+}
+
+/* Общие стили для формы */
+.registration_form_input_verify {
+    display: flex; /* Используем flexbox для выравнивания */
+    flex-direction: column; /* Элементы располагаются друг под другом */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    gap: 15px; /* Отступ между элементами */
+    padding: 20px;
+    /*background-color: #282c34; !* Темный фон, как в терминале *!*/
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; /* Шрифт, похожий на моноширинный */
+    color: #cecfd2; /* Цвет текста по умолчанию */
+}
+
+/* Обертка для поля ввода, чтобы лучше контролировать стили */
+.code-input-wrapper {
+    position: relative; /* Нужно для позиционирования псевдоэлементов */
+    width: 100%; /* Занимает всю доступную ширину */
+    max-width: 300px; /* Ограничиваем максимальную ширину */
+}
+
+/* Стили для самого поля ввода */
+.registration_form_input_verify input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #858688; /* Более темный фон для поля */
+    border: none; /* Убираем стандартную границу */
+    border-bottom: 2px solid #61afef; /* Подчеркивание, как в терминале */
+    color: #e06c75; /* Цвет вводимого текста */
+    font-size: 1rem;
+    border-radius: 4px;
+    outline: none; /* Убираем стандартный outline при фокусе */
+    transition: all 0.3s ease-in-out; /* Плавный переход всех изменений */
+    box-sizing: border-box; /* Чтобы padding не влиял на общую ширину */
+}
+
+/* Стили для плейсхолдера */
+.registration_form_input_verify input[type="text"]::placeholder {
+    color: #a8b1c2; /* Более светлый цвет для плейсхолдера */
+    font-style: italic;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Динамика: изменение при фокусе */
+.registration_form_input_verify input[type="text"]:focus {
+    border-bottom-color: #98c379; /* Цвет подчеркивания при фокусе */
+    box-shadow: 0 0 10px rgba(152, 195, 121, 0.5); /* Легкая тень при фокусе */
+    background-color: #444a53; /* Немного светлее фон при фокусе */
+}
+
+/* Динамика: изменение плейсхолдер при фокусе */
+.registration_form_input_verify input[type="text"]:focus::placeholder {
+    color: #4b525e; /* Плейсхолдер становится менее заметным при фокусе */
+}
+
+/* Дополнительная динамика: анимация подчеркивания */
+.code-input-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Изначально подчеркивание отсутствует */
+    height: 2px;
+    background-color: #98c379; /* Цвет подчеркивания */
+    transition: width 0.3s ease-in-out;
+}
+
+.registration_form_input_verify input[type="text"]:focus ~ .code-input-wrapper::after {
+    width: 100%; /* Подчеркивание появляется при фокусе */
+}
+
+/* Стили для кнопки */
+.registration_bottom_verify {
+    padding: 10px 20px;
+    background-color: #61afef; /* Цвет кнопки */
+    color: #ffffff; /* Цвет текста кнопки */
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Динамика: изменение кнопки при наведении */
+.registration_bottom_verify:hover {
+    background-color: #569cd6; /* Более темный цвет при наведении */
+    transform: translateY(-2px); /* Легкий подъем кнопки */
+}
+
+/* Динамика: изменение кнопки при нажатии */
+.registration_bottom_verify:active {
+    background-color: #4b8ac7; /* Еще темнее при нажатии */
+    transform: translateY(1px); /* Эффект "придавливания" */
+}
+
+/* Стили для .code-input-wrapper, если он не является прямым родителем input (исправление селектора ::after) */
+.registration_form_input_verify .code-input-wrapper input[type="text"]:focus ~ .code-input-wrapper::after {
+}
+
+/* Альтернативный вариант для ::after, если он внутри input */
+.registration_form_input_verify input[type="text"] {
+    /* ... другие стили ... */
+    position: relative; /* Добавляем position relative для input, если ::after будет внутри него */
 }
