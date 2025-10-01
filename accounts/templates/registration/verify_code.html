@@ -1,0 +1,85 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %} Проверка кода {% endblock %}
+
+{% block content %}
+
+    <div class="registration_body_verify">
+        <div class="registration_container">
+            <h1 class="registration_head">Проверка кода</h1>
+
+            {% if error %}
+                <p style="color: red; text-align: center;">{{ error }}</p>
+                <form id="requestNewCodeForm" method="post" action={% url 'accounts:login_view' %}>
+                {% csrf_token %}
+                <input class="registration_bottom" type="submit" value="Запросить новый код">
+{#                <button type="submit">Запросить новый код</button>#}
+                </form>
+            {% endif %}
+
+            {# Отображаем форму ввода кода, только если нет ошибок и пользователь найден #}
+            {% if not error and user%}
+                <p>Пожалуйста, введите код, отправленный на вашу электронную почту.</p>
+
+                <div class="timer-code">
+                    Осталось времени: <span id="countdown"
+                                               data-code-lifetime-seconds="{{ code_lifetime_seconds|default:"180" }}"
+                                               data-created-at-timestamp="{{ created_at|default:"null" }}"></span>
+                </div>
+
+                <form method="post" class="registration_form_input_verify">
+                    {% csrf_token %}
+                    <div class="code-input-wrapper">
+                        <input type="text" name="code" placeholder="Введите код" required>
+                    </div>
+                    <button class="registration_bottom_verify" type="submit">Подтвердить</button>
+                </form>
+
+                {# Форма для запроса нового кода, которая будет отправлена автоматически #}
+                <div class="request-new-code">
+                    <p>Не получили код?</p>
+                    <form id="requestNewCodeForm" method="post" action={% url 'accounts:login_view' %}>
+                        {% csrf_token %}
+                        {# скрытое поле, чтобы сервер знал, что это запрос нового кода, если нужно #}
+                        <input type="hidden" name="request_new_code" value="true">
+                        <button type="submit" class="request-button">Запросить новый код</button>
+                    </form>
+                </div>
+
+            {% elif user %} {# Если пользователь есть, но код уже не актуален или ошибка, показываем только запрос нового кода #}
+                <p>Ваш предыдущий код истек или был неверным. Пожалуйста, запросите новый код.</p>
+                <div class="request-new-code">
+                    <form id="requestNewCodeForm" method="post" action="{% url 'accounts:login_verify_code' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="request_new_code" value="true">
+                        <button type="submit" class="request-button">Запросить новый код</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    {# Подключение статического JS-файла #}
+    {% load static %}
+    <script src="{% static 'js/timer.js' %}"></script>
+
+    <script>
+        // Получаем данные из data-атрибутов
+        const countdownElement = document.getElementById('countdown');
+        if (countdownElement) {
+            const options = {
+                codeLifetimeSeconds: parseInt(countdownElement.dataset.codeLifetimeSeconds, 10),
+                createdAtTimestamp: countdownElement.dataset.createdAtTimestamp === 'null' ? null : parseInt(countdownElement.dataset.createdAtTimestamp, 10)
+            };
+            // Ваша функция initializeCountdown должна быть определена в timer.js
+            if (typeof initializeCountdown === 'function') {
+                initializeCountdown(options);
+            } else {
+                console.error("initializeCountdown function is not defined. Ensure timer.js is loaded correctly.");
+            }
+        }
+    </script>
+
+{% endblock %}
