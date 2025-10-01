@@ -170,8 +170,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # AUTH
 AUTHENTICATION_BACKENDS = [
-    'social_core.backends.vk.VKOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.vk.VKOAuth2',
+    # 'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -241,3 +241,7 @@ MASSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 # """ RECAPTCHA """
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+
+# """ YOOKASSA """
+YOOKASSA_ACCOUNT_ID = os.getenv('YOOKASSA_ACCOUNT_ID')
+YOOKASSA_SECRET_KEY = os.getenv('YOOKASSA_SECRET_KEY')
