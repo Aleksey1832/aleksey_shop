@@ -12,6 +12,11 @@
                     <input class="registration_bottom" type="submit" value="Вернуться в магазин">
                 </form>
         {% else %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: #275019"><b>{{ message }}</b></p>
+                {% endfor %}
+            {% endif %}
             <p><b>Заказ: № {{ order.id }} оформлен!</b></p>
             <p> В корзине: {{ total_items }} {{ ending_word }} </p>
             <p> Общая сумма: {{ cart.get_total_price_sale }} ₽ </p>
