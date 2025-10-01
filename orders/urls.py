@@ -8,4 +8,5 @@ urlpatterns = [
     path('success/<int:order_id>/', views.order_success, name='order_success'),
     path('payment/<int:order_id>', views.payment, name='payment'),
     path('cancel/<int:order_id>', views.cancel_order, name='cancel_order'),
+    path('pay/', views.yookassa_webhook, name='yookassa_webhook'),
 ]
